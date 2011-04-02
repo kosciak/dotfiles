@@ -1,0 +1,20 @@
+
+[roxterm profile]
+font=Monospace 9
+cursor_blinks=1
+background_type=0
+saturation=0,520295
+scrollbar_pos=0
+init_tabs=1
+allow_bold=1
+hide_menubar=1
+hide_mouse=1
+wrap_switch_tab=0
+mailer_spawn_type=0
+sel_by_word=-A-Za-z0-9,./?%&#:_
+login_shell=1
+scroll_on_keystroke=1
+scroll_on_output=1
+use_custom_command=0
+visible_bell=0
+disable_menu_shortcuts=1

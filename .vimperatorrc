@@ -1,0 +1,44 @@
+"2.1 (created: 2009/05/21 13:13:06)
+
+color kosciak-human
+
+noremap J <C-d>
+noremap K <C-u>
+noremap <C-h> gT
+noremap <C-l> gt
+noremap < gT
+noremap > gt
+noremap | <C-z>
+noremap <C-\\> <C-v>
+noremap <C-t> :tabopen! 
+
+set "extendedhinttags=//*[@onclick or @onmouseover or @onmousedown or @onmouseup or @oncommand or @class='lk' or @role='link' or @role='button' or @role='option'] | //input[not(@type='hidden')] | //a | //area | //iframe | //textarea | //button | //select | //xhtml:input[not(@type='hidden')] | //xhtml:a | //xhtml:area | //xhtml:iframe | //xhtml:textarea | //xhtml:button | //xhtml:select | //div[contains(@class,'J-K-I J-J5-Ji')]"
+set "hinttags=//*[@onclick or @onmouseover or @onmousedown or @onmouseup or @oncommand or @class='lk' or @role='link' or @role='button' or @role='option'] | //input[not(@type='hidden')] | //a | //area | //iframe | //textarea | //button | //select | //xhtml:input[not(@type='hidden')] | //xhtml:a | //xhtml:area | //xhtml:iframe | //xhtml:textarea | //xhtml:button | //xhtml:select | //div[contains(@class,'J-K-I J-J5-Ji')]"
+
+set guioptions=rbn
+set newtab=downloads
+set popups=2
+
+set nextpattern=\\bnastępn,\\bdalej,\\bnext,^>$,^(>>|»)$,^(>|»),(>|»)$,\\bmore\\b
+set previouspattern=\\bpoprzedni,\\bwstecz,\\bprev|previous\\b,^<$,^(<<|«)$,^(<|«),(<|«)$
+
+set scroll=8
+
+set runtimepath=~/.vimperator
+
+source! ~/.vimperatorrc.local
+
+"autocmd LocationChange .* js modes.passAllKeys = /(www\.google\.com\/reader|mail\.google\.com)/.test(buffer.URL)
+
+javascript <<EOF
+(function(){
+    var feedPanel = document.createElement("statusbarpanel");
+    feedPanel.setAttribute("id", "feed-panel-clone");
+    feedPanel.appendChild(document.getElementById("feed-button"));
+    feedPanel.firstChild.setAttribute("style", "padding: 0; max-height: 16px;");
+    document.getElementById("status-bar")
+    .insertBefore(feedPanel, document.getElementById("security-button"));
+})();
+EOF
+
+" vim: set ft=vimperator:
