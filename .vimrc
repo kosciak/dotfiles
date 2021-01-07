@@ -22,20 +22,27 @@ endif
 
 set wildignore+=*.pyc,*~
 
+set enc=utf-8       " UTF-8 by default
+
+
 " ----------------------------------------------------------------------
 "  VIM interface
 " ----------------------------------------------------------------------
 
-set backspace=indent,eol,start
+set ttyfast         " fast terminal connection
+
+set backspace=indent,eol,start  " backspace removes all
 
 set laststatus=2	" always show status line
 set ruler			" show the cursor position all the time
 set showcmd			" display incomplete commands
 set wildmenu		" wildmenu for comands completion
+"set wildmode=longest,list,full
 
 set magic			" magic on for regular expressions
 
 set incsearch		" do incremental searching
+
 if &t_Co > 2 || has("gui_running")
   syntax on			" syntax highliting
   set hlsearch		" highlight the last used search pattern.
@@ -46,7 +53,7 @@ set smartcase		" override ignorecase when Uppercase in search pattern
 
 set mouse=a			" turn mouse on
 
-set number			" line numbers
+set number			" show line numbers
 set showmatch		" show matching brackets
 
 set wrap
@@ -55,28 +62,30 @@ set cpoptions+=n
 set showbreak=>>>\ 
 set display+=lastline	" display as much of the last line as possible
 
-set scrolloff=3
+set scrolloff=3     " let X lines before/after cursor during scroll
 
 " Spellchecking: English and Polish, show 10 best suggestions
 set spelllang=en,pl
 set spellsuggest=best,10
+
+"set foldcolumn=1    " extra margin to the left
 
 
 " ----------------------------------------------------------------------
 "  Text, tab, indentation
 " ----------------------------------------------------------------------
 
-set tabstop=4
-set shiftwidth=4
-set shiftround
-set expandtab
-set smarttab
+set tabstop=4       " 4 whitespaces for tabs visual presentation 
+set shiftwidth=4    " shift lines by 4 spaces
+set shiftround      " round indent to multiple of shiftwidth
+set expandtab       " expand tabs into spaces
+set smarttab        " set tabs for a shifttabs logic
 
 set listchars=tab:→\ ,eol:¶,extends:→,precedes:<,trail:·,nbsp:°
 "set list
 
-set autoindent
-set smartindent
+set autoindent      " indent when moving to the next line
+set smartindent     " smart autoindenting when starting new line
 
 
 " ----------------------------------------------------------------------
@@ -112,6 +121,12 @@ if has("autocmd")
   autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
   autocmd FileType php set omnifunc=phpcomplete#CompletePHP
   autocmd FileType c set omnifunc=ccomplete#Complete
+  autocmd FileType python set omnifunc=pythoncomplete#Complete
+
+  " Python related
+  autocmd BufNewFile,BufRead *.py 
+    \ set foldmethod=indent |
+    \ set foldlevel=99
 
 
   " When editing a file, always jump to the last known cursor position.
@@ -143,14 +158,23 @@ map Y y$
 
 nnoremap <leader><space> :noh<cr>
 
+" Split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Fold using space
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+
 
 " ----------------------------------------------------------------------
 "  Commands
 " ----------------------------------------------------------------------
 
 " Convenient command to see the difference between the current buffer and the file it was loaded from, thus the changes you made.
-command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-	 	\ | wincmd p | diffthis
+"command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+"	 	\ | wincmd p | diffthis
 
 
 
@@ -173,43 +197,55 @@ set guifont=Monospace\ 9
 "  Plugins
 " ----------------------------------------------------------------------
 
-" CSApprox
-let g:CSApprox_loaded=1
+" Auto install Vim-plug manager
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif	
 
-" TagList
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Auto_Highlight_Tag = 1
-let Tlist_Close_On_Select = 1
-let Tlist_File_Fold_Auto_Close = 1
-let Tlist_Enable_Fold_Column = 0
-let Tlist_Inc_Winwidth = 0					" Fix for terminal
+" Declare plugins install directory
+call plug#begin('~/.vim/bundle')
 
-" bufExplorer
-let g:bufExplorerDefaultHelp=0
+ Plug 'junegunn/vim-plug'
 
-" MiniBufferExplorer
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 0
-let g:miniBufExplModSelTarget = 1 
-let g:miniBufExplUseSingleClick = 1
-"let g:miniBufExplorerMoreThanOne = 1
-"let g:miniBufExplForceSyntaxEnable = 1		" Messes up TagList colouring
+ " Quoting / parenthesizing made simple
+ Plug 'tpope/vim-surround'
 
-" NERDTree
+ " Commenting stuff out
+ Plug 'tpope/vim-commentary'
+
+ " Tab for completion
+ Plug 'ervandew/supertab'
+
+ " Tree explorer
+ Plug 'scrooloose/nerdtree'
+
+ " Tags explorer
+ Plug 'majutsushi/tagbar'
+
+ " Language packs - indentation, highlighting
+ Plug 'sheerun/vim-polyglot'
+
+ " Python folding rules
+ Plug 'tmhedberg/simpylfold'
+
+ " Python text objects and motions
+ Plug 'jeetsukumaran/vim-pythonsense'
+
+" End of plugins list
+call plug#end()
+
+
+"  NERDTree settings
 let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=0
 let NERDTreeShowBookmarks=1
+let NERDTreeIgnore = ['\.*\~$', '\.pyo$', '\.pyc$', '__pycache__']
+nnoremap <leader>n :NERDTreeFocus<CR>
 
-" svndiff
-hi DiffAdd      ctermfg=0 ctermbg=2 guibg='green'
-hi DiffDelete   ctermfg=0 ctermbg=1 guibg='red'
-hi DiffChange   ctermfg=0 ctermbg=3 guibg='yellow' 
-let g:svndiff_autoupdate=1 
 
-" ctags
-let g:ctags_title=0
-let g:ctags_statusline=1
-let generate_tags=1
+" Tagbar settings
+let g:tagbar_autoclose=1
+nnoremap <leader>t :TagbarToggle<CR>
 
