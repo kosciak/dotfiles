@@ -207,10 +207,17 @@ endif
 " Declare plugins install directory
 call plug#begin('~/.vim/bundle')
 
+ " Vim Plug itself, for documentation to work
  Plug 'junegunn/vim-plug'
+
+ " CtrlP - fuzzy search and file opening
+ Plug 'ctrlpvim/ctrlp.vim'
 
  " Quoting / parenthesizing made simple
  Plug 'tpope/vim-surround'
+
+ " Repeat supported plugin maps (like vim-surrounf)
+ Plug 'tpope/vim-repeat'
 
  " Commenting stuff out
  Plug 'tpope/vim-commentary'
@@ -248,4 +255,8 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 " Tagbar settings
 let g:tagbar_autoclose=1
 nnoremap <leader>t :TagbarToggle<CR>
+
+
+" CtrlP settings
+let g:ctrlp_switch_buffer = 0 "'et'
 
