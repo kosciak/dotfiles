@@ -123,6 +123,9 @@ if has("autocmd")
   autocmd FileType c set omnifunc=ccomplete#Complete
   autocmd FileType python set omnifunc=pythoncomplete#Complete
 
+  " Markdown related
+  autocmd FileType markdown set formatoptions+=ro
+
   " Python related
   autocmd BufNewFile,BufRead *.py 
     \ set foldmethod=indent |
@@ -248,7 +251,7 @@ call plug#end()
 let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=0
 let NERDTreeShowBookmarks=1
-let NERDTreeIgnore = ['\.*\~$', '\.pyo$', '\.pyc$', '__pycache__']
+let NERDTreeIgnore = ['\.*\~$', '\.pyo$', '\.pyc$', '__pycache__', '^node_modules$']
 nnoremap <leader>n :NERDTreeFocus<CR>
 
 
@@ -259,4 +262,6 @@ nnoremap <leader>t :TagbarToggle<CR>
 
 " CtrlP settings
 let g:ctrlp_switch_buffer = 0 "'et'
+" Ignore files from .gitignore
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
 
