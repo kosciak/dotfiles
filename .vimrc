@@ -263,5 +263,5 @@ nnoremap <leader>t :TagbarToggle<CR>
 " CtrlP settings
 let g:ctrlp_switch_buffer = 0 "'et'
 " Ignore files from .gitignore
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
 
