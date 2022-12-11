@@ -1,3 +1,6 @@
+
+## Functions
+
 # Extract archives
 # extract <file>
 extract () {

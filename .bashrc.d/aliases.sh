@@ -1,4 +1,6 @@
 
+## Set custom aliases
+
 # ls
 alias la='ls -A'
 alias lla='ls -lA'

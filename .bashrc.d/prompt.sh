@@ -10,7 +10,7 @@ if tput setaf 1 &> /dev/null; then
 	green=$(tput setaf 2);
 	yellow=$(tput setaf 3);
 	blue=$(tput setaf 4);
-	mangenta=$(tput setaf 5);
+	magenta=$(tput setaf 5);
 	cyan=$(tput setaf 6);
 	white=$(tput setaf 7);
 else
@@ -28,11 +28,13 @@ else
 fi;
 
 
-# Colors in Terminal
+# Set PS1
 if [[ ! -z $BASH ]]; then
     if [[ $EUID -eq 0 ]]; then
+		# Logged as root
         PS1="${yellow}[${reset}${red}u@\h${reset} ${yellow}\w${reset}${yellow}]${reset} # "
     else
+		# Normal user
         PS1="${cyan}[${reset}${blue}u@\h${reset} ${green}\w${reset}${cyan}]${reset} $ "
     fi
 fi
