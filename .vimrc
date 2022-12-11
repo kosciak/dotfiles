@@ -29,6 +29,8 @@ set enc=utf-8       " UTF-8 by default
 "  VIM interface
 " ----------------------------------------------------------------------
 
+set title           " set window title
+
 set ttyfast         " fast terminal connection
 
 set backspace=indent,eol,start  " backspace removes all
@@ -51,7 +53,8 @@ endif
 set ignorecase		" ignore case when searching
 set smartcase		" override ignorecase when Uppercase in search pattern
 
-set mouse=a			" turn mouse on
+"set mouse=a			" turn mouse on
+set mouse=vicr			" turn mouse on
 
 set number			" show line numbers
 set showmatch		" show matching brackets
