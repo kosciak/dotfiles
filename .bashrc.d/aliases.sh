@@ -1,6 +1,7 @@
 
 # ls
 alias la='ls -A'
+alias lla='ls -lA'
 
 # size formatting
 alias df='df -h'                          # human-readable sizes
