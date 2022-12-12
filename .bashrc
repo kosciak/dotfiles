@@ -16,8 +16,9 @@ export PATH
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
+# NOTE: Use only *.sh files to prevent sourcing of *~ files created by VIM when editing!
 if [ -d ~/.bashrc.d ]; then
-    for rc in ~/.bashrc.d/*; do
+    for rc in ~/.bashrc.d/*.sh; do
         if [ -f "$rc" ]; then
             . "$rc"
         fi
