@@ -14,3 +14,6 @@ alias cp="cp -i"
 alias mv='mv -i'
 alias rm='rm -i'
 
+# force man pages in en_US instead of whatever is set as LC_MESSAGES
+alias man="man -Len_US"
+
