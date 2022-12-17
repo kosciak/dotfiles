@@ -162,9 +162,10 @@ map Q gq
 " More logical yanking (like D, C)
 map Y y$
 
+" Reset highlighting
 nnoremap <leader><space> :noh<cr>
 
-" Split navigations
+" Split navigations without pressing Ctrl-W first
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -216,6 +217,14 @@ call plug#begin('~/.vim/bundle')
  " Vim Plug itself, for documentation to work
  Plug 'junegunn/vim-plug'
 
+ " Tree explorer
+ Plug 'scrooloose/nerdtree'
+ Plug 'Xuyuanp/nerdtree-git-plugin'
+ "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+ " Tags explorer
+ Plug 'majutsushi/tagbar'
+
  " CtrlP - fuzzy search and file opening
  Plug 'ctrlpvim/ctrlp.vim'
 
@@ -231,12 +240,6 @@ call plug#begin('~/.vim/bundle')
  " Tab for completion
  Plug 'ervandew/supertab'
 
- " Tree explorer
- Plug 'scrooloose/nerdtree'
-
- " Tags explorer
- Plug 'majutsushi/tagbar'
-
  " Language packs - indentation, highlighting
  Plug 'sheerun/vim-polyglot'
 
@@ -245,6 +248,17 @@ call plug#begin('~/.vim/bundle')
 
  " Python text objects and motions
  Plug 'jeetsukumaran/vim-pythonsense'
+
+ " Color previews for #RRGGBB notation
+ Plug 'ap/vim-css-color'
+
+ " TODO: Check them out
+ " Plug 'vimwiki/vimwiki'
+
+ " Show icons in NERDTree, *line, CtrlP, etc
+ " NOTE: Must be loaded as the last one
+ "Plug 'ryanoasis/vim-devicons'
+
 
 " End of plugins list
 call plug#end()
