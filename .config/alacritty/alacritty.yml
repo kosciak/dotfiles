@@ -51,7 +51,8 @@ window:
     y: 1
 
   # Spread additional padding evenly around the terminal content.
-  dynamic_padding: false
+  #dynamic_padding: false
+  dynamic_padding: true
 
   # Window decorations
   #
@@ -335,34 +336,44 @@ draw_bold_text_with_bright_colors: true
   # regardless of their background color.
   #transparent_background_colors: false
 
+
+# TODO: See
+# - https://github.com/alacritty/alacritty/wiki/Color-schemes
+# - https://github.com/rajasegar/alacritty-themes
+# - https://github.com/eendroroy/alacritty-theme
+# - https://github.com/aarowill/base16-alacritty
+# - https://github.com/kovidgoyal/kitty-themes
+# - https://github.com/tichopad/alacritty-theme-switch
+# - https://terminal.sexy/
+
 colors:
   # Slightly modified Tango Light theme
 
   primary:
-    #background: '0x2e3436'
-    #foreground: '0xd3d7cf'
-    foreground: '0x2e3436'
-    background: '0xf9f9f9'
+    #background: '#2e3436'
+    #foreground: '#d3d7cf'
+    foreground: '#2e3436'
+    background: '#f9f9f9'
     
   normal:
-    black: '0x2e3436'
-    red: '0xcc0000'
-    green: '0x4e9a06'
-    yellow: '0xc4a000'
-    blue: '0x3465a4'
-    magenta: '0x75507b'
-    cyan: '0x06989a'
-    white: '0xd3d7cf'
+    black:    '#2e3436'
+    red:      '#cc0000'
+    green:    '#4e9a06'
+    yellow:   '#c4a000'
+    blue:     '#3465a4'
+    magenta:  '#75507b'
+    cyan:     '#06989a'
+    white:    '#d3d7cf'
 
   bright:
-    black: '0x555753'
-    red: '0xef2929'
-    green: '0x8ae234'
-    yellow: '0xfce94f'
-    blue: '0x729fcf'
-    magenta: '0xad7fa8'
-    cyan: '0x34e2e2'
-    white: '0xf9f9f9'
+    black:    '#555753'
+    red:      '#ef2929'
+    green:    '#8ae234'
+    yellow:   '#fce94f'
+    blue:     '#729fcf'
+    magenta:  '#ad7fa8'
+    cyan:     '#34e2e2'
+    white:    '#f9f9f9'
 
 
 # Bell
