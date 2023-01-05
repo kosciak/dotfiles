@@ -100,7 +100,7 @@ window:
   # Override the variant of the GTK theme/Wayland client side decorations.
   # Commonly supported values are `dark` and `light`. Set this to `None` to use
   # the default theme variant.
-  #decorations_theme_variant: None
+  decorations_theme_variant: None
 
 #scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -167,7 +167,7 @@ font:
   # spacing.
   offset:
     x: 0
-    y: 1
+    y: 0
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the
@@ -184,8 +184,8 @@ font:
   builtin_box_drawing: true
 
 # If `true`, bold text is drawn using the bright color variants.
-#draw_bold_text_with_bright_colors: false
-draw_bold_text_with_bright_colors: true
+draw_bold_text_with_bright_colors: false
+# draw_bold_text_with_bright_colors: true
 
 # Colors (Tomorrow Night)
 #colors:
@@ -353,7 +353,7 @@ colors:
     #background: '#2e3436'
     #foreground: '#d3d7cf'
     foreground: '#2e3436'
-    background: '#f9f9f9'
+    background: '#eeeeec'
     
   normal:
     black:    '#2e3436'
@@ -373,7 +373,7 @@ colors:
     blue:     '#729fcf'
     magenta:  '#ad7fa8'
     cyan:     '#34e2e2'
-    white:    '#f9f9f9'
+    white:    '#eeeeec'
 
 
 # Bell
@@ -399,7 +399,7 @@ bell:
 
   # Duration of the visual bell flash in milliseconds. A `duration` of `0` will
   # disable the visual bell animation.
-  duration: 75
+  duration: 0
 
   # Visual bell animation color.
   color: '#ffffff'
@@ -418,7 +418,8 @@ bell:
   #command: None
   command:
     program: play
-    args: ["/usr/share/sounds/gnome/default/alerts/drip.ogg"]
+    # args: ["/usr/share/sounds/gnome/default/alerts/drip.ogg"]
+    args: ["/usr/share/sounds/freedesktop/stereo/bell.oga", "vol", "0.75"]
 
 #selection:
   # This string contains all characters that are used as separators for

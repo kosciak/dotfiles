@@ -15,7 +15,7 @@ if [[ ! -z $BASH ]]; then
 		# Logged as root
 		PS1_PRE="$(color $RESET)"
 		# PS1_PRE+="$(color $FG_YELLOW)[$(color $RESET)"
-		PS1_PRE+="$(color $BOLD$FG_RED)\u$(color $RESET)"
+		PS1_PRE+="$(color $BOLD)$(color $FG_RED)\u$(color $RESET)"
 		PS1_PRE+="@"
 		PS1_PRE+="$(color $FG_RED)\h$(color $RESET)"
 		PS1_PRE+=" "
@@ -34,7 +34,7 @@ if [[ ! -z $BASH ]]; then
 		# PS1_PRE+="@"
 		# PS1_PRE+="$(color $FG_BLUE)\h$(color $RESET)"
 		PS1_PRE+=" "
-		PS1_PRE+="$(color $BOLD$FG_BLUE)\w$(color $RESET)"
+		PS1_PRE+="$(color $BOLD)$(color $FG_LIGHT_BLUE)\w$(color $RESET)"
 		PS1_PRE+="$(color $RESET)"
 
 		PS1_POST="$(color $RESET)"

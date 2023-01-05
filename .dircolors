@@ -1,0 +1,50 @@
+
+# Below are TERM or COLORTERM entries, which can be glob patterns, which
+# restrict following config to systems with matching environment variables.
+COLORTERM ?*
+TERM Eterm
+TERM ansi
+TERM *color*
+TERM con[0-9]*x[0-9]*
+TERM cons25
+TERM console
+TERM cygwin
+TERM *direct*
+TERM dtterm
+TERM gnome
+TERM hurd
+TERM jfbterm
+TERM konsole
+TERM kterm
+TERM linux
+TERM linux-c
+TERM mlterm
+TERM putty
+TERM rxvt*
+TERM screen*
+TERM st
+TERM terminator
+TERM tmux*
+TERM vt100
+TERM xterm*
+
+# backup files
+# NOTE: Instead of 00;90 use (slightly lighter) 38;5;24 - this way it can be correctly used by exa
+*~ 38;5;244
+*# 38;5;244
+.bak 38;5;244
+.old 38;5;244
+.orig 38;5;244
+.part 38;5;244
+.rej 38;5;244
+.swp 38;5;244
+.tmp 38;5;244
+.dpkg-dist 38;5;244
+.dpkg-old 38;5;244
+.ucf-dist 38;5;244
+.ucf-new 38;5;244
+.ucf-old 38;5;244
+.rpmnew 38;5;244
+.rpmorig 38;5;244
+.rpmsave 38;5;244
+

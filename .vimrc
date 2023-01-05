@@ -53,8 +53,8 @@ endif
 set ignorecase		" ignore case when searching
 set smartcase		" override ignorecase when Uppercase in search pattern
 
-"set mouse=a			" turn mouse on
-set mouse=vicr			" turn mouse on
+set mouse=a			" turn mouse on
+" set mouse=vicr			" turn mouse on, except NORMAL mode
 
 set number			" show line numbers
 set showmatch		" show matching brackets
