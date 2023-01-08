@@ -1,0 +1,91 @@
+{
+    "lm_sensors": {
+        "tags": ["system"],
+        "copy": [
+            "/etc/sensors.d/ASUS_Prime_B550_Plus"
+        ]
+    },
+    "profile": {
+        "tags": ["system"],
+        "copy": [
+            "/etc/profile.d/attrs_colors.sh",
+            "/etc/profile.d/color_prompt.sh"
+        ]
+    },
+
+    "bash": {
+        "tags": ["user"],
+        "reference": "https://wiki.archlinux.org/title/Bash",
+        "symlink": [
+            ".bash_profile",
+            ".bashrc",
+            ".bashrc.d"
+        ]
+    },
+    "readline": {
+        "tags": ["user"],
+        "reference": "https://wiki.archlinux.org/title/Readline",
+        "symlink": [
+            ".inputrc"
+        ]
+    },
+    "most": {
+        "tags": ["user"],
+        "reference": "https://github.com/FauxFaux/most-pager",
+        "symlink": [
+            ".mostrc"
+        ]
+    },
+    "screen": {
+        "tags": ["user"],
+        "reference": "https://wiki.archlinux.org/title/GNU_Screen",
+        "symlink": [
+            ".screenrc"
+        ]
+    },
+    "vim": {
+        "tags": ["user"],
+        "symlink": [
+            ".vimrc"
+        ]
+    },
+    "git": {
+        "tags": ["user"],
+        "symlink": [
+            ".gitconfig",
+            ".gitignore_global"
+        ]
+    },
+    "alacritty": {
+        "tags": ["user"],
+        "reference": "https://github.com/alacritty/alacritty",
+        "symlink": [
+            ".config/alacritty"
+        ]
+    },
+
+    "X": {
+        "tags": ["obsolete"],
+        "reference": "https://wiki.archlinux.org/title/X_resources",
+        "comments": "Contains xterm settings. TODO: Consider converting to .Xresources",
+        "symlink": [
+            ".Xdefaults"
+        ]
+    },
+    "vimperator": {
+        "tags": ["obsolete"],
+        "reference": "http://vimperator.org/",
+        "symlink": [
+            ".vimperatorrc",
+            ".vimperator"
+        ]
+    },
+    "roxterm": {
+        "tags": ["obsolete"],
+        "symlink": [
+            ".config/roxterm.sourceforge.net"
+        ]
+    }
+
+}
+
