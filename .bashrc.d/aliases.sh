@@ -7,7 +7,7 @@ alias lla='ls -lA'
 
 # exa
 if [ -f "/usr/bin/exa" ]; then
-    alias exa='exa --group --group-directories-first'
+    alias exa='exa --group --group-directories-first --icons --classify'
     # alias exa='exa --group --git --group-directories-first'
     alias ls='exa'
     # exa by default don't show '.' and '..', use -aa to show them
