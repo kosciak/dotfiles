@@ -29,6 +29,12 @@
             ".inputrc"
         ]
     },
+    "dircolors": {
+        "tags": ["user"],
+        "symlink": [
+            ".dircolors"
+        ]
+    },
     "most": {
         "tags": ["user"],
         "reference": "https://github.com/FauxFaux/most-pager",

@@ -97,24 +97,31 @@ def filter_configs(configs, names, tags):
     return selected
 
 
-def check_src_file(path):
-    if not path.exists():
-        log.error("Missing source: %s", path)
-        raise FileNotFoundError(path)
+def check_src_file(src):
+    if not src.exists():
+        log.error("Missing source: %s", src)
+        raise FileNotFoundError(src)
     return; yield
 
 
-def check_dst_file(path):
-    if not path.exists():
+def check_dst_file(src, dst, mode):
+    if not dst.exists():
         return
 
-    log.warning('Destination already exists: %s', path)
+    if mode == Mode.SYMLINK and dst.is_symlink() and dst.readlink() == src:
+        log.info('%8s: %s -> %s', 'OK', dst, src)
+        return
+
+    # TODO: Check if src == dst in mode == Mode.COPY (md5 sum? filecmp module?)
+
+    log.warning('Destination exists: %s', dst)
     now = datetime.datetime.now()
     target = Path(
-        path.parents[0],
-        f"{path.name}.copy-{now.strftime('%Y%m%d')}",
+        dst.parents[0],
+        f"{dst.name}.copy-{now.strftime('%Y%m%d')}",
     )
-    yield Command(Mode.MOVE, path, target)
+    yield Command(Mode.MOVE, dst, target)
+    yield Command(mode, src, dst)
 
 
 def process_file(path, mode):
@@ -129,12 +136,11 @@ def process_file(path, mode):
         dst = home.joinpath(path)
 
     yield from check_src_file(src)
-    yield from check_dst_file(dst)
-    yield Command(mode, src, dst)
+    yield from check_dst_file(src, dst, mode)
 
 
 def process_config(config, dry_run=False):
-    log.info('Config: %s', config.name)
+    log.info('Config  : %s', config.name)
     commands = []
     for path in config.copy_files:
         commands.extend(process_file(
@@ -182,6 +188,7 @@ if __name__ == "__main__":
         choices=sorted(get_tags(configs)),
         help="Select configs with given tag(s)",
     )
+    # TODO: --list
     args = parser.parse_args()
 
     selected = filter_configs(configs, names=args.names, tags=args.tags)
