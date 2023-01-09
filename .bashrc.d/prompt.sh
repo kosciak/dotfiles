@@ -78,8 +78,8 @@ prompt_command() {
 	# NOTE: git-prompt coloring works only when called from PROMPT_COMMAND
 	# NOTE: It will replace PS1 with new value!
 	if type __git_ps1 &> /dev/null; then
-		# __git_ps1 "${PS1_PRE}" "${PS1_POST}" " %s"
-		__git_ps1 "${PS1_PRE}" "${PS1_POST}" " @%s"
+		__git_ps1 "${PS1_PRE}" "${PS1_POST}" " %s"
+		# __git_ps1 "${PS1_PRE}" "${PS1_POST}" " @%s"
 	fi;
 
 	# Add Virtual ENV name to prompt
