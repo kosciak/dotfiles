@@ -4,6 +4,7 @@
 # ls
 alias la='ls -A'
 alias lla='ls -lA'
+alias ll.='ls -ld .*'
 
 # exa
 if [ -f "/usr/bin/exa" ]; then
