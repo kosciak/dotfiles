@@ -20,7 +20,13 @@ else
   set backup		" keep a backup file
 endif
 
-set wildignore+=*.pyc,*~,.git,.git/*,__pycache__,*/__pycache__/*
+" Files to ignore
+set wildignore+=*~
+set wildignore+=*.pyc,*.pyo
+set wildignore+=.git,.git/*
+set wildignore+=.bzr,.bzr/*
+set wildignore+=.svn,.svn/*
+set wildignore+=__pycache__,*/__pycache__/*
 
 set encoding=utf-8  " UTF-8 by default
 
@@ -216,6 +222,10 @@ augroup CLNRSet
 augroup END
 
 
+hi TagbarScope cterm=bold
+hi TagbarAccessPublic ctermfg=70
+
+
 " ----------------------------------------------------------------------
 "  GUI options
 "  # TODO: Move to .gvimrc
@@ -241,13 +251,23 @@ call plug#begin('~/.vim/bundle')
  " Vim Plug itself, for documentation to work
  Plug 'junegunn/vim-plug'
 
+ " Lightline - configurable statusline
+ " Plug 'itchyny/lightline.vim'
+
  " Tree explorer
  Plug 'scrooloose/nerdtree'
  " Plug 'Xuyuanp/nerdtree-git-plugin'
  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+ " Alternate syntax highlighting plugins:
+ " Plug 'vwxyutarooo/nerdtree-devicons-syntax'
+ " Plug 'her/synicons.vim'
+ " Plug 'lambdalisue/glyph-palette.vim' " NOTE: Needs further configuration!
 
  " Tags explorer
  Plug 'majutsushi/tagbar'
+
+ " MiniBufExpl
+ " Plug 'fholgado/minibufexpl.vim'
 
  " Buffer explorer
  Plug 'jlanzarotta/bufexplorer'
@@ -279,6 +299,9 @@ call plug#begin('~/.vim/bundle')
  " Color previews for #RRGGBB notation
  Plug 'ap/vim-css-color'
 
+ " Git wrapper
+ Plug 'tpope/vim-fugitive'
+
  " TODO: Check them out
  " Plug 'vimwiki/vimwiki'
 
@@ -297,50 +320,86 @@ nnoremap <leader>n :NERDTreeFocus<CR>   " Open NERDTree
 let g:NERDTreeQuitOnOpen = 1        " Quit after opening file
 let g:NERDTreeShowBookmarks = 0     " Don't show bookmarks (toggle with 'B')
 let g:NERDTreeShowHidden = 0        " Don't show bookmarks (toggle with 'I')
-let g:NERDTreeRespectWildIgnore = 1 " Don't show files in wildignore
+
 " Don't show selected files (toggle with 'f')
-let g:NERDTreeIgnore = ['\.*\~$', '\.pyo$', '\.pyc$', '__pycache__', '^node_modules$']
+let g:NERDTreeIgnore = [
+      \ '\.*\~$',
+      \ '\.pyo$', '\.pyc$',
+      \ '__pycache__',
+      \ '^node_modules$',
+      \]
+let g:NERDTreeRespectWildIgnore = 1 " Don't show files in wildignore
+
 let g:NERDTreeMapOpenSplit = 's'    " Remap split to 's'
 let g:NERDTreeMapOpenVSplit = 'v'   " Remap vertical split to 'v'
+
 
 " ----------------------------------------------------------------------
 "  NERDTree Git Plugin settings
 " ----------------------------------------------------------------------
 let g:NERDTreeGitStatusCwdOnly = 1
 let g:NERDTreeGitStatusUseNerdFonts = 0
-let g:NERDTreeGitStatusShowClean = 0 " default: 0
+let g:NERDTreeGitStatusShowClean = 0
 let g:NERDTreeGitStatusAlignIfConceal = 0
-let g:NERDTreeGitStatusConcealBrackets = 0
+
 
 " ----------------------------------------------------------------------
 "  NERDTree Syntax Highliting settings
-"  TODO: Needs revision!
 " ----------------------------------------------------------------------
-" let g:WebDevIconsDisableDefaultFolderSymbolCoorFromNERDTreeDir = 1
+" let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
 " let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
 
+" Disable highlighting by: extension / exact match / pattern
 let g:NERDTreeDisableFileExtensionHighlight = 1
-let g:NERDTreeDisableExactMatchHighlight = 1
+" let g:NERDTreeDisableExactMatchHighlight = 1
 let g:NERDTreeDisablePatternMatchHighlight = 1
 
-" TODO: Needs to ajust colors for light theme!
+let g:NERDTreeLimitedSyntax = 1
+
+" Disable all default matching
+let g:NERDTreeSyntaxDisableDefaultExtensions = 1
+let g:NERDTreeSyntaxDisableDefaultExactMatches = 1
+let g:NERDTreeSyntaxDisableDefaultPatternMatches = 1
+
+let g:NERDTreeSyntaxEnabledExactMatches = [
+      \ 'dropbox',
+      \ 'node_modules',
+      \]
+
+" Highlight full name (not only icons) of files
 " let g:NERDTreeFileExtensionHighlightFullName = 1
 " let g:NERDTreeExactMatchHighlightFullName = 1
 " let g:NERDTreePatternMatchHighlightFullName = 1
 
-let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
-let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
+" Highlight full name (not only icons) of folders
+let g:NERDTreeHighlightFolders = 1          " enables folder icon highlighting using exact match
+let g:NERDTreeHighlightFoldersFullName = 1  " highlights the folder name
+
 
 " ----------------------------------------------------------------------
 "  DevIcons settings
 " ----------------------------------------------------------------------
-let g:webdevicons_enable_nerdtree = 1
-let g:webdevicons_conceal_nerdtree_brackets = 1
+let g:DevIconsEnableFoldersOpenClose = 1    " Change icon for open dirs
+
+" let g:DevIconsEnableFolderExtensionPatternMatching = 1
 
 let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
-let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
+
+" No padding BEFORE icons in NERDTree
 let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
 let g:WebDevIconsNerdTreeAfterGlyphPadding = " "
+
+" Custom file extenstions
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
+      \ 'ttf'   : '',
+      \ 'otf'   : '',
+      \ 'woff'  : '',
+      \ 'gpx'   : '',
+      \ 'tcx'   : '',
+      \}
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {
+      \ 'dropbox'   : '',
+      \}
 
 
 " ----------------------------------------------------------------------
@@ -348,6 +407,16 @@ let g:WebDevIconsNerdTreeAfterGlyphPadding = " "
 " ----------------------------------------------------------------------
 let g:tagbar_autoclose=1
 nnoremap <leader>t :TagbarToggle<CR>
+
+
+" ----------------------------------------------------------------------
+"  MiniBufExpl
+" ----------------------------------------------------------------------
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 0
+let g:miniBufExplModSelTarget = 1
+let g:miniBufExplUseSingleClick = 1
 
 
 " ----------------------------------------------------------------------
