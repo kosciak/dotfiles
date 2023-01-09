@@ -12,7 +12,7 @@ endif
 
 set nocompatible	" Vim setings
 
-set history=500		" keep 500 lines of command line history
+set history=500	    " keep 500 lines of command line history
 
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
@@ -57,6 +57,8 @@ set mouse=a			" turn mouse on in all modes
 " set mouse=vicr			" turn mouse on, except NORMAL mode
 
 set number			" show line numbers
+set numberwidth=5   " mininal number of columns for line numbers
+
 set showmatch		" show matching brackets
 
 set wrap
@@ -193,10 +195,12 @@ nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 "	 	\ | wincmd p | diffthis
 
 
-
 " ----------------------------------------------------------------------
 "  Colorscheme
 " ----------------------------------------------------------------------
+
+" set t_Co=256        " force 256 colors
+" set bg=light        " force light background
 
 "highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
 "match OverLength /\%81v.\+/
@@ -214,6 +218,7 @@ augroup END
 
 " ----------------------------------------------------------------------
 "  GUI options
+"  # TODO: Move to .gvimrc
 " ----------------------------------------------------------------------
 
 set guifont=Monospace\ 9
@@ -243,6 +248,9 @@ call plug#begin('~/.vim/bundle')
 
  " Tags explorer
  Plug 'majutsushi/tagbar'
+
+ " Buffer explorer
+ Plug 'jlanzarotta/bufexplorer'
 
  " CtrlP - fuzzy search and file opening
  Plug 'ctrlpvim/ctrlp.vim'
@@ -283,7 +291,7 @@ call plug#end()
 
 
 " ----------------------------------------------------------------------
-" NERDTree settings
+"  NERDTree settings
 " ----------------------------------------------------------------------
 nnoremap <leader>n :NERDTreeFocus<CR>   " Open NERDTree
 let g:NERDTreeQuitOnOpen = 1        " Quit after opening file
@@ -296,7 +304,7 @@ let g:NERDTreeMapOpenSplit = 's'    " Remap split to 's'
 let g:NERDTreeMapOpenVSplit = 'v'   " Remap vertical split to 'v'
 
 " ----------------------------------------------------------------------
-" NERDTree Git Plugin settings
+"  NERDTree Git Plugin settings
 " ----------------------------------------------------------------------
 let g:NERDTreeGitStatusCwdOnly = 1
 let g:NERDTreeGitStatusUseNerdFonts = 0
@@ -305,8 +313,8 @@ let g:NERDTreeGitStatusAlignIfConceal = 0
 let g:NERDTreeGitStatusConcealBrackets = 0
 
 " ----------------------------------------------------------------------
-" NERDTree Syntax Highliting settings
-" TODO: Needs revision!
+"  NERDTree Syntax Highliting settings
+"  TODO: Needs revision!
 " ----------------------------------------------------------------------
 " let g:WebDevIconsDisableDefaultFolderSymbolCoorFromNERDTreeDir = 1
 " let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
@@ -324,7 +332,7 @@ let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exac
 let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
 
 " ----------------------------------------------------------------------
-" DevIcons settings
+"  DevIcons settings
 " ----------------------------------------------------------------------
 let g:webdevicons_enable_nerdtree = 1
 let g:webdevicons_conceal_nerdtree_brackets = 1
@@ -336,14 +344,14 @@ let g:WebDevIconsNerdTreeAfterGlyphPadding = " "
 
 
 " ----------------------------------------------------------------------
-" Tagbar settings
+"  Tagbar settings
 " ----------------------------------------------------------------------
 let g:tagbar_autoclose=1
 nnoremap <leader>t :TagbarToggle<CR>
 
 
 " ----------------------------------------------------------------------
-" CtrlP settings
+"  CtrlP settings
 " ----------------------------------------------------------------------
 let g:ctrlp_switch_buffer = 0 "'et'
 " Ignore files from .gitignore
