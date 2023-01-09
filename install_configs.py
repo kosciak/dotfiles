@@ -105,22 +105,21 @@ def check_src_file(src):
 
 
 def check_dst_file(src, dst, mode):
-    if not dst.exists():
-        return
+    if dst.exists():
+        if mode == Mode.SYMLINK and dst.is_symlink() and dst.readlink() == src:
+            log.info('%8s: %s -> %s', 'OK', dst, src)
+            return
 
-    if mode == Mode.SYMLINK and dst.is_symlink() and dst.readlink() == src:
-        log.info('%8s: %s -> %s', 'OK', dst, src)
-        return
+        # TODO: Check if src == dst in mode == Mode.COPY (md5 sum? filecmp module?)
 
-    # TODO: Check if src == dst in mode == Mode.COPY (md5 sum? filecmp module?)
+        log.warning('Destination exists: %s', dst)
+        now = datetime.datetime.now()
+        target = Path(
+            dst.parents[0],
+            f"{dst.name}.copy-{now.strftime('%Y%m%d')}",
+        )
+        yield Command(Mode.MOVE, dst, target)
 
-    log.warning('Destination exists: %s', dst)
-    now = datetime.datetime.now()
-    target = Path(
-        dst.parents[0],
-        f"{dst.name}.copy-{now.strftime('%Y%m%d')}",
-    )
-    yield Command(Mode.MOVE, dst, target)
     yield Command(mode, src, dst)
 
 
