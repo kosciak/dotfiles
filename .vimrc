@@ -59,6 +59,7 @@ endif
 set ignorecase		" ignore case when searching
 set smartcase		" override ignorecase when Uppercase in search pattern
 
+" NOTE: Hold SHIFT (or CTRL+SHIFT) during selection to disable visual mode!
 set mouse=a			" turn mouse on in all modes
 " set mouse=vicr			" turn mouse on, except NORMAL mode
 
@@ -82,7 +83,7 @@ set spellsuggest=best,10
 "set foldcolumn=1    " extra margin to the left
 
 if has('conceal')
-  set conceallevel=3
+  set conceallevel=3      " Devicons suggest 3, others mention 2?
 endif
 
 set cursorline            " Highlight current line
@@ -151,6 +152,10 @@ if has("autocmd")
     \ set foldmethod=indent |
     \ set foldlevel=99
 
+  " Javascript related
+  autocmd BufNewFile,BufRead *.js 
+    \ set foldmethod=syntax |
+    \ set foldlevel=99
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
@@ -193,12 +198,25 @@ nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
 
 " ----------------------------------------------------------------------
-"  Commands
+"  Commands and functions
 " ----------------------------------------------------------------------
 
 " Convenient command to see the difference between the current buffer and the file it was loaded from, thus the changes you made.
 "command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
 "	 	\ | wincmd p | diffthis
+
+
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+function! SynGroup()
+    let l:s = synID(line('.'), col('.'), 1)
+    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfun
 
 
 " ----------------------------------------------------------------------
@@ -222,8 +240,12 @@ augroup CLNRSet
 augroup END
 
 
-hi TagbarScope cterm=bold
+hi TagbarScope cterm=bold ctermfg=5
 hi TagbarAccessPublic ctermfg=70
+
+au filetype markdown hi Title term=bold cterm=bold ctermfg=5 gui=bold guifg=Magenta
+au filetype markdown hi Identifier ctermfg=2 guifg=Green
+au filetype markdown hi mkdListItemCheckbox cterm=bold
 
 
 " ----------------------------------------------------------------------
@@ -231,7 +253,7 @@ hi TagbarAccessPublic ctermfg=70
 "  # TODO: Move to .gvimrc
 " ----------------------------------------------------------------------
 
-set guifont=Monospace\ 9
+set guifont=Deja\ Vu\ Sans\ Mono\ \Nerd\ Font\ 11
 
 
 " ----------------------------------------------------------------------
@@ -248,78 +270,74 @@ endif
 " Declare plugins install directory
 call plug#begin('~/.vim/bundle')
 
- " Vim Plug itself, for documentation to work
- Plug 'junegunn/vim-plug'
+  " Vim Plug itself, for documentation to work
+    Plug 'junegunn/vim-plug'
 
- " Lightline - configurable statusline
- " Plug 'itchyny/lightline.vim'
+  " Statusline
+    " Plug 'itchyny/lightline.vim'      " configurable statusline
 
- " Tree explorer
- Plug 'scrooloose/nerdtree'
- " Plug 'Xuyuanp/nerdtree-git-plugin'
- Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
- " Alternate syntax highlighting plugins:
- " Plug 'vwxyutarooo/nerdtree-devicons-syntax'
- " Plug 'her/synicons.vim'
- " Plug 'lambdalisue/glyph-palette.vim' " NOTE: Needs further configuration!
+  " File management
+    Plug 'scrooloose/nerdtree'
+    " Plug 'Xuyuanp/nerdtree-git-plugin'
+    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+    " Alternate syntax highlighting plugins:
+    " Plug 'vwxyutarooo/nerdtree-devicons-syntax'
+    " Plug 'her/synicons.vim'
+    " Plug 'lambdalisue/glyph-palette.vim' " NOTE: Needs further configuration!
 
- " Tags explorer
- Plug 'majutsushi/tagbar'
+  " Tags viewer
+    Plug 'majutsushi/tagbar'        " Tags tree explorer
 
- " MiniBufExpl
- " Plug 'fholgado/minibufexpl.vim'
+  " Buffers
+    Plug 'jlanzarotta/bufexplorer'  " TODO: Check and configure!
+    " Plug 'fholgado/minibufexpl.vim' " tab-like buffers explorer
 
- " Buffer explorer
- Plug 'jlanzarotta/bufexplorer'
+  " Fuzzy search and file opening
+    Plug 'ctrlpvim/ctrlp.vim'
 
- " CtrlP - fuzzy search and file opening
- Plug 'ctrlpvim/ctrlp.vim'
+  " Editing
+    Plug 'tpope/vim-surround'       " Quoting / parenthesizing made simple
+    Plug 'tpope/vim-repeat'         " Repeat supported plugin maps (like vim-surround)
+    Plug 'tpope/vim-commentary'     " Commenting stuff out
+    Plug 'godlygeek/tabular'        " Tabularize text
+    Plug 'dkarter/bullets.vim'      " Bullet lists automation
 
- " Quoting / parenthesizing made simple
- Plug 'tpope/vim-surround'
+  " Tab and completion
+    Plug 'ervandew/supertab'
 
- " Repeat supported plugin maps (like vim-surround)
- Plug 'tpope/vim-repeat'
+  " Language packs - syntax, indentation, highlighting
+    let g:polyglot_disabled = ['markdown']  " NOTE: MUST be declared BEFORE loading plugin!
+    Plug 'sheerun/vim-polyglot'
+    Plug 'plasticboy/vim-markdown'
 
- " Commenting stuff out
- Plug 'tpope/vim-commentary'
+  " Python
+    Plug 'tmhedberg/simpylfold'           " Python folding rules
+    Plug 'jeetsukumaran/vim-pythonsense'  " Python text objects and motions
 
- " Tab for completion
- Plug 'ervandew/supertab'
+  " Color previews
+    Plug 'ap/vim-css-color'
 
- " Language packs - indentation, highlighting
- Plug 'sheerun/vim-polyglot'
+  " Git integration
+    Plug 'tpope/vim-fugitive'
 
- " Python folding rules
- Plug 'tmhedberg/simpylfold'
+  " TODO: Check these plugins out:
+    " Plug 'vimwiki/vimwiki'
 
- " Python text objects and motions
- Plug 'jeetsukumaran/vim-pythonsense'
-
- " Color previews for #RRGGBB notation
- Plug 'ap/vim-css-color'
-
- " Git wrapper
- Plug 'tpope/vim-fugitive'
-
- " TODO: Check them out
- " Plug 'vimwiki/vimwiki'
-
- " Show icons in NERDTree, *line, CtrlP, etc
- " NOTE: Must be loaded as the last one
- Plug 'ryanoasis/vim-devicons'
+  " Show icons in NERDTree, CtrlP, etc
+    Plug 'ryanoasis/vim-devicons'   " NOTE: Must be loaded as the last one
 
 " End of plugins list
 call plug#end()
-
 
 " ----------------------------------------------------------------------
 "  NERDTree settings
 " ----------------------------------------------------------------------
 nnoremap <leader>n :NERDTreeFocus<CR>   " Open NERDTree
+nnoremap <leader>N :NERDTreeFind<CR>    " Open NERDTree and show current file
+
 let g:NERDTreeQuitOnOpen = 1        " Quit after opening file
 let g:NERDTreeShowBookmarks = 0     " Don't show bookmarks (toggle with 'B')
-let g:NERDTreeShowHidden = 0        " Don't show bookmarks (toggle with 'I')
+let g:NERDTreeShowHidden = 1        " Don't show bookmarks (toggle with 'I')
 
 " Don't show selected files (toggle with 'f')
 let g:NERDTreeIgnore = [
@@ -344,7 +362,7 @@ let g:NERDTreeGitStatusAlignIfConceal = 0
 
 
 " ----------------------------------------------------------------------
-"  NERDTree Syntax Highliting settings
+"  NERDTree Syntax Highlight settings
 " ----------------------------------------------------------------------
 " let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
 " let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
@@ -405,12 +423,13 @@ let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {
 " ----------------------------------------------------------------------
 "  Tagbar settings
 " ----------------------------------------------------------------------
-let g:tagbar_autoclose=1
+let g:tagbar_autoclose = 1
+let g:tagbar_compact = 2
 nnoremap <leader>t :TagbarToggle<CR>
 
 
 " ----------------------------------------------------------------------
-"  MiniBufExpl
+"  MiniBufExpl settings
 " ----------------------------------------------------------------------
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
@@ -425,6 +444,17 @@ let g:miniBufExplUseSingleClick = 1
 let g:ctrlp_switch_buffer = 0 "'et'
 " Ignore files from .gitignore
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
+
+
+" ----------------------------------------------------------------------
+"  Vim-markdown settings
+" ----------------------------------------------------------------------
+let g:vim_markdown_strikethrough = 1
+" let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_folding_style_pythonic = 1
+let g:vim_markdown_folding_level = 6
+let g:vim_markdown_new_list_item_indent = 0
+map <F13> <Plug>Markdown_EditUrlUnderCursor   " re-enable default <ge> mapping
 
 
 " after a re-source, fix syntax matching issues (concealing brackets):
