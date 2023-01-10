@@ -243,9 +243,9 @@ augroup END
 hi TagbarScope cterm=bold ctermfg=5
 hi TagbarAccessPublic ctermfg=70
 
-au filetype markdown hi Title term=bold cterm=bold ctermfg=5 gui=bold guifg=Magenta
-au filetype markdown hi Identifier ctermfg=2 guifg=Green
-au filetype markdown hi mkdListItemCheckbox cterm=bold
+autocmd FileType markdown hi Title term=bold cterm=bold ctermfg=5 gui=bold guifg=Magenta
+autocmd FileType markdown hi Identifier ctermfg=2 guifg=Green
+autocmd FileType markdown hi mkdListItemCheckbox cterm=bold
 
 
 " ----------------------------------------------------------------------
@@ -296,11 +296,12 @@ call plug#begin('~/.vim/bundle')
     Plug 'ctrlpvim/ctrlp.vim'
 
   " Editing
-    Plug 'tpope/vim-surround'       " Quoting / parenthesizing made simple
-    Plug 'tpope/vim-repeat'         " Repeat supported plugin maps (like vim-surround)
-    Plug 'tpope/vim-commentary'     " Commenting stuff out
-    Plug 'godlygeek/tabular'        " Tabularize text
-    Plug 'dkarter/bullets.vim'      " Bullet lists automation
+    Plug 'tpope/vim-surround'         " Quoting / parenthesizing made simple
+    Plug 'tpope/vim-repeat'           " Repeat supported plugin maps (like vim-surround)
+    Plug 'tpope/vim-commentary'       " Commenting stuff out
+    Plug 'godlygeek/tabular'          " Tabularize text
+    Plug 'dhruvasagar/vim-table-mode' " Table creator and formatter
+    Plug 'dkarter/bullets.vim'        " Bullet lists automation
 
   " Tab and completion
     Plug 'ervandew/supertab'
@@ -309,6 +310,7 @@ call plug#begin('~/.vim/bundle')
     let g:polyglot_disabled = ['markdown']  " NOTE: MUST be declared BEFORE loading plugin!
     Plug 'sheerun/vim-polyglot'
     Plug 'plasticboy/vim-markdown'
+    " Plug 'vim-pandoc/vim-pandoc'
 
   " Python
     Plug 'tmhedberg/simpylfold'           " Python folding rules
@@ -322,6 +324,7 @@ call plug#begin('~/.vim/bundle')
 
   " TODO: Check these plugins out:
     " Plug 'vimwiki/vimwiki'
+    " Plug 'lervag/wiki.vim'
 
   " Show icons in NERDTree, CtrlP, etc
     Plug 'ryanoasis/vim-devicons'   " NOTE: Must be loaded as the last one
@@ -425,7 +428,7 @@ let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {
 " ----------------------------------------------------------------------
 let g:tagbar_autoclose = 1
 let g:tagbar_compact = 2
-nnoremap <leader>t :TagbarToggle<CR>
+nnoremap <leader>a :TagbarToggle<CR>
 
 
 " ----------------------------------------------------------------------
@@ -443,7 +446,10 @@ let g:miniBufExplUseSingleClick = 1
 " ----------------------------------------------------------------------
 let g:ctrlp_switch_buffer = 0 "'et'
 " Ignore files from .gitignore
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
+let g:ctrlp_user_command = [
+      \ '.git',
+      \ 'cd %s && git ls-files . --cached --exclude-standard --others',
+      \]
 
 
 " ----------------------------------------------------------------------
@@ -455,6 +461,19 @@ let g:vim_markdown_folding_style_pythonic = 1
 let g:vim_markdown_folding_level = 6
 let g:vim_markdown_new_list_item_indent = 0
 map <F13> <Plug>Markdown_EditUrlUnderCursor   " re-enable default <ge> mapping
+
+
+" ----------------------------------------------------------------------
+"  Bullets settings
+" ----------------------------------------------------------------------
+autocmd FileType markdown nnoremap <C-x> :ToggleCheckbox<CR>
+
+
+" ----------------------------------------------------------------------
+"  Table Mode settings
+" ----------------------------------------------------------------------
+autocmd FileType markdown let g:table_mode_verbose = 0
+autocmd FileType markdown :TableModeEnable
 
 
 " after a re-source, fix syntax matching issues (concealing brackets):
