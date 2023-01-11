@@ -44,12 +44,23 @@ set backspace=indent,eol,start  " backspace removes all
 set laststatus=2	" always show status line
 set ruler			" show the cursor position all the time
 
-" set statusline=%<%h%w%q%m%r\ %{FugitiveHead()}%{WebDevIconsGetFileTypeSymbol()}\ %{expand('%:~:h')}/%t%=%y\ %(%l,%c%V%)\ %P
-" set statusline=%<%h%w%q%m%r\ %{WebDevIconsGetFileTypeSymbol()}\ %{expand('%:~:.:h')}/%t%=%y\ %8.(%l:%c%)%5P
-set statusline=%<%h%w%q%m%r\ %{WebDevIconsGetFileTypeSymbol()}\ %#SLPath#%{expand('%:~:h')}/%*%t%=%y\ %8.(%l:%c%)%5P\ 
-
-
-hi SLPath cterm=reverse,italic
+set statusline=
+set statusline+=%m                  " Modified flag: [+] or [-]
+set statusline+=%<                  " Truncate if too long
+set statusline+=%h%w%q%r            " Flags: Help, Preview, *List, Readonly
+set statusline+=\                   " Space
+set statusline+=%{WebDevIconsGetFileTypeSymbol()}
+set statusline+=\                   " Space
+set statusline+=%#StatusLinePath#   " Start named highlight group
+set statusline+=%{GetStatusLinePath()}
+set statusline+=%*                  " Reset highlight group
+set statusline+=%t                  " File name
+set statusline+=%=                  " left/right alignment separator
+set statusline+=%y                  " Filetype
+set statusline+=\                   " Space
+set statusline+=%7.(%l:%c%)         " Line number : Column number
+set statusline+=%5p%%               " Percentage through file in lines
+set statusline+=\                   " Space
 
 set showcmd			" display incomplete commands
 set wildmenu		" wildmenu for comands completion
@@ -157,6 +168,7 @@ if has("autocmd")
 
   " Python related
   autocmd BufNewFile,BufRead *.py 
+    \ set formatoptions+=ro |
     \ set foldmethod=indent |
     \ set foldlevel=99
 
@@ -199,9 +211,21 @@ function! SynStack()
 endfunc
 
 function! SynGroup()
-    let l:s = synID(line('.'), col('.'), 1)
-    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
-endfun
+  let l:s = synID(line('.'), col('.'), 1)
+  echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfunc
+
+
+function! GetStatusLinePath()
+  let path = substitute(expand('%:h'), '^\.$', '', 'i')
+  if strlen(path) == 0
+    return ''
+  elseif path[0] ==# '/' || path[0:2] ==# '../'
+    return expand('%:~:h') .. '/'
+  else
+    return path .. '/'
+  endif
+endfunc
 
 
 " ----------------------------------------------------------------------
@@ -223,6 +247,8 @@ hi CursorLineNR cterm=bold ctermbg=254
 augroup CLNRSet
     autocmd! ColorScheme * hi CursorLineNR cterm=bold ctermbg=254
 augroup END
+
+hi StatusLinePath cterm=reverse,italic
 
 hi TagbarScope cterm=bold ctermfg=5
 hi TagbarAccessPublic ctermfg=70
@@ -264,6 +290,9 @@ call plug#begin('~/.vim/bundle')
     Plug 'scrooloose/nerdtree'
     " Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+    " Plug 'obaland/vfiler.vim'
+    " Plug 'obaland/vfiler-column-devicons'
 
   " Tags viewer
     Plug 'majutsushi/tagbar'        " Tags tree explorer
@@ -385,7 +414,8 @@ let g:NERDTreeHighlightFoldersFullName = 1  " highlights the folder name
 
 let g:DevIconsEnableFoldersOpenClose = 1    " Change icon for open dirs
 
-" let g:DevIconsEnableFolderExtensionPatternMatching = 1
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFolderExtensionPatternMatching = 1
 
 let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
 
@@ -393,7 +423,7 @@ let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
 let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
 let g:WebDevIconsNerdTreeAfterGlyphPadding = " "
 
-" Custom file extenstions
+" Adding custom decoration rules
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
       \ 'ttf'   : '',
       \ 'otf'   : '',
@@ -486,6 +516,10 @@ map Y y$
 
 " Reset highlighting
 nnoremap <leader><space> :noh<cr>
+
+" Toggle between paste and nopaste, with visual feedback
+nnoremap <leader>p :set invpaste paste?<CR>
+set pastetoggle=<leader>p
 
 " Split navigations without pressing Ctrl-W first
 nnoremap <C-J> <C-W><C-J>
