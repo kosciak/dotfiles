@@ -7,6 +7,7 @@ export PROJECT_HOME=$HOME/projekty
 
 # Don't add ENV name to PS1 as it will be overwritten by __git_ps1 anyway
 export VIRTUAL_ENV_DISABLE_PROMPT=1
+# export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 
 if [ -f ~/.local/bin/virtualenvwrapper.sh ]; then
