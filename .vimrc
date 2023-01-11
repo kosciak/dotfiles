@@ -43,6 +43,14 @@ set backspace=indent,eol,start  " backspace removes all
 
 set laststatus=2	" always show status line
 set ruler			" show the cursor position all the time
+
+" set statusline=%<%h%w%q%m%r\ %{FugitiveHead()}%{WebDevIconsGetFileTypeSymbol()}\ %{expand('%:~:h')}/%t%=%y\ %(%l,%c%V%)\ %P
+" set statusline=%<%h%w%q%m%r\ %{WebDevIconsGetFileTypeSymbol()}\ %{expand('%:~:.:h')}/%t%=%y\ %8.(%l:%c%)%5P
+set statusline=%<%h%w%q%m%r\ %{WebDevIconsGetFileTypeSymbol()}\ %#SLPath#%{expand('%:~:h')}/%*%t%=%y\ %8.(%l:%c%)%5P\ 
+
+
+hi SLPath cterm=reverse,italic
+
 set showcmd			" display incomplete commands
 set wildmenu		" wildmenu for comands completion
 "set wildmode=longest,list,full
@@ -175,29 +183,6 @@ endif " has("autocmd")
 
 
 " ----------------------------------------------------------------------
-"  Mappings
-" ----------------------------------------------------------------------
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
-
-" More logical yanking (like D, C)
-map Y y$
-
-" Reset highlighting
-nnoremap <leader><space> :noh<cr>
-
-" Split navigations without pressing Ctrl-W first
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
-" Fold using space
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-
-
-" ----------------------------------------------------------------------
 "  Commands and functions
 " ----------------------------------------------------------------------
 
@@ -239,7 +224,6 @@ augroup CLNRSet
     autocmd! ColorScheme * hi CursorLineNR cterm=bold ctermbg=254
 augroup END
 
-
 hi TagbarScope cterm=bold ctermfg=5
 hi TagbarAccessPublic ctermfg=70
 
@@ -280,17 +264,14 @@ call plug#begin('~/.vim/bundle')
     Plug 'scrooloose/nerdtree'
     " Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-    " Alternate syntax highlighting plugins:
-    " Plug 'vwxyutarooo/nerdtree-devicons-syntax'
-    " Plug 'her/synicons.vim'
-    " Plug 'lambdalisue/glyph-palette.vim' " NOTE: Needs further configuration!
 
   " Tags viewer
     Plug 'majutsushi/tagbar'        " Tags tree explorer
 
-  " Buffers
+  " Buffers / Tabs
     Plug 'jlanzarotta/bufexplorer'  " TODO: Check and configure!
     " Plug 'fholgado/minibufexpl.vim' " tab-like buffers explorer
+    " Plug 'ap/vim-buftabline'
 
   " Fuzzy search and file opening
     Plug 'ctrlpvim/ctrlp.vim'
@@ -332,11 +313,10 @@ call plug#begin('~/.vim/bundle')
 " End of plugins list
 call plug#end()
 
+
 " ----------------------------------------------------------------------
-"  NERDTree settings
+"  NERDTree - 'scrooloose/nerdtree'
 " ----------------------------------------------------------------------
-nnoremap <leader>n :NERDTreeFocus<CR>   " Open NERDTree
-nnoremap <leader>N :NERDTreeFind<CR>    " Open NERDTree and show current file
 
 let g:NERDTreeQuitOnOpen = 1        " Quit after opening file
 let g:NERDTreeShowBookmarks = 0     " Don't show bookmarks (toggle with 'B')
@@ -356,8 +336,9 @@ let g:NERDTreeMapOpenVSplit = 'v'   " Remap vertical split to 'v'
 
 
 " ----------------------------------------------------------------------
-"  NERDTree Git Plugin settings
+"  NERDTree Git Plugin - 'Xuyuanp/nerdtree-git-plugin'
 " ----------------------------------------------------------------------
+
 let g:NERDTreeGitStatusCwdOnly = 1
 let g:NERDTreeGitStatusUseNerdFonts = 0
 let g:NERDTreeGitStatusShowClean = 0
@@ -365,8 +346,9 @@ let g:NERDTreeGitStatusAlignIfConceal = 0
 
 
 " ----------------------------------------------------------------------
-"  NERDTree Syntax Highlight settings
+"  NERDTree Syntax Highlight - 'tiagofumo/vim-nerdtree-syntax-highlight'
 " ----------------------------------------------------------------------
+
 " let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
 " let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
 
@@ -398,8 +380,9 @@ let g:NERDTreeHighlightFoldersFullName = 1  " highlights the folder name
 
 
 " ----------------------------------------------------------------------
-"  DevIcons settings
+"  DevIcons - 'ryanoasis/vim-devicons'
 " ----------------------------------------------------------------------
+
 let g:DevIconsEnableFoldersOpenClose = 1    " Change icon for open dirs
 
 " let g:DevIconsEnableFolderExtensionPatternMatching = 1
@@ -424,16 +407,27 @@ let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {
 
 
 " ----------------------------------------------------------------------
-"  Tagbar settings
+"  Tagbar - 'majutsushi/tagbar'
 " ----------------------------------------------------------------------
+
 let g:tagbar_autoclose = 1
 let g:tagbar_compact = 2
-nnoremap <leader>a :TagbarToggle<CR>
 
 
 " ----------------------------------------------------------------------
-"  MiniBufExpl settings
+"  Buffer Explorer - 'jlanzarotta/bufexplorer'
 " ----------------------------------------------------------------------
+
+let g:bufExplorerDefaultHelp = 0
+let g:bufExplorerSplitOutPathName = 0
+let g:bufExplorerShowRelativePath = 1
+let g:bufExplorerDisableDefaultKeyMapping = 1
+
+
+" ----------------------------------------------------------------------
+"  MiniBufExpl - 'fholgado/minibufexpl.vim'
+" ----------------------------------------------------------------------
+
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 0
@@ -442,8 +436,9 @@ let g:miniBufExplUseSingleClick = 1
 
 
 " ----------------------------------------------------------------------
-"  CtrlP settings
+"  CtrlP - 'ctrlpvim/ctrlp.vim'
 " ----------------------------------------------------------------------
+
 let g:ctrlp_switch_buffer = 0 "'et'
 " Ignore files from .gitignore
 let g:ctrlp_user_command = [
@@ -453,8 +448,9 @@ let g:ctrlp_user_command = [
 
 
 " ----------------------------------------------------------------------
-"  Vim-markdown settings
+"  Vim-markdown - 'plasticboy/vim-markdown'
 " ----------------------------------------------------------------------
+
 let g:vim_markdown_strikethrough = 1
 " let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_folding_style_pythonic = 1
@@ -464,18 +460,59 @@ map <F13> <Plug>Markdown_EditUrlUnderCursor   " re-enable default <ge> mapping
 
 
 " ----------------------------------------------------------------------
-"  Bullets settings
+"  Bullets - 'dkarter/bullets.vim'
 " ----------------------------------------------------------------------
+
 autocmd FileType markdown nnoremap <C-x> :ToggleCheckbox<CR>
 
 
 " ----------------------------------------------------------------------
-"  Table Mode settings
+"  Table Mode - 'dhruvasagar/vim-table-mode'
 " ----------------------------------------------------------------------
+
 autocmd FileType markdown let g:table_mode_verbose = 0
 autocmd FileType markdown :TableModeEnable
 
 
+" ----------------------------------------------------------------------
+"  Mappings
+" ----------------------------------------------------------------------
+
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
+" More logical yanking (like D, C)
+map Y y$
+
+" Reset highlighting
+nnoremap <leader><space> :noh<cr>
+
+" Split navigations without pressing Ctrl-W first
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Close window
+nnoremap <leader>q :close<CR>
+
+" Fold using space
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+
+" NERDTree
+nnoremap <leader>n :NERDTreeFocus<CR>   " Open NERDTree
+nnoremap <leader>N :NERDTreeFind<CR>    " Open NERDTree and show current file
+nnoremap <leader>f :NERDTreeFocus<CR>   " Open NERDTree
+nnoremap <leader>c :NERDTreeFind<CR>    " Open NERDTree and show current file
+
+" Tagbar
+nnoremap <leader>a :TagbarToggle<CR>
+
+" Buffer Explorer
+nnoremap <leader>b :ToggleBufExplorer<CR>
+
+
+" ----------------------------------------------------------------------
 " after a re-source, fix syntax matching issues (concealing brackets):
 if exists("g:loaded_webdevicons")
     call webdevicons#refresh()
