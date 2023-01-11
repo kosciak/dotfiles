@@ -30,14 +30,14 @@ set wildignore+=__pycache__,*/__pycache__/*
 
 set encoding=utf-8  " UTF-8 by default
 
+set ttyfast         " fast terminal connection
+
 
 " ----------------------------------------------------------------------
 "  VIM interface
 " ----------------------------------------------------------------------
 
 set title           " set window title
-
-set ttyfast         " fast terminal connection
 
 set backspace=indent,eol,start  " backspace removes all
 
@@ -49,13 +49,15 @@ set statusline+=%m                  " Modified flag: [+] or [-]
 set statusline+=%<                  " Truncate if too long
 set statusline+=%h%w%q%r            " Flags: Help, Preview, *List, Readonly
 set statusline+=\                   " Space
-set statusline+=%{WebDevIconsGetFileTypeSymbol()}
+" set statusline+=%{GetStatusLineGit()}
+set statusline+=%{GetStatusLineIcon()}
 set statusline+=\                   " Space
 set statusline+=%#StatusLinePath#   " Start named highlight group
 set statusline+=%{GetStatusLinePath()}
 set statusline+=%*                  " Reset highlight group
 set statusline+=%t                  " File name
 set statusline+=%=                  " left/right alignment separator
+" set statusline+=%<%{GetStatusLineTag()}\ 
 set statusline+=%y                  " Filetype
 set statusline+=\                   " Space
 set statusline+=%7.(%l:%c%)         " Line number : Column number
@@ -228,6 +230,32 @@ function! GetStatusLinePath()
 endfunc
 
 
+function! GetStatusLineIcon()
+  return WebDevIconsGetFileTypeSymbol()
+endfunc
+
+
+function! GetStatusLineGit()
+  let branch = FugitiveHead()
+  if strlen(branch) > 0
+    return ' ' .. branch .. '%* '
+  else
+    return ''
+  endif
+endfunc
+
+
+function! GetStatusLineTag()
+  " let tag = tagbar#currenttag(' %s', '', 'f')
+  let tag = tagbar#currenttag(' %s', '')
+  if strlen(tag) > 0
+    return tag
+  else
+    return ''
+  endif
+endfunc
+
+
 " ----------------------------------------------------------------------
 "  Colorscheme
 " ----------------------------------------------------------------------
@@ -248,7 +276,7 @@ augroup CLNRSet
     autocmd! ColorScheme * hi CursorLineNR cterm=bold ctermbg=254
 augroup END
 
-hi StatusLinePath cterm=reverse,italic
+hi StatusLinePath cterm=reverse",italic
 
 hi TagbarScope cterm=bold ctermfg=5
 hi TagbarAccessPublic ctermfg=70
@@ -282,9 +310,6 @@ call plug#begin('~/.vim/bundle')
 
   " Vim Plug itself, for documentation to work
     Plug 'junegunn/vim-plug'
-
-  " Statusline
-    " Plug 'itchyny/lightline.vim'      " configurable statusline
 
   " File management
     Plug 'scrooloose/nerdtree'
@@ -348,6 +373,7 @@ call plug#end()
 " ----------------------------------------------------------------------
 
 let g:NERDTreeQuitOnOpen = 1        " Quit after opening file
+let g:NERDTreeMinimalUI = 1         " Don't show bookmarks and help prompt
 let g:NERDTreeShowBookmarks = 0     " Don't show bookmarks (toggle with 'B')
 let g:NERDTreeShowHidden = 1        " Don't show bookmarks (toggle with 'I')
 
