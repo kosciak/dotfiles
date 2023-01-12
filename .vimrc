@@ -104,7 +104,7 @@ set spellsuggest=best,10
 "set foldcolumn=1    " extra margin to the left
 
 if has('conceal')
-  set conceallevel=3      " Devicons suggest 3, others mention 2?
+  set conceallevel=2
 endif
 
 set cursorline            " Highlight current line
@@ -311,6 +311,14 @@ call plug#begin('~/.vim/bundle')
   " Vim Plug itself, for documentation to work
     Plug 'junegunn/vim-plug'
 
+  " Buffers / Tabs
+    Plug 'jlanzarotta/bufexplorer'  " TODO: Check and configure!
+    " Plug 'fholgado/minibufexpl.vim' " tab-like buffers explorer
+    " Plug 'ap/vim-buftabline'
+
+  " Fuzzy search and file opening
+    Plug 'ctrlpvim/ctrlp.vim'
+
   " File management
     Plug 'scrooloose/nerdtree'
     " Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -322,21 +330,21 @@ call plug#begin('~/.vim/bundle')
   " Tags viewer
     Plug 'majutsushi/tagbar'        " Tags tree explorer
 
-  " Buffers / Tabs
-    Plug 'jlanzarotta/bufexplorer'  " TODO: Check and configure!
-    " Plug 'fholgado/minibufexpl.vim' " tab-like buffers explorer
-    " Plug 'ap/vim-buftabline'
-
-  " Fuzzy search and file opening
-    Plug 'ctrlpvim/ctrlp.vim'
-
   " Editing
     Plug 'tpope/vim-surround'         " Quoting / parenthesizing made simple
     Plug 'tpope/vim-repeat'           " Repeat supported plugin maps (like vim-surround)
+
     Plug 'tpope/vim-commentary'       " Commenting stuff out
+
     Plug 'godlygeek/tabular'          " Tabularize text
     Plug 'dhruvasagar/vim-table-mode' " Table creator and formatter
+
+    Plug 'lervag/vim-rainbow-lists'   " Highlight list indentation levels
     Plug 'dkarter/bullets.vim'        " Bullet lists automation
+    " Plug 'lervag/lists.vim'
+
+    Plug 'AndrewRadev/sideways.vim'   " Move items to the righ or left
+    Plug 'machakann/vim-swap'         " Arguments swapping
 
   " Tab and completion
     Plug 'ervandew/supertab'
@@ -344,10 +352,10 @@ call plug#begin('~/.vim/bundle')
   " Language packs - syntax, indentation, highlighting
     let g:polyglot_disabled = ['markdown']  " NOTE: MUST be declared BEFORE loading plugin!
     Plug 'sheerun/vim-polyglot'
+
     Plug 'plasticboy/vim-markdown'
     " Plug 'vim-pandoc/vim-pandoc'
 
-  " Python
     Plug 'tmhedberg/simpylfold'           " Python folding rules
     Plug 'jeetsukumaran/vim-pythonsense'  " Python text objects and motions
 
@@ -357,12 +365,15 @@ call plug#begin('~/.vim/bundle')
   " Git integration
     Plug 'tpope/vim-fugitive'
 
-  " TODO: Check these plugins out:
+  " Wiki, notes taking, journaling
     " Plug 'vimwiki/vimwiki'
-    " Plug 'lervag/wiki.vim'
+    Plug 'lervag/wiki.vim'                " TODO: configure!
 
-  " Show icons in NERDTree, CtrlP, etc
-    Plug 'ryanoasis/vim-devicons'   " NOTE: Must be loaded as the last one
+    Plug 'mtth/scratch.vim'
+
+  " Icons
+    " NOTE: Must be loaded as the last one
+    Plug 'ryanoasis/vim-devicons'
 
 " End of plugins list
 call plug#end()
@@ -516,18 +527,38 @@ map <F13> <Plug>Markdown_EditUrlUnderCursor   " re-enable default <ge> mapping
 
 
 " ----------------------------------------------------------------------
-"  Bullets - 'dkarter/bullets.vim'
-" ----------------------------------------------------------------------
-
-autocmd FileType markdown nnoremap <C-x> :ToggleCheckbox<CR>
-
-
-" ----------------------------------------------------------------------
 "  Table Mode - 'dhruvasagar/vim-table-mode'
 " ----------------------------------------------------------------------
 
 autocmd FileType markdown let g:table_mode_verbose = 0
 autocmd FileType markdown :TableModeEnable
+
+
+" ----------------------------------------------------------------------
+"  Bullets - 'dkarter/bullets.vim'
+" ----------------------------------------------------------------------
+
+let g:bullets_checkbox_partials_toggle = 0
+
+
+" ----------------------------------------------------------------------
+"  Scratch - 'mtth/scratch.vim'
+" ----------------------------------------------------------------------
+
+let g:scratch_insert_autohide = 0
+let g:scratch_filetype = 'markdown'
+
+" ----------------------------------------------------------------------
+"  Wiki.vim - 'lervag/wiki.vim'
+" ----------------------------------------------------------------------
+
+let g:wiki_root = '~/projekty/wiki'
+let wiki_global_load = 0
+let g:wiki_filetypes = ['md', 'wiki']
+autocmd FileType markdown let g:wiki_link_extension = '.md'
+autocmd FileType markdown let g:wiki_link_target_type = 'md'
+autocmd FileType wiki let g:wiki_link_extension = '.wiki'
+autocmd FileType wiki let g:wiki_link_target_type = 'wiki'
 
 
 " ----------------------------------------------------------------------
@@ -556,6 +587,9 @@ nnoremap <C-H> <C-W><C-H>
 " Close window
 nnoremap <leader>q :close<CR>
 
+" Increment using Ctrl-i (not to interfere with screen leader key)
+nnoremap <C-i> <C-a>
+
 " Fold using space
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
@@ -569,7 +603,30 @@ nnoremap <leader>c :NERDTreeFind<CR>    " Open NERDTree and show current file
 nnoremap <leader>a :TagbarToggle<CR>
 
 " Buffer Explorer
-nnoremap <leader>b :ToggleBufExplorer<CR>
+nnoremap <leader>b :BufExplorer<CR>
+" nnoremap <leader>b :ToggleBufExplorer<CR>
+
+" Sideways and Swap
+" NOTE: Sideways is more versatile, but Swap's interactive mode is so good! 
+let g:swap_no_default_key_mappings = 1
+nnoremap gsh :SidewaysLeft<cr>
+nnoremap gsl :SidewaysRight<cr>
+nnoremap gss <Plug>(swap-interactive)
+
+" Scratch
+let g:scratch_no_mappings = 1
+nmap <leader>si <plug>(scratch-insert-reuse)
+nmap <leader>sc <plug>(scratch-insert-clear)
+xmap <leader>si <plug>(scratch-selection-reuse)
+xmap <leader>sc <plug>(scratch-selection-clear)
+nnoremap <leader>ss :Scratch<CR>
+nnoremap <leader>sp :ScratchPreview<CR>
+
+" Bullets
+autocmd FileType markdown nnoremap <C-x> :ToggleCheckbox<CR>
+
+" Rainbow list
+autocmd FileType markdown nnoremap <leader>r :RBListToggle<CR>
 
 
 " ----------------------------------------------------------------------
