@@ -58,7 +58,9 @@ set statusline+=%*                  " Reset highlight group
 set statusline+=%t                  " File name
 set statusline+=%=                  " left/right alignment separator
 " set statusline+=%<%{GetStatusLineTag()}\ 
+set statusline+=%#StatusLinePath#   " Start named highlight group
 set statusline+=%y                  " Filetype
+set statusline+=%*                  " Reset highlight group
 set statusline+=\                   " Space
 set statusline+=%7.(%l:%c%)         " Line number : Column number
 set statusline+=%5p%%               " Percentage through file in lines
@@ -166,7 +168,9 @@ if has("autocmd")
   autocmd FileType python set omnifunc=pythoncomplete#Complete
 
   " Markdown related
-  autocmd FileType markdown set formatoptions+=ro
+  autocmd FileType markdown
+    \ set formatoptions+=ro |
+    \ set textwidth=80
 
   " Python related
   autocmd BufNewFile,BufRead *.py 
@@ -281,17 +285,10 @@ hi StatusLinePath cterm=reverse",italic
 hi TagbarScope cterm=bold ctermfg=5
 hi TagbarAccessPublic ctermfg=70
 
-autocmd FileType markdown hi Title term=bold cterm=bold ctermfg=5 gui=bold guifg=Magenta
-autocmd FileType markdown hi Identifier ctermfg=2 guifg=Green
-autocmd FileType markdown hi mkdListItemCheckbox cterm=bold
-
-
-" ----------------------------------------------------------------------
-"  GUI options
-"  # TODO: Move to .gvimrc
-" ----------------------------------------------------------------------
-
-set guifont=Deja\ Vu\ Sans\ Mono\ \Nerd\ Font\ 11
+autocmd FileType markdown
+  \ hi Title term=bold cterm=bold ctermfg=5 gui=bold guifg=Magenta |
+  \ hi Identifier ctermfg=2 guifg=Green |
+  \ hi mkdListItemCheckbox cterm=bold
 
 
 " ----------------------------------------------------------------------
@@ -311,13 +308,32 @@ call plug#begin('~/.vim/bundle')
   " Vim Plug itself, for documentation to work
     Plug 'junegunn/vim-plug'
 
+  " Language packs - syntax, indentation, highlighting
+    " let g:polyglot_disabled = ['markdown']  " NOTE: MUST be declared BEFORE loading plugin!
+    Plug 'sheerun/vim-polyglot'           " Collection of language packs
+      " Provided by polyglot (install separately if you need help file):
+      Plug 'plasticboy/vim-markdown'
+      " Plug 'pangloss/vim-javascript'
+      " Plug 'vim-python/python-syntax'
+      " Plug 'Vimjas/vim-python-pep8-indent'
+
+    " Plug 'SidOfc/mkdx'                  " Feature rich if not too complicated
+    " Plug 'vim-pandoc/vim-pandoc'
+
+    Plug 'tmhedberg/simpylfold'           " Python folding rules
+    Plug 'jeetsukumaran/vim-pythonsense'  " Python text objects and motions
+
   " Buffers / Tabs
-    Plug 'jlanzarotta/bufexplorer'  " TODO: Check and configure!
+    Plug 'jlanzarotta/bufexplorer'    " TODO: Check and configure!
     " Plug 'fholgado/minibufexpl.vim' " tab-like buffers explorer
     " Plug 'ap/vim-buftabline'
 
+    Plug 'tyru/capture.vim'           " Show Ex command in a buffer
+
   " Fuzzy search and file opening
-    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'ctrlpvim/ctrlp.vim'         " Full path fuzzy finder
+    Plug 'dyng/ctrlsf.vim'            " TODO: Configure!
+    Plug 'jremmen/vim-ripgrep'
 
   " File management
     Plug 'scrooloose/nerdtree'
@@ -328,7 +344,7 @@ call plug#begin('~/.vim/bundle')
     " Plug 'obaland/vfiler-column-devicons'
 
   " Tags viewer
-    Plug 'majutsushi/tagbar'        " Tags tree explorer
+    Plug 'majutsushi/tagbar'          " Tags tree explorer
 
   " Editing
     Plug 'tpope/vim-surround'         " Quoting / parenthesizing made simple
@@ -349,16 +365,6 @@ call plug#begin('~/.vim/bundle')
   " Tab and completion
     Plug 'ervandew/supertab'
 
-  " Language packs - syntax, indentation, highlighting
-    let g:polyglot_disabled = ['markdown']  " NOTE: MUST be declared BEFORE loading plugin!
-    Plug 'sheerun/vim-polyglot'
-
-    Plug 'plasticboy/vim-markdown'
-    " Plug 'vim-pandoc/vim-pandoc'
-
-    Plug 'tmhedberg/simpylfold'           " Python folding rules
-    Plug 'jeetsukumaran/vim-pythonsense'  " Python text objects and motions
-
   " Color previews
     Plug 'ap/vim-css-color'
 
@@ -366,10 +372,10 @@ call plug#begin('~/.vim/bundle')
     Plug 'tpope/vim-fugitive'
 
   " Wiki, notes taking, journaling
+    Plug 'lervag/wiki.vim'            " TODO: configure!
     " Plug 'vimwiki/vimwiki'
-    Plug 'lervag/wiki.vim'                " TODO: configure!
 
-    Plug 'mtth/scratch.vim'
+    Plug 'mtth/scratch.vim'           " Temporary scratch buffer
 
   " Icons
     " NOTE: Must be loaded as the last one
@@ -387,6 +393,8 @@ let g:NERDTreeQuitOnOpen = 1        " Quit after opening file
 let g:NERDTreeMinimalUI = 1         " Don't show bookmarks and help prompt
 let g:NERDTreeShowBookmarks = 0     " Don't show bookmarks (toggle with 'B')
 let g:NERDTreeShowHidden = 1        " Don't show bookmarks (toggle with 'I')
+
+let g:NERDTreeWinSize = 40
 
 " Don't show selected files (toggle with 'f')
 let g:NERDTreeIgnore = [
@@ -519,10 +527,14 @@ let g:ctrlp_user_command = [
 " ----------------------------------------------------------------------
 
 let g:vim_markdown_strikethrough = 1
+
 " let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_folding_style_pythonic = 1
 let g:vim_markdown_folding_level = 6
-let g:vim_markdown_new_list_item_indent = 0
+
+let g:vim_markdown_new_list_item_indent = 2
+
+let g:vim_markdown_follow_anchor = 1
 map <F13> <Plug>Markdown_EditUrlUnderCursor   " re-enable default <ge> mapping
 
 
@@ -530,8 +542,9 @@ map <F13> <Plug>Markdown_EditUrlUnderCursor   " re-enable default <ge> mapping
 "  Table Mode - 'dhruvasagar/vim-table-mode'
 " ----------------------------------------------------------------------
 
-autocmd FileType markdown let g:table_mode_verbose = 0
-autocmd FileType markdown :TableModeEnable
+autocmd FileType markdown
+  \ let g:table_mode_verbose = 0 |
+  \ :TableModeEnable
 
 
 " ----------------------------------------------------------------------
@@ -555,10 +568,12 @@ let g:scratch_filetype = 'markdown'
 let g:wiki_root = '~/projekty/wiki'
 let wiki_global_load = 0
 let g:wiki_filetypes = ['md', 'wiki']
-autocmd FileType markdown let g:wiki_link_extension = '.md'
-autocmd FileType markdown let g:wiki_link_target_type = 'md'
-autocmd FileType wiki let g:wiki_link_extension = '.wiki'
-autocmd FileType wiki let g:wiki_link_target_type = 'wiki'
+autocmd FileType markdown
+  \ let g:wiki_link_extension = '.md' |
+  \ let g:wiki_link_target_type = 'md'
+autocmd FileType wiki
+  \ let g:wiki_link_extension = '.wiki' |
+  \ let g:wiki_link_target_type = 'wiki'
 
 
 " ----------------------------------------------------------------------
@@ -612,6 +627,10 @@ let g:swap_no_default_key_mappings = 1
 nnoremap gsh :SidewaysLeft<cr>
 nnoremap gsl :SidewaysRight<cr>
 nnoremap gss <Plug>(swap-interactive)
+" nmap <leader>si <Plug>SidewaysArgumentInsertBefore
+" nmap <leader>sa <Plug>SidewaysArgumentAppendAfter
+" nmap <leader>sI <Plug>SidewaysArgumentInsertFirst
+" nmap <leader>sA <Plug>SidewaysArgumentAppendLast
 
 " Scratch
 let g:scratch_no_mappings = 1
@@ -623,10 +642,16 @@ nnoremap <leader>ss :Scratch<CR>
 nnoremap <leader>sp :ScratchPreview<CR>
 
 " Bullets
-autocmd FileType markdown nnoremap <C-x> :ToggleCheckbox<CR>
+autocmd FileType markdown
+  \ nnoremap <C-x> :ToggleCheckbox<CR> |
+  \ imap <C-l> <Plug>(bullets-demote) |
+  \ imap <C-h> <Plug>(bullets-promote)
 
 " Rainbow list
 autocmd FileType markdown nnoremap <leader>r :RBListToggle<CR>
+
+" Wiki
+nnoremap <Tab> <Plug>(wiki-link-next)   " Not mapped for some reason...
 
 
 " ----------------------------------------------------------------------
