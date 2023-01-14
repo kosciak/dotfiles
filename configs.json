@@ -52,6 +52,7 @@
     "vim": {
         "tags": ["user"],
         "symlink": [
+            ".vim",
             ".vimrc",
             ".gvimrc"
         ]

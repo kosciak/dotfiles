@@ -172,5 +172,5 @@ command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
 " ----------------------------------------------------------------------
 
 set t_Co=256
-set bg=light
+set background=light
 

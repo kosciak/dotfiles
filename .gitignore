@@ -1,0 +1,4 @@
+.vim/autoload/plug.vim
+.vim/plugged/
+.vim/*swp
+.vim/*swo

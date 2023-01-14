@@ -2,6 +2,11 @@
 "
 " Author: Wojciech 'KosciaK' Pietrzok
 "
+" .vimrc
+" .vim/autoload/statusline.vim
+" .vim/autoload/syntax.vim
+" .vim/ftplugin/mediawiki.vim
+"
 " ----------------------------------------------------------------------
 "  General settings
 " ----------------------------------------------------------------------
@@ -42,15 +47,15 @@ set statusline+=%m                  " Modified flag: [+] or [-]
 set statusline+=%<                  " Truncate if too long
 set statusline+=%h%w%q%r            " Flags: Help, Preview, *List, Readonly
 set statusline+=\                   " Space
-" set statusline+=%{GetStatusLineGit()}
-set statusline+=%{GetStatusLineIcon()}
+" set statusline+=%{statusline#Git()}
+set statusline+=%{statusline#Icon()}
 set statusline+=\                   " Space
 set statusline+=%#StatusLinePath#   " Start named highlight group
-set statusline+=%{GetStatusLinePath()}
+set statusline+=%{statusline#Path()}
 set statusline+=%*                  " Reset highlight group
 set statusline+=%t                  " File name
 set statusline+=%=                  " left/right alignment separator
-" set statusline+=%<%{GetStatusLineTag()}\ 
+" set statusline+=%<%{statusline#Tag()}\ 
 set statusline+=%#StatusLinePath#   " Start named highlight group
 set statusline+=%y                  " Filetype
 set statusline+=%*                  " Reset highlight group
@@ -152,19 +157,19 @@ if has("autocmd")
 
   " Markdown related
   autocmd FileType markdown
-    \ set formatoptions+=ro |
-    \ set textwidth=80
+    \ setlocal formatoptions+=ro |
+    \ setlocal textwidth=80
 
   " Python related
   autocmd BufNewFile,BufRead *.py 
-    \ set formatoptions+=ro |
-    \ set foldmethod=indent |
-    \ set foldlevel=99
+    \ setlocal formatoptions+=ro |
+    \ setlocal foldmethod=indent |
+    \ setlocal foldlevel=99
 
   " Javascript related
   autocmd BufNewFile,BufRead *.js 
-    \ set foldmethod=syntax |
-    \ set foldlevel=99
+    \ setlocal foldmethod=syntax |
+    \ setlocal foldlevel=99
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
@@ -187,59 +192,10 @@ endif " has("autocmd")
 "  Commands and functions
 " ----------------------------------------------------------------------
 
-function! SynStack()
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
-
-function! SynGroup()
-  let l:s = synID(line('.'), col('.'), 1)
-  echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
-endfunc
-
-
-function! GetStatusLinePath()
-  let path = substitute(expand('%:h'), '^\.$', '', 'i')
-  if strlen(path) == 0
-    return ''
-  elseif path[0] ==# '/' || path[0:2] ==# '../'
-    return expand('%:~:h') .. '/'
-  else
-    return path .. '/'
-  endif
-endfunc
-
-
-function! GetStatusLineIcon()
-  return WebDevIconsGetFileTypeSymbol()
-endfunc
-
-
-function! GetStatusLineGit()
-  let branch = FugitiveHead()
-  if strlen(branch) > 0
-    return ' ' .. branch .. '%* '
-  else
-    return ''
-  endif
-endfunc
-
-
-function! GetStatusLineTag()
-  " let tag = tagbar#currenttag(' %s', '', 'f')
-  let tag = tagbar#currenttag(' %s', '')
-  if strlen(tag) > 0
-    return tag
-  else
-    return ''
-  endif
-endfunc
-
 
 " ----------------------------------------------------------------------
 "  Colorscheme
+"  NOTE: highlight by default is global
 " ----------------------------------------------------------------------
 
 set t_Co=256                " force 256 colors
@@ -263,10 +219,15 @@ hi StatusLinePath cterm=reverse",italic
 hi TagbarScope cterm=bold ctermfg=5
 hi TagbarAccessPublic ctermfg=70
 
-autocmd FileType markdown
-  \ hi Title term=bold cterm=bold ctermfg=5 gui=bold guifg=Magenta |
-  \ hi Identifier ctermfg=2 guifg=Green |
-  \ hi mkdListItemCheckbox cterm=bold
+" Bold headers
+hi htmlTitle term=bold cterm=bold ctermfg=5 gui=bold guifg=Magenta
+hi htmlH1 term=bold cterm=bold ctermfg=5 gui=bold guifg=Magenta
+
+" List markers
+hi mkdListItem ctermfg=2 guifg=Green
+hi mkdRule ctermfg=2 guifg=Green
+" with bold checkboxes: [ ] [x]
+hi mkdListItemCheckbox term=bold cterm=bold gui=bold
 
 
 " ----------------------------------------------------------------------
@@ -310,6 +271,9 @@ call plug#begin()
     Plug 'jlanzarotta/bufexplorer'    " TODO: Check and configure!
 
     Plug 'tyru/capture.vim'           " Show Ex command in a buffer
+
+  " Registers
+    Plug 'junegunn/vim-peekaboo'
 
   " Search
     Plug 'ctrlpvim/ctrlp.vim'         " Full path fuzzy finder
@@ -512,6 +476,7 @@ map <F13> <Plug>Markdown_EditUrlUnderCursor   " re-enable default <ge> mapping
 autocmd FileType markdown
   \ let g:table_mode_verbose = 0 |
   \ :TableModeEnable
+
 
 " ----------------------------------------------------------------------
 "   dkarter/bullets.vim
