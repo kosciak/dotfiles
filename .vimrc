@@ -12,8 +12,6 @@ endif
 
 set nocompatible	" Vim setings
 
-set history=500	    " keep 500 lines of command line history
-
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
 else
@@ -39,11 +37,6 @@ set ttyfast         " fast terminal connection
 
 set title           " set window title
 
-set backspace=indent,eol,start  " backspace removes all
-
-set laststatus=2	" always show status line
-set ruler			" show the cursor position all the time
-
 set statusline=
 set statusline+=%m                  " Modified flag: [+] or [-]
 set statusline+=%<                  " Truncate if too long
@@ -67,15 +60,11 @@ set statusline+=%5p%%               " Percentage through file in lines
 set statusline+=\                   " Space
 
 set showcmd			" display incomplete commands
-set wildmenu		" wildmenu for comands completion
 "set wildmode=longest,list,full
 
 set magic			" magic on for regular expressions
 
-set incsearch		" do incremental searching
-
 if &t_Co > 2 || has("gui_running")
-  syntax on			" syntax highliting
   set hlsearch		" highlight the last used search pattern.
 endif
 
@@ -95,7 +84,6 @@ set wrap
 set linebreak
 set cpoptions+=n
 set showbreak=>>>\ 
-set display+=lastline	" display as much of the last line as possible
 
 set scrolloff=3     " let X lines before/after cursor during scroll
 
@@ -123,10 +111,8 @@ set tabstop=4       " 4 whitespaces for tabs visual presentation
 set shiftwidth=4    " shift lines by 4 spaces
 set shiftround      " round indent to multiple of shiftwidth
 set expandtab       " expand tabs into spaces
-set smarttab        " set tabs for a shifttabs logic
 
 set listchars=tab:→\ ,eol:¶,extends:→,precedes:<,trail:·,nbsp:°
-"set list
 
 set autoindent      " indent when moving to the next line
 set smartindent     " smart autoindenting when starting new line
@@ -144,9 +130,6 @@ set hidden 			" allow closing of windows with unsaved buffers
 " ----------------------------------------------------------------------
 
 if has("autocmd")
-
-  filetype plugin on	" enable file type detection
-  filetype indent on	" load indent files
 
   " separate autocmd group
   augroup vimrcEx
@@ -204,11 +187,6 @@ endif " has("autocmd")
 "  Commands and functions
 " ----------------------------------------------------------------------
 
-" Convenient command to see the difference between the current buffer and the file it was loaded from, thus the changes you made.
-"command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-"	 	\ | wincmd p | diffthis
-
-
 function! SynStack()
   if !exists("*synstack")
     return
@@ -264,8 +242,8 @@ endfunc
 "  Colorscheme
 " ----------------------------------------------------------------------
 
-" set t_Co=256        " force 256 colors
-" set bg=light        " force light background
+set t_Co=256                " force 256 colors
+set background=light        " force light background
 
 "highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
 "match OverLength /\%81v.\+/
@@ -303,10 +281,13 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif	
 
 " Declare plugins install directory
-call plug#begin('~/.vim/bundle')
+call plug#begin()
 
   " Vim Plug itself, for documentation to work
     Plug 'junegunn/vim-plug'
+
+  " Config
+    Plug 'tpope/vim-sensible'         " Sensible default settings
 
   " Language packs - syntax, indentation, highlighting
     " let g:polyglot_disabled = ['markdown']  " NOTE: MUST be declared BEFORE loading plugin!
@@ -319,25 +300,23 @@ call plug#begin('~/.vim/bundle')
 
     Plug 'chikamichi/mediawiki.vim'
 
-    " Plug 'SidOfc/mkdx'                  " Feature rich if not too complicated
-    " Plug 'vim-pandoc/vim-pandoc'
-
     Plug 'tmhedberg/simpylfold'           " Python folding rules
     Plug 'jeetsukumaran/vim-pythonsense'  " Python text objects and motions
 
+    " Plug 'SidOfc/mkdx'                  " Feature rich if not too complicated
+    " Plug 'vim-pandoc/vim-pandoc'
+
   " Buffers / Tabs
     Plug 'jlanzarotta/bufexplorer'    " TODO: Check and configure!
-    " Plug 'fholgado/minibufexpl.vim' " tab-like buffers explorer
-    " Plug 'ap/vim-buftabline'
 
     Plug 'tyru/capture.vim'           " Show Ex command in a buffer
 
-  " Fuzzy search and file opening
+  " Search
     Plug 'ctrlpvim/ctrlp.vim'         " Full path fuzzy finder
     Plug 'dyng/ctrlsf.vim'            " TODO: Configure!
     Plug 'jremmen/vim-ripgrep'
 
-  " File management
+  " Files
     Plug 'scrooloose/nerdtree'
     " Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -345,7 +324,7 @@ call plug#begin('~/.vim/bundle')
     " Plug 'obaland/vfiler.vim'
     " Plug 'obaland/vfiler-column-devicons'
 
-  " Tags viewer
+  " Tags
     Plug 'majutsushi/tagbar'          " Tags tree explorer
 
   " Editing
