@@ -251,10 +251,10 @@ call plug#begin()
     Plug 'tpope/vim-sensible'         " Sensible default settings
 
   " Language packs - syntax, indentation, highlighting
-    " let g:polyglot_disabled = ['markdown']  " NOTE: MUST be declared BEFORE loading plugin!
+    let g:polyglot_disabled = ['markdown']  " NOTE: MUST be declared BEFORE loading plugin!
     Plug 'sheerun/vim-polyglot'           " Collection of language packs
       " Provided by polyglot (install separately if you need help file):
-      Plug 'plasticboy/vim-markdown'
+      Plug 'plasticboy/vim-markdown'      " Updated version
       " Plug 'pangloss/vim-javascript'
       " Plug 'vim-python/python-syntax'
       " Plug 'Vimjas/vim-python-pep8-indent'
