@@ -1,0 +1,176 @@
+" .vimrc 
+"
+" Author: Wojciech 'KosciaK' Pietrzok
+" 
+" ----------------------------------------------------------------------
+"  General settings
+" ----------------------------------------------------------------------
+
+if v:progname =~? "evim"
+  finish
+endif
+
+set nocompatible	" Vim setings
+
+set history=500		" keep 500 lines of command line history
+
+if has("vms")
+  set nobackup		" do not keep a backup file, use versions instead
+else
+  set backup		" keep a backup file
+endif
+
+set wildignore+=*.pyc,*~
+
+set encoding=utf8
+
+set autoread
+
+if has('langmap') && exists('+langremap') && &langremap && s:MaySet('langremap')
+  set nolangremap
+endif
+
+
+" ----------------------------------------------------------------------
+"  VIM interface
+" ----------------------------------------------------------------------
+
+set backspace=indent,eol,start
+
+set laststatus=2	" always show status line
+set ruler			" show the cursor position all the time
+set showcmd			" display incomplete commands
+set wildmenu		" wildmenu for comands completion
+
+set magic			" magic on for regular expressions
+
+set incsearch		" do incremental searching
+if &t_Co > 2 || has("gui_running")
+  syntax on			" syntax highliting
+  set hlsearch		" highlight the last used search pattern.
+endif
+
+set ignorecase		" ignore case when searching
+set smartcase		" override ignorecase when Uppercase in search pattern
+
+"set mouse=a			" turn mouse on
+
+set number			" line numbers
+set showmatch		" show matching brackets
+
+set wrap
+set linebreak
+set cpoptions+=n
+set showbreak=>>>\ 
+set display+=lastline	" display as much of the last line as possible
+
+set scrolloff=3
+
+if v:version > 703 || v:version == 703 && has("patch541")
+  set formatoptions+=j
+endif
+
+" Spellchecking: English and Polish, show 10 best suggestions
+set spelllang=en,pl
+set spellsuggest=best,10
+
+
+" ----------------------------------------------------------------------
+"  Text, tab, indentation
+" ----------------------------------------------------------------------
+
+set tabstop=4
+set shiftwidth=4
+set shiftround
+set complete-=i
+set expandtab
+set smarttab
+
+set listchars=tab:→\ ,eol:¶,extends:→,precedes:<,trail:·,nbsp:°
+"set list
+
+set autoindent
+set smartindent
+
+
+" ----------------------------------------------------------------------
+"  Windows, tabs, buffers
+" ----------------------------------------------------------------------
+
+set hidden 			" allow closing of windows with unsaved buffers
+
+
+" ----------------------------------------------------------------------
+"  Autocommands
+" ----------------------------------------------------------------------
+
+if has("autocmd")
+
+  filetype plugin on	" enable file type detection
+  filetype indent on	" load indent files
+
+  " separate autocmd group
+  augroup vimrcEx
+  " delete previous settings for this group
+  au!			
+
+  autocmd BufRead *.txt setfiletype text
+
+  autocmd FileType text setlocal noexpandtab
+  autocmd FileType vim setlocal noexpandtab
+  autocmd FileType svn setlocal noexpandtab
+
+  autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+  autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+  autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+  autocmd FileType c set omnifunc=ccomplete#Complete
+  autocmd FileType python set omnifunc=pythoncomplete#Complete
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+
+  augroup END
+
+else
+
+  set autoindent		" always set autoindenting on
+
+endif " has("autocmd")
+
+
+" ----------------------------------------------------------------------
+"  Mappings
+" ----------------------------------------------------------------------
+
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
+" More logical yanking (like D, C)
+map Y y$
+
+nnoremap <leader><space> :noh<cr>
+
+
+" ----------------------------------------------------------------------
+"  Commands
+" ----------------------------------------------------------------------
+
+" Convenient command to see the difference between the current buffer and the file it was loaded from, thus the changes you made.
+command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+	 	\ | wincmd p | diffthis
+
+
+" ----------------------------------------------------------------------
+"  Colorscheme
+" ----------------------------------------------------------------------
+
+set t_Co=256
+set bg=light
+
