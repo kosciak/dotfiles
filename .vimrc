@@ -1,7 +1,7 @@
-" .vimrc 
+" .vimrc
 "
 " Author: Wojciech 'KosciaK' Pietrzok
-" 
+"
 " ----------------------------------------------------------------------
 "  General settings
 " ----------------------------------------------------------------------
@@ -317,6 +317,8 @@ call plug#begin('~/.vim/bundle')
       " Plug 'vim-python/python-syntax'
       " Plug 'Vimjas/vim-python-pep8-indent'
 
+    Plug 'chikamichi/mediawiki.vim'
+
     " Plug 'SidOfc/mkdx'                  " Feature rich if not too complicated
     " Plug 'vim-pandoc/vim-pandoc'
 
@@ -386,9 +388,12 @@ call plug#end()
 
 
 " ----------------------------------------------------------------------
-"  NERDTree - 'scrooloose/nerdtree'
+"  Plugins settings
 " ----------------------------------------------------------------------
 
+" ----------------------------------------------------------------------
+"   scrooloose/nerdtree
+" ----------------------------------------------------------------------
 let g:NERDTreeQuitOnOpen = 1        " Quit after opening file
 let g:NERDTreeMinimalUI = 1         " Don't show bookmarks and help prompt
 let g:NERDTreeShowBookmarks = 0     " Don't show bookmarks (toggle with 'B')
@@ -408,20 +413,18 @@ let g:NERDTreeRespectWildIgnore = 1 " Don't show files in wildignore
 let g:NERDTreeMapOpenSplit = 's'    " Remap split to 's'
 let g:NERDTreeMapOpenVSplit = 'v'   " Remap vertical split to 'v'
 
-
 " ----------------------------------------------------------------------
-"  NERDTree Git Plugin - 'Xuyuanp/nerdtree-git-plugin'
+"   Xuyuanp/nerdtree-git-plugin
 " ----------------------------------------------------------------------
-
 let g:NERDTreeGitStatusCwdOnly = 1
 let g:NERDTreeGitStatusUseNerdFonts = 0
 let g:NERDTreeGitStatusShowClean = 0
 let g:NERDTreeGitStatusAlignIfConceal = 0
 
-
 " ----------------------------------------------------------------------
-"  NERDTree Syntax Highlight - 'tiagofumo/vim-nerdtree-syntax-highlight'
+"   tiagofumo/vim-nerdtree-syntax-highlight
 " ----------------------------------------------------------------------
+let g:NERDTreeLimitedSyntax = 1
 
 " let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
 " let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
@@ -430,8 +433,6 @@ let g:NERDTreeGitStatusAlignIfConceal = 0
 let g:NERDTreeDisableFileExtensionHighlight = 1
 " let g:NERDTreeDisableExactMatchHighlight = 1
 let g:NERDTreeDisablePatternMatchHighlight = 1
-
-let g:NERDTreeLimitedSyntax = 1
 
 " Disable all default matching
 let g:NERDTreeSyntaxDisableDefaultExtensions = 1
@@ -452,11 +453,9 @@ let g:NERDTreeSyntaxEnabledExactMatches = [
 let g:NERDTreeHighlightFolders = 1          " enables folder icon highlighting using exact match
 let g:NERDTreeHighlightFoldersFullName = 1  " highlights the folder name
 
-
 " ----------------------------------------------------------------------
-"  DevIcons - 'ryanoasis/vim-devicons'
+"   ryanoasis/vim-devicons
 " ----------------------------------------------------------------------
-
 let g:DevIconsEnableFoldersOpenClose = 1    " Change icon for open dirs
 
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
@@ -480,40 +479,32 @@ let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {
       \ 'dropbox'   : '',
       \}
 
-
 " ----------------------------------------------------------------------
-"  Tagbar - 'majutsushi/tagbar'
+"   majutsushi/tagbar
 " ----------------------------------------------------------------------
-
 let g:tagbar_autoclose = 1
 let g:tagbar_compact = 2
 
-
 " ----------------------------------------------------------------------
-"  Buffer Explorer - 'jlanzarotta/bufexplorer'
+"   jlanzarotta/bufexplorer
 " ----------------------------------------------------------------------
-
 let g:bufExplorerDefaultHelp = 0
 let g:bufExplorerSplitOutPathName = 0
 let g:bufExplorerShowRelativePath = 1
 let g:bufExplorerDisableDefaultKeyMapping = 1
 
-
 " ----------------------------------------------------------------------
-"  MiniBufExpl - 'fholgado/minibufexpl.vim'
+"   fholgado/minibufexpl.vim
 " ----------------------------------------------------------------------
-
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 0
 let g:miniBufExplModSelTarget = 1
 let g:miniBufExplUseSingleClick = 1
 
-
 " ----------------------------------------------------------------------
-"  CtrlP - 'ctrlpvim/ctrlp.vim'
+"   ctrlpvim/ctrlp.vim
 " ----------------------------------------------------------------------
-
 let g:ctrlp_switch_buffer = 0 "'et'
 " Ignore files from .gitignore
 let g:ctrlp_user_command = [
@@ -521,50 +512,42 @@ let g:ctrlp_user_command = [
       \ 'cd %s && git ls-files . --cached --exclude-standard --others',
       \]
 
-
 " ----------------------------------------------------------------------
-"  Vim-markdown - 'plasticboy/vim-markdown'
+"   plasticboy/vim-markdown
 " ----------------------------------------------------------------------
-
 let g:vim_markdown_strikethrough = 1
 
 " let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_folding_style_pythonic = 1
 let g:vim_markdown_folding_level = 6
 
-let g:vim_markdown_new_list_item_indent = 2
+let g:vim_markdown_auto_insert_bullets = 0
+let g:vim_markdown_new_list_item_indent = 0
 
 let g:vim_markdown_follow_anchor = 1
 map <F13> <Plug>Markdown_EditUrlUnderCursor   " re-enable default <ge> mapping
 
-
 " ----------------------------------------------------------------------
-"  Table Mode - 'dhruvasagar/vim-table-mode'
+"   dhruvasagar/vim-table-mode
 " ----------------------------------------------------------------------
-
 autocmd FileType markdown
   \ let g:table_mode_verbose = 0 |
   \ :TableModeEnable
 
-
 " ----------------------------------------------------------------------
-"  Bullets - 'dkarter/bullets.vim'
+"   dkarter/bullets.vim
 " ----------------------------------------------------------------------
-
 let g:bullets_checkbox_partials_toggle = 0
 
-
 " ----------------------------------------------------------------------
-"  Scratch - 'mtth/scratch.vim'
+"   mtth/scratch.vim
 " ----------------------------------------------------------------------
-
 let g:scratch_insert_autohide = 0
 let g:scratch_filetype = 'markdown'
 
 " ----------------------------------------------------------------------
-"  Wiki.vim - 'lervag/wiki.vim'
+"   lervag/wiki.vim
 " ----------------------------------------------------------------------
-
 let g:wiki_root = '~/projekty/wiki'
 let wiki_global_load = 0
 let g:wiki_filetypes = ['md', 'wiki']
@@ -587,7 +570,7 @@ map Q gq
 map Y y$
 
 " Reset highlighting
-nnoremap <leader><space> :noh<cr>
+nnoremap <leader><space> :nohlsearch<cr>
 
 " Toggle between paste and nopaste, with visual feedback
 nnoremap <leader>p :set invpaste paste?<CR>
@@ -655,7 +638,8 @@ nnoremap <Tab> <Plug>(wiki-link-next)   " Not mapped for some reason...
 
 
 " ----------------------------------------------------------------------
-" after a re-source, fix syntax matching issues (concealing brackets):
+" after a re-source, fix syntax matching issues (concealing brackets)
+" ----------------------------------------------------------------------
 if exists("g:loaded_webdevicons")
     call webdevicons#refresh()
 endif
