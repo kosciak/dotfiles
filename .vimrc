@@ -454,7 +454,7 @@ let g:ctrlp_switch_buffer = 0 "'et'
 "   \ 'fallback': 'cd %s && fd --hidden --type f',
 let g:ctrlp_user_command = {
   \ 'types': {
-    \ 1: ['.git', 'cd %s && git ls-files'],
+    \ 1: ['.git', 'cd %s && git ls-files --cached --others --exclude-standard'],
     \ 2: ['.hg', 'hg --cwd %s locate -I .'],
     \ 3: ['.bzr', 'cd %s && bzr ls -R -k file'],
     \ },
@@ -574,8 +574,8 @@ nnoremap <leader>c :NERDTreeFind<CR>    " Open NERDTree and show current file
 nnoremap <leader>a :TagbarToggle<CR>
 
 " jlanzarotta/bufexplorer
-nnoremap <leader>b :BufExplorer<CR>
-" nnoremap <leader>b :ToggleBufExplorer<CR>
+" nnoremap <leader>b :BufExplorer<CR>
+nnoremap <leader>b :ToggleBufExplorer<CR>
 
 " AndrewRadev/sideways.vim
 " machakann/vim-swap
@@ -610,6 +610,18 @@ autocmd FileType markdown
 
 " lervag/wiki.vim
 nnoremap <Tab> <Plug>(wiki-link-next)   " Not mapped for some reason...
+
+nnoremap <leader>w<C-P> :execute 'CtrlP ' .. wiki#get_root()<CR>
+nnoremap <leader>pw :execute 'CtrlP ' .. wiki#get_root()<CR>
+
+" ctrlpvim/ctrlp.vim
+nnoremap <leader>p :CtrlP<CR>
+nnoremap <leader>pp :CtrlP<CR>
+nnoremap <leader>pb :CtrlPBuffer<CR>
+nnoremap <leader>pc :CtrlPCurFile<CR>
+nnoremap <leader>pd :CtrlPCurWD<CR>
+nnoremap <leader>pm :CtrlPMRU<CR>
+nnoremap <leader>pl :CtrlPLine<CR>
 
 " tpope/vim-fugitive
 " junegunn/gv.vim
