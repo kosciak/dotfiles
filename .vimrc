@@ -50,13 +50,13 @@ set statusline+=\                   " Space
 " set statusline+=%{statusline#Git()}
 set statusline+=%{statusline#Icon()}
 set statusline+=\                   " Space
-set statusline+=%#StatusLinePath#   " Start named highlight group
+set statusline+=%#StatusLineNormal#   " Start named highlight group
 set statusline+=%{statusline#Path()}
 set statusline+=%*                  " Reset highlight group
 set statusline+=%t                  " File name
 set statusline+=%=                  " left/right alignment separator
 " set statusline+=%<%{statusline#Tag()}\ 
-set statusline+=%#StatusLinePath#   " Start named highlight group
+set statusline+=%#StatusLineNormal#   " Start named highlight group
 set statusline+=%y                  " Filetype
 set statusline+=%*                  " Reset highlight group
 set statusline+=\                   " Space
@@ -107,6 +107,8 @@ set cursorlineopt=number  " Highlight only line number
 
 set fillchars+=vert:\     " Removes pipes | that act as seperators on splits
 
+set completeopt=menu  " on completion show only menu, no preview or popup
+
 
 " ----------------------------------------------------------------------
 "  Text, tab, indentation
@@ -147,18 +149,11 @@ if has("autocmd")
   autocmd FileType vim setlocal noexpandtab
   autocmd FileType svn setlocal noexpandtab
 
-  autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-  autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-  autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-  autocmd FileType c set omnifunc=ccomplete#Complete
-  autocmd FileType python set omnifunc=pythoncomplete#Complete
-
   " Markdown related
   autocmd FileType markdown
     \ setlocal formatoptions+=ro |
-    \ setlocal textwidth=80
+    \ setlocal textwidth=80 |
+    \ call tablemode#Enable()
 
   " Python related
   autocmd BufNewFile,BufRead *.py 
@@ -189,11 +184,6 @@ endif " has("autocmd")
 
 
 " ----------------------------------------------------------------------
-"  Commands and functions
-" ----------------------------------------------------------------------
-
-
-" ----------------------------------------------------------------------
 "  Colorscheme
 "  NOTE: highlight by default is global
 " ----------------------------------------------------------------------
@@ -214,20 +204,27 @@ augroup CLNRSet
     autocmd! ColorScheme * hi CursorLineNR cterm=bold ctermbg=254
 augroup END
 
-hi StatusLinePath cterm=reverse",italic
+hi StatusLineNormal cterm=reverse",italic
 
 hi TagbarScope cterm=bold ctermfg=5
 hi TagbarAccessPublic ctermfg=70
 
-" Bold headers
+" Markup - bold headers
 hi htmlTitle term=bold cterm=bold ctermfg=5 gui=bold guifg=Magenta
 hi htmlH1 term=bold cterm=bold ctermfg=5 gui=bold guifg=Magenta
 
-" List markers
+" Markup - list markers
 hi mkdListItem ctermfg=2 guifg=Green
 hi mkdRule ctermfg=2 guifg=Green
 " with bold checkboxes: [ ] [x]
 hi mkdListItemCheckbox term=bold cterm=bold gui=bold
+
+" Diff
+hi diffAdded ctermfg=2 guifg=Green
+hi diffRemoved ctermfg=1 guifg=Red
+hi diffFile term=bold cterm=bold ctermfg=4 guifg=Blue
+hi diffIndexLine cterm=bold ctermfg=5 guifg=Magenta
+hi diffLine ctermfg=6 guifg=Cyan
 
 
 " ----------------------------------------------------------------------
@@ -250,6 +247,22 @@ call plug#begin()
   " Config
     Plug 'tpope/vim-sensible'         " Sensible default settings
 
+  " Editing
+    Plug 'tpope/vim-surround'         " Quoting / parenthesizing made simple
+    Plug 'tpope/vim-repeat'           " Repeat supported plugin maps (like vim-surround)
+
+    Plug 'tpope/vim-commentary'       " Commenting stuff out
+
+    Plug 'godlygeek/tabular'          " Tabularize text NOTE: Load *before* vim-markdown!
+    Plug 'dhruvasagar/vim-table-mode' " Table creator and formatter
+
+    Plug 'lervag/vim-rainbow-lists'   " Highlight list indentation levels
+    Plug 'dkarter/bullets.vim'        " Bullet lists automation
+    " Plug 'lervag/lists.vim'
+
+    Plug 'AndrewRadev/sideways.vim'   " Move items to the righ or left
+    Plug 'machakann/vim-swap'         " Arguments swapping
+
   " Language packs - syntax, indentation, highlighting
     let g:polyglot_disabled = ['markdown']  " NOTE: MUST be declared BEFORE loading plugin!
     Plug 'sheerun/vim-polyglot'           " Collection of language packs
@@ -266,6 +279,7 @@ call plug#begin()
 
     " Plug 'SidOfc/mkdx'                  " Feature rich if not too complicated
     " Plug 'vim-pandoc/vim-pandoc'
+    " Plug 'vim-pandoc/vim-pandoc-syntax'
 
   " Buffers / Tabs
     Plug 'jlanzarotta/bufexplorer'    " TODO: Check and configure!
@@ -273,7 +287,7 @@ call plug#begin()
     Plug 'tyru/capture.vim'           " Show Ex command in a buffer
 
   " Registers
-    Plug 'junegunn/vim-peekaboo'
+    Plug 'junegunn/vim-peekaboo'      " Show register's contents in sidebar
 
   " Search
     Plug 'ctrlpvim/ctrlp.vim'         " Full path fuzzy finder
@@ -291,30 +305,15 @@ call plug#begin()
   " Tags
     Plug 'majutsushi/tagbar'          " Tags tree explorer
 
-  " Editing
-    Plug 'tpope/vim-surround'         " Quoting / parenthesizing made simple
-    Plug 'tpope/vim-repeat'           " Repeat supported plugin maps (like vim-surround)
-
-    Plug 'tpope/vim-commentary'       " Commenting stuff out
-
-    Plug 'godlygeek/tabular'          " Tabularize text
-    Plug 'dhruvasagar/vim-table-mode' " Table creator and formatter
-
-    Plug 'lervag/vim-rainbow-lists'   " Highlight list indentation levels
-    Plug 'dkarter/bullets.vim'        " Bullet lists automation
-    " Plug 'lervag/lists.vim'
-
-    Plug 'AndrewRadev/sideways.vim'   " Move items to the righ or left
-    Plug 'machakann/vim-swap'         " Arguments swapping
-
-  " Tab and completion
+  " Completion
     Plug 'ervandew/supertab'
 
   " Color previews
     Plug 'ap/vim-css-color'
 
-  " Git integration
+  " Version control
     Plug 'tpope/vim-fugitive'
+    Plug 'junegunn/gv.vim'
 
   " Wiki, notes taking, journaling
     Plug 'lervag/wiki.vim'            " TODO: configure!
@@ -458,7 +457,7 @@ let g:ctrlp_user_command = [
 " ----------------------------------------------------------------------
 "   plasticboy/vim-markdown
 " ----------------------------------------------------------------------
-let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_follow_anchor = 1
 
 " let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_folding_style_pythonic = 1
@@ -467,16 +466,19 @@ let g:vim_markdown_folding_level = 6
 let g:vim_markdown_auto_insert_bullets = 0
 let g:vim_markdown_new_list_item_indent = 0
 
-let g:vim_markdown_follow_anchor = 1
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_json_frontmatter = 1
+let g:vim_markdown_toml_frontmatter = 1
+
+let g:vim_markdown_toc_autofit = 1
+
 map <F13> <Plug>Markdown_EditUrlUnderCursor   " re-enable default <ge> mapping
 
 " ----------------------------------------------------------------------
 "   dhruvasagar/vim-table-mode
 " ----------------------------------------------------------------------
-autocmd FileType markdown
-  \ let g:table_mode_verbose = 0 |
-  \ :TableModeEnable
-
+let g:table_mode_verbose = 0
 
 " ----------------------------------------------------------------------
 "   dkarter/bullets.vim
@@ -490,17 +492,29 @@ let g:scratch_insert_autohide = 0
 let g:scratch_filetype = 'markdown'
 
 " ----------------------------------------------------------------------
+"   majutsushi/tagbar
+" ----------------------------------------------------------------------
+let g:SuperTabDefaultCompletionType = "context"
+
+" ----------------------------------------------------------------------
+"   junegunn/vim-peekaboo
+" ----------------------------------------------------------------------
+let g:peekaboo_window = 'vert bo 40new'
+let g:peekaboo_delay = 500
+
+" ----------------------------------------------------------------------
 "   lervag/wiki.vim
 " ----------------------------------------------------------------------
 let g:wiki_root = '~/projekty/wiki'
 let wiki_global_load = 0
-let g:wiki_filetypes = ['md', 'wiki']
-autocmd FileType markdown
-  \ let g:wiki_link_extension = '.md' |
-  \ let g:wiki_link_target_type = 'md'
-autocmd FileType wiki
-  \ let g:wiki_link_extension = '.wiki' |
-  \ let g:wiki_link_target_type = 'wiki'
+let g:wiki_link_toggle_on_follow = 0
+let g:wiki_write_on_nav = 1
+let g:wiki_filetypes = ['md']
+let g:wiki_link_extension = '.md'
+let g:wiki_link_target_type = 'md'
+
+" TODO: Update TOC on save (if exists!)
+" See: https://github.com/mzlogin/vim-markdown-toc/blob/master/ftplugin/markdown.vim
 
 
 " ----------------------------------------------------------------------
@@ -535,20 +549,21 @@ nnoremap <C-i> <C-a>
 " Fold using space
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
-" NERDTree
+" scrooloose/nerdtree
 nnoremap <leader>n :NERDTreeFocus<CR>   " Open NERDTree
 nnoremap <leader>N :NERDTreeFind<CR>    " Open NERDTree and show current file
 nnoremap <leader>f :NERDTreeFocus<CR>   " Open NERDTree
 nnoremap <leader>c :NERDTreeFind<CR>    " Open NERDTree and show current file
 
-" Tagbar
+" majutsushi/tagbar
 nnoremap <leader>a :TagbarToggle<CR>
 
-" Buffer Explorer
+" jlanzarotta/bufexplorer
 nnoremap <leader>b :BufExplorer<CR>
 " nnoremap <leader>b :ToggleBufExplorer<CR>
 
-" Sideways and Swap
+" AndrewRadev/sideways.vim
+" machakann/vim-swap
 " NOTE: Sideways is more versatile, but Swap's interactive mode is so good! 
 let g:swap_no_default_key_mappings = 1
 nnoremap gsh :SidewaysLeft<cr>
@@ -559,7 +574,7 @@ nnoremap gss <Plug>(swap-interactive)
 " nmap <leader>sI <Plug>SidewaysArgumentInsertFirst
 " nmap <leader>sA <Plug>SidewaysArgumentAppendLast
 
-" Scratch
+" mtth/scratch.vim
 let g:scratch_no_mappings = 1
 nmap <leader>si <plug>(scratch-insert-reuse)
 nmap <leader>sc <plug>(scratch-insert-clear)
@@ -568,17 +583,23 @@ xmap <leader>sc <plug>(scratch-selection-clear)
 nnoremap <leader>ss :Scratch<CR>
 nnoremap <leader>sp :ScratchPreview<CR>
 
-" Bullets
+" dkarter/bullets.vim
 autocmd FileType markdown
-  \ nnoremap <C-x> :ToggleCheckbox<CR> |
-  \ imap <C-l> <Plug>(bullets-demote) |
-  \ imap <C-h> <Plug>(bullets-promote)
+  \ nnoremap <buffer> <C-x> :ToggleCheckbox<CR> |
+  \ imap <buffer> <C-l> <Plug>(bullets-demote) |
+  \ imap <buffer> <C-h> <Plug>(bullets-promote)
 
-" Rainbow list
-autocmd FileType markdown nnoremap <leader>r :RBListToggle<CR>
+" lervag/vim-rainbow-lists
+autocmd FileType markdown
+  \ nnoremap <buffer> <leader>r :RBListToggle<CR>
 
-" Wiki
+" lervag/wiki.vim
 nnoremap <Tab> <Plug>(wiki-link-next)   " Not mapped for some reason...
+
+" tpope/vim-fugitive
+" junegunn/gv.vim
+nnoremap <leader>gv :GV!<CR>
+nnoremap <leader>gd :Gvdiffsplit<CR>
 
 
 " ----------------------------------------------------------------------
