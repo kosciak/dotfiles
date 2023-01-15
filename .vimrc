@@ -306,6 +306,7 @@ call plug#begin()
     Plug 'majutsushi/tagbar'          " Tags tree explorer
 
   " Completion
+    Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
     Plug 'ervandew/supertab'
 
   " Color previews
@@ -497,6 +498,13 @@ let g:scratch_filetype = 'markdown'
 let g:SuperTabDefaultCompletionType = "context"
 
 " ----------------------------------------------------------------------
+"   ycm_autoclose_preview_window_after_insertion
+" ----------------------------------------------------------------------
+let g:ycm_autoclose_preview_window_after_completion = 1
+" only use the `Down` key to select the first item
+let g:ycm_key_list_select_completion = ['<Down>']
+
+" ----------------------------------------------------------------------
 "   junegunn/vim-peekaboo
 " ----------------------------------------------------------------------
 let g:peekaboo_window = 'vert bo 40new'
@@ -566,9 +574,9 @@ nnoremap <leader>b :BufExplorer<CR>
 " machakann/vim-swap
 " NOTE: Sideways is more versatile, but Swap's interactive mode is so good! 
 let g:swap_no_default_key_mappings = 1
-nnoremap gsh :SidewaysLeft<cr>
-nnoremap gsl :SidewaysRight<cr>
-nnoremap gss <Plug>(swap-interactive)
+nnoremap gh :SidewaysLeft<cr>
+nnoremap gl :SidewaysRight<cr>
+nnoremap gs <Plug>(swap-interactive)
 " nmap <leader>si <Plug>SidewaysArgumentInsertBefore
 " nmap <leader>sa <Plug>SidewaysArgumentAppendAfter
 " nmap <leader>sI <Plug>SidewaysArgumentInsertFirst
@@ -599,7 +607,10 @@ nnoremap <Tab> <Plug>(wiki-link-next)   " Not mapped for some reason...
 " tpope/vim-fugitive
 " junegunn/gv.vim
 nnoremap <leader>gv :GV!<CR>
+nnoremap <leader>gl :Git log %<CR>
+nnoremap <leader>gb :Git blame<CR>
 nnoremap <leader>gd :Gvdiffsplit<CR>
+nnoremap <leader>gs :Git<CR>
 
 
 " ----------------------------------------------------------------------
