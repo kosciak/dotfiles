@@ -1,3 +1,4 @@
+" .vimrc
 " .vim/autoload/statusline.vim
 "
 " Author: Wojciech 'KosciaK' Pietrzok
@@ -24,7 +25,7 @@ endfunc
 function! statusline#Git()
   let branch = FugitiveHead()
   if strlen(branch) > 0
-    return ' ' .. branch .. '%* '
+    return ' ' .. branch .. ' '
   else
     return ''
   endif

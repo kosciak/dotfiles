@@ -1,4 +1,5 @@
 " .vimrc
+" .vim/autoload/syntax.vim
 "
 " Author: Wojciech 'KosciaK' Pietrzok
 "
