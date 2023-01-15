@@ -74,6 +74,8 @@ endif
 set spelllang=en,pl
 set spellsuggest=best,10
 
+set completeopt=menu  " on completion show only menu, no preview or popup
+
 
 " ----------------------------------------------------------------------
 "  Text, tab, indentation
@@ -119,14 +121,6 @@ if has("autocmd")
   autocmd FileType text setlocal noexpandtab
   autocmd FileType vim setlocal noexpandtab
   autocmd FileType svn setlocal noexpandtab
-
-  autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-  autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-  autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-  autocmd FileType c set omnifunc=ccomplete#Complete
-  autocmd FileType python set omnifunc=pythoncomplete#Complete
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
