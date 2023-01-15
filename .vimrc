@@ -318,7 +318,6 @@ call plug#begin()
 
   " Wiki, notes taking, journaling
     Plug 'lervag/wiki.vim'            " TODO: configure!
-    " Plug 'vimwiki/vimwiki'
 
     Plug 'mtth/scratch.vim'           " Temporary scratch buffer
 
@@ -449,11 +448,19 @@ let g:miniBufExplUseSingleClick = 1
 "   ctrlpvim/ctrlp.vim
 " ----------------------------------------------------------------------
 let g:ctrlp_switch_buffer = 0 "'et'
+
 " Ignore files from .gitignore
-let g:ctrlp_user_command = [
-      \ '.git',
-      \ 'cd %s && git ls-files . --cached --exclude-standard --others',
-      \]
+" let g:ctrlp_user_command = {
+"   \ 'fallback': 'cd %s && fd --hidden --type f',
+let g:ctrlp_user_command = {
+  \ 'types': {
+    \ 1: ['.git', 'cd %s && git ls-files'],
+    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+    \ 3: ['.bzr', 'cd %s && bzr ls -R -k file'],
+    \ },
+  \ 'ignore': 1
+  \ }
+
 
 " ----------------------------------------------------------------------
 "   plasticboy/vim-markdown
@@ -469,8 +476,8 @@ let g:vim_markdown_new_list_item_indent = 0
 
 let g:vim_markdown_strikethrough = 1
 let g:vim_markdown_frontmatter = 1
-let g:vim_markdown_json_frontmatter = 1
-let g:vim_markdown_toml_frontmatter = 1
+" let g:vim_markdown_json_frontmatter = 1   " NOTE: Breaks links concealing!
+" let g:vim_markdown_toml_frontmatter = 1
 
 let g:vim_markdown_toc_autofit = 1
 
@@ -498,7 +505,7 @@ let g:scratch_filetype = 'markdown'
 let g:SuperTabDefaultCompletionType = "context"
 
 " ----------------------------------------------------------------------
-"   ycm_autoclose_preview_window_after_insertion
+"   ycm-core/YouCompleteMe
 " ----------------------------------------------------------------------
 let g:ycm_autoclose_preview_window_after_completion = 1
 " only use the `Down` key to select the first item
@@ -514,7 +521,7 @@ let g:peekaboo_delay = 500
 "   lervag/wiki.vim
 " ----------------------------------------------------------------------
 let g:wiki_root = '~/projekty/wiki'
-let wiki_global_load = 0
+let wiki_global_load = 1
 let g:wiki_link_toggle_on_follow = 0
 let g:wiki_write_on_nav = 1
 let g:wiki_filetypes = ['md']
@@ -551,8 +558,8 @@ nnoremap <C-H> <C-W><C-H>
 " Close window
 nnoremap <leader>q :close<CR>
 
-" Increment using Ctrl-i (not to interfere with screen leader key)
-nnoremap <C-i> <C-a>
+" Increment (not to interfere with screen leader key)
+nnoremap <C-C> <C-A>
 
 " Fold using space
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
@@ -611,6 +618,9 @@ nnoremap <leader>gl :Git log %<CR>
 nnoremap <leader>gb :Git blame<CR>
 nnoremap <leader>gd :Gvdiffsplit<CR>
 nnoremap <leader>gs :Git<CR>
+
+" ycm-core/YouCompleteMe
+" TODO: See: https://github.com/puremourning/.vim-mac/blob/master/plugin/ycm_mappings.vim
 
 
 " ----------------------------------------------------------------------
