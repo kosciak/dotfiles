@@ -104,8 +104,11 @@ if has('conceal')
   set conceallevel=2
 endif
 
-set cursorline            " Highlight current line
-set cursorlineopt=number  " Highlight only line number
+set cursorline      " Highlight current line
+" with only line number, EXCEPT selected FileTypes:
+set cursorlineopt=number
+autocmd FileType tagbar,nerdtree,ctrlp
+ \ set cursorlineopt=both
 
 set fillchars+=vert:\     " Removes pipes | that act as seperators on splits
 
@@ -197,18 +200,23 @@ set background=light        " force light background
 "highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
 "match OverLength /\%81v.\+/
 
-hi CursorLine ctermbg=253 cterm=NONE
+" hi SpecialKey term=bold ctermfg=7 guifg=Blue
+" hi NonText term=bold ctermfg=7 gui=bold guifg=Blue
+
+hi CursorLine ctermbg=254 cterm=NONE
 augroup CLClear
     autocmd! ColorScheme * hi CursorLine ctermbg=253 cterm=NONE
 augroup END
 
-hi CursorLineNR cterm=bold ctermbg=254
+hi CursorLineNR term=bold cterm=bold ctermbg=254
 augroup CLNRSet
     autocmd! ColorScheme * hi CursorLineNR cterm=bold ctermbg=253
 augroup END
 
 " hi StatusLineNormal cterm=reverse,italic
 hi StatusLineNormal cterm=reverse
+
+hi bufExplorerMapping term=bold ctermfg=6 guifg=Cyan
 
 hi TagbarScope cterm=bold ctermfg=5
 hi TagbarAccessPublic ctermfg=70
@@ -218,8 +226,8 @@ hi htmlTitle term=bold cterm=bold ctermfg=5 gui=bold guifg=Magenta
 hi htmlH1 term=bold cterm=bold ctermfg=5 gui=bold guifg=Magenta
 
 " Markup - list markers
-hi mkdListItem ctermfg=2 guifg=Green
-hi mkdRule ctermfg=2 guifg=Green
+hi mkdListItem term=bold cterm=bold ctermfg=2 gui=bold guifg=Green
+hi mkdRule term=bold cterm=bold ctermfg=2 gui=bold guifg=Green
 " with bold checkboxes: [ ] [x]
 hi mkdListItemCheckbox term=bold cterm=bold ctermbg=254 gui=bold
 hi mkdHeading term=bold cterm=bold ctermbg=254 gui=bold
@@ -460,7 +468,9 @@ let g:miniBufExplUseSingleClick = 1
 " ----------------------------------------------------------------------
 "   ctrlpvim/ctrlp.vim
 " ----------------------------------------------------------------------
+let g:ctrlp_working_path_mode = 'wa'  " start from cwd instead of root
 let g:ctrlp_switch_buffer = 0 "'et'
+let g:ctrlp_show_hidden = 1
 
 " Ignore files from .gitignore
 " let g:ctrlp_user_command = {
@@ -589,10 +599,8 @@ nnoremap <C-C> <C-A>
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
 " scrooloose/nerdtree
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <leader>f :NERDTreeFocus<CR>
+nnoremap <leader>d :NERDTreeFocus<CR>
 " Open NERDTree and show current file
-nnoremap <leader>N :NERDTreeFind<CR>
 nnoremap <leader>c :NERDTreeFind<CR>
 
 " majutsushi/tagbar
@@ -644,7 +652,8 @@ nnoremap <leader>p :CtrlP<CR>
 nnoremap <leader>pp :CtrlP<CR>
 nnoremap <leader>pc :CtrlPCurFile<CR>
 nnoremap <leader>pd :CtrlPCurWD<CR>
-nnoremap <leader>pr :CtrlPMRU<CR>
+nnoremap <leader>pr :CtrlPRoot<CR>
+nnoremap <leader>pm :CtrlPMRU<CR>
 nnoremap <leader>pb :CtrlPBuffer<CR>
 nnoremap <leader>pl :CtrlPLine<CR>
 
