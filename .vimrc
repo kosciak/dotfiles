@@ -15,12 +15,14 @@ if v:progname =~? "evim"
   finish
 endif
 
-set nocompatible	" Vim setings
+set nocompatible    " Vim setings
+
+set history=1000    " keep 1000 lines of command line history
 
 if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
+  set nobackup      " do not keep a backup file, use versions instead
 else
-  set backup		" keep a backup file
+  set backup        " keep a backup file
 endif
 
 " Files to ignore
@@ -64,26 +66,26 @@ set statusline+=%7.(%l:%c%)         " Line number : Column number
 set statusline+=%5p%%               " Percentage through file in lines
 set statusline+=\                   " Space
 
-set showcmd			" display incomplete commands
+set showcmd         " display incomplete commands
 "set wildmode=longest,list,full
 
-set magic			" magic on for regular expressions
+set magic           " magic on for regular expressions
 
 if &t_Co > 2 || has("gui_running")
-  set hlsearch		" highlight the last used search pattern.
+  set hlsearch      " highlight the last used search pattern.
 endif
 
-set ignorecase		" ignore case when searching
-set smartcase		" override ignorecase when Uppercase in search pattern
+set ignorecase      " ignore case when searching
+set smartcase       " override ignorecase when Uppercase in search pattern
 
 " NOTE: Hold SHIFT (or CTRL+SHIFT) during selection to disable visual mode!
-set mouse=a			" turn mouse on in all modes
-" set mouse=vicr			" turn mouse on, except NORMAL mode
+set mouse=a         " turn mouse on in all modes
+set mouse=vicr      " turn mouse on in all modes
 
-set number			" show line numbers
+set number          " show line numbers
 set numberwidth=5   " mininal number of columns for line numbers
 
-set showmatch		" show matching brackets
+set showmatch       " show matching brackets
 
 set wrap
 set linebreak
@@ -119,6 +121,7 @@ set shiftwidth=4    " shift lines by 4 spaces
 set shiftround      " round indent to multiple of shiftwidth
 set expandtab       " expand tabs into spaces
 
+" NOTE: Needs 'set list' to work and show listchars!
 set listchars=tab:→\ ,eol:¶,extends:→,precedes:<,trail:·,nbsp:°
 
 set autoindent      " indent when moving to the next line
@@ -129,7 +132,7 @@ set smartindent     " smart autoindenting when starting new line
 "  Windows, tabs, buffers
 " ----------------------------------------------------------------------
 
-set hidden 			" allow closing of windows with unsaved buffers
+set hidden          " allow closing of windows with unsaved buffers
 
 
 " ----------------------------------------------------------------------
@@ -141,7 +144,7 @@ if has("autocmd")
   " separate autocmd group
   augroup vimrcEx
   " delete previous settings for this group
-  au!			
+  au!
 
   autocmd BufRead *.txt setfiletype text
 
@@ -178,7 +181,7 @@ if has("autocmd")
 
 else
 
-  set autoindent		" always set autoindenting on
+  set autoindent      " always set autoindenting on
 
 endif " has("autocmd")
 
@@ -194,17 +197,18 @@ set background=light        " force light background
 "highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
 "match OverLength /\%81v.\+/
 
-hi CursorLine ctermbg=254 cterm=NONE
+hi CursorLine ctermbg=253 cterm=NONE
 augroup CLClear
-    autocmd! ColorScheme * hi CursorLine ctermbg=254 cterm=NONE
+    autocmd! ColorScheme * hi CursorLine ctermbg=253 cterm=NONE
 augroup END
 
 hi CursorLineNR cterm=bold ctermbg=254
 augroup CLNRSet
-    autocmd! ColorScheme * hi CursorLineNR cterm=bold ctermbg=254
+    autocmd! ColorScheme * hi CursorLineNR cterm=bold ctermbg=253
 augroup END
 
-hi StatusLineNormal cterm=reverse",italic
+" hi StatusLineNormal cterm=reverse,italic
+hi StatusLineNormal cterm=reverse
 
 hi TagbarScope cterm=bold ctermfg=5
 hi TagbarAccessPublic ctermfg=70
@@ -217,7 +221,8 @@ hi htmlH1 term=bold cterm=bold ctermfg=5 gui=bold guifg=Magenta
 hi mkdListItem ctermfg=2 guifg=Green
 hi mkdRule ctermfg=2 guifg=Green
 " with bold checkboxes: [ ] [x]
-hi mkdListItemCheckbox term=bold cterm=bold gui=bold
+hi mkdListItemCheckbox term=bold cterm=bold ctermbg=254 gui=bold
+hi mkdHeading term=bold cterm=bold ctermbg=254 gui=bold
 
 " Diff
 hi diffAdded ctermfg=2 guifg=Green
@@ -225,6 +230,11 @@ hi diffRemoved ctermfg=1 guifg=Red
 hi diffFile term=bold cterm=bold ctermfg=4 guifg=Blue
 hi diffIndexLine cterm=bold ctermfg=5 guifg=Magenta
 hi diffLine ctermfg=6 guifg=Cyan
+
+" call matchadd('Conceal', '\[\ \]', 0, 11, {'conceal': ''})
+" call matchadd('Conceal', '\[X\]', 0, 12, {'conceal': ''})
+" call matchadd('Conceal', '\[x\]', 0, 13, {'conceal': ''})
+" hi Conceal ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
 
 
 " ----------------------------------------------------------------------
@@ -236,7 +246,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif	
+endif
 
 " Declare plugins install directory
 call plug#begin()
@@ -246,6 +256,9 @@ call plug#begin()
 
   " Config
     Plug 'tpope/vim-sensible'         " Sensible default settings
+
+  " Filesystem
+    Plug 'duggiefresh/vim-easydir'    " Create directories on :write
 
   " Editing
     Plug 'tpope/vim-surround'         " Quoting / parenthesizing made simple
@@ -491,7 +504,15 @@ let g:table_mode_verbose = 0
 " ----------------------------------------------------------------------
 "   dkarter/bullets.vim
 " ----------------------------------------------------------------------
+let g:bullets_checkbox_markers = '   X'
 let g:bullets_checkbox_partials_toggle = 0
+" Add another cycle or -/*/+
+let g:bullets_outline_levels = [
+      \ 'ROM', 'ABC',
+      \ 'num', 'abc', 'rom',
+      \ 'std-', 'std*', 'std+',
+      \ 'std-', 'std*', 'std+'
+      \]
 
 " ----------------------------------------------------------------------
 "   mtth/scratch.vim
@@ -524,6 +545,9 @@ let g:wiki_root = '~/projekty/wiki'
 let wiki_global_load = 1
 let g:wiki_link_toggle_on_follow = 0
 let g:wiki_write_on_nav = 1
+
+let g:wiki_toc_title = ''
+
 let g:wiki_filetypes = ['md']
 let g:wiki_link_extension = '.md'
 let g:wiki_link_target_type = 'md'
@@ -565,10 +589,11 @@ nnoremap <C-C> <C-A>
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
 " scrooloose/nerdtree
-nnoremap <leader>n :NERDTreeFocus<CR>   " Open NERDTree
-nnoremap <leader>N :NERDTreeFind<CR>    " Open NERDTree and show current file
-nnoremap <leader>f :NERDTreeFocus<CR>   " Open NERDTree
-nnoremap <leader>c :NERDTreeFind<CR>    " Open NERDTree and show current file
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <leader>f :NERDTreeFocus<CR>
+" Open NERDTree and show current file
+nnoremap <leader>N :NERDTreeFind<CR>
+nnoremap <leader>c :NERDTreeFind<CR>
 
 " majutsushi/tagbar
 nnoremap <leader>a :TagbarToggle<CR>
@@ -600,7 +625,7 @@ nnoremap <leader>sp :ScratchPreview<CR>
 
 " dkarter/bullets.vim
 autocmd FileType markdown
-  \ nnoremap <buffer> <C-x> :ToggleCheckbox<CR> |
+  \ nnoremap <buffer> <C-x> :ToggleCheckbox<CR>|
   \ imap <buffer> <C-l> <Plug>(bullets-demote) |
   \ imap <buffer> <C-h> <Plug>(bullets-promote)
 
@@ -617,10 +642,10 @@ nnoremap <leader>pw :execute 'CtrlP ' .. wiki#get_root()<CR>
 " ctrlpvim/ctrlp.vim
 nnoremap <leader>p :CtrlP<CR>
 nnoremap <leader>pp :CtrlP<CR>
-nnoremap <leader>pb :CtrlPBuffer<CR>
 nnoremap <leader>pc :CtrlPCurFile<CR>
 nnoremap <leader>pd :CtrlPCurWD<CR>
-nnoremap <leader>pm :CtrlPMRU<CR>
+nnoremap <leader>pr :CtrlPMRU<CR>
+nnoremap <leader>pb :CtrlPBuffer<CR>
 nnoremap <leader>pl :CtrlPLine<CR>
 
 " tpope/vim-fugitive
