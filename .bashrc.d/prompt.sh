@@ -34,12 +34,14 @@ if [[ ! -z $BASH ]]; then
 		# PS1_PRE+="@"
 		# PS1_PRE+="$(color $FG_BLUE)\h$(color $RESET)"
 		PS1_PRE+=" "
+		# PS1_PRE+="$(color $BOLD)$(color $FG_LIGHT_BLUE) \w$(color $RESET)"
 		PS1_PRE+="$(color $BOLD)$(color $FG_LIGHT_BLUE)\w$(color $RESET)"
 		PS1_PRE+="$(color $RESET)"
 
 		PS1_POST="$(color $RESET)"
 		# PS1_POST+="$(color $FG_CYAN)]$(color $RESET)"
-		PS1_POST+=" \$ "
+		# PS1_POST+=" ❯ "
+		PS1_POST+=" $(color $FG_LIGHT_BLACK)$(color $BOLD)\$$(color $RESET) "
 		PS1_POST+="$(color $RESET)"
     fi
 
@@ -48,6 +50,7 @@ fi;
 
 
 __venv_ps1() {
+	# printf "$(color $RESET)$(color $BG_WHITE)$(color $FG_MAGENTA) %s $(color $FG_LIGHT_WHITE)◢$(color $RESET)" "${VIRTUAL_ENV##*/}"
 	printf "$(color $RESET)$(color $FG_MAGENTA) %s$(color $RESET)" "${VIRTUAL_ENV##*/}"
 }
 
