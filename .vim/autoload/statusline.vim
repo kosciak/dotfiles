@@ -49,6 +49,11 @@ function! statusline#Filename(...) abort
   return statusline#Format(file, a:000)
 endfunc
 
+function! statusline#Icon(...) abort
+  let icon    = WebDevIconsGetFileTypeSymbol()
+  return statusline#Format(icon, a:000)
+endfunc
+
 
 function! statusline#Git(...) abort
   let branch  = FugitiveHead()
