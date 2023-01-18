@@ -46,13 +46,15 @@ if [[ ! -z $BASH ]]; then
     fi
 
 	export PS1="${PS1_PRE}${PS1_POST}"
+
 	export PS2="$(color $FG_LIGHT_BLACK)$(color $BOLD)> $(color $RESET)"
 fi;
 
 
 __venv_ps1() {
 	# printf "$(color $RESET)$(color $BG_WHITE)$(color $FG_MAGENTA) %s $(color $FG_LIGHT_WHITE)◢$(color $RESET)" "${VIRTUAL_ENV##*/}"
-	printf "$(color $RESET)$(color $FG_MAGENTA) %s$(color $RESET)" "${VIRTUAL_ENV##*/}"
+	printf "$(color $RESET)$(color $FG_MAGENTA) %s$(color $RESET)" \
+		"${VIRTUAL_ENV##*/}"
 }
 
 
@@ -82,9 +84,11 @@ prompt_command() {
 	# NOTE: git-prompt coloring works only when called from PROMPT_COMMAND
 	# NOTE: It will replace PS1 with new value!
 	if type __git_ps1 &> /dev/null; then
-		# __git_ps1 "${PS1_PRE}" "${PS1_POST}" " $(color $FG_GREEN) %s"
-		__git_custom_ps1 "${PS1_PRE}" "${PS1_POST}" " $(color $FG_GREEN) %s"
 		# __git_ps1 "${PS1_PRE}" "${PS1_POST}" " @%s"
+		# __git_ps1 "${PS1_PRE}" "${PS1_POST}" " $(color $FG_GREEN) %s"
+		__git_ps1 \
+			"${PS1_PRE}" "${PS1_POST}" \
+			" $(color $FG_GREEN) %s"
 	fi;
 
 	# Add Virtual ENV name to prompt
