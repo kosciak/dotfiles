@@ -178,12 +178,14 @@ let g:scratch_filetype = 'markdown'
 "   majutsushi/tagbar
 " ----------------------------------------------------------------------
 let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
 " ----------------------------------------------------------------------
 "   ycm-core/YouCompleteMe
 " ----------------------------------------------------------------------
 let g:ycm_autoclose_preview_window_after_completion = 1
 " only use the `Down` key to select the first item
+" let g:ycm_key_list_select_completion = ['<Tab>', '<Down>']
 let g:ycm_key_list_select_completion = ['<Down>']
 
 " ----------------------------------------------------------------------

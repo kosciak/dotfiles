@@ -83,7 +83,7 @@ set smartcase       " override ignorecase when Uppercase in search pattern
 
 " NOTE: Hold SHIFT (or CTRL+SHIFT) during selection to disable visual mode!
 set mouse=a         " turn mouse on in all modes
-set mouse=vicr      " turn mouse on in all modes
+" set mouse=vicr      " turn mouse on in all modes
 
 set number          " show line numbers
 set numberwidth=5   " mininal number of columns for line numbers
@@ -213,7 +213,7 @@ call plug#begin()
     Plug 'duggiefresh/vim-easydir'    " Create directories on :write
 
   " Editing
-    Plug 'rhysd/clever-f.vim'         " Better f, F, t, T repeating
+    " Plug 'rhysd/clever-f.vim'         " Better f, F, t, T repeating
 
     Plug 'tpope/vim-surround'         " Quoting / parenthesizing made simple
     Plug 'tpope/vim-repeat'           " Repeat supported plugin maps (like vim-surround)
