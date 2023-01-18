@@ -6,7 +6,7 @@ export GIT_PS1_HIDE_IF_PWD_IGNORED=1
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=''
-export GIT_PS1_SHOWUNTRACKEDFILES=1
+# export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_COMPRESSSPARSESTATE=1
 export GIT_PS1_SHOWUPSTREAM="auto"
 export GIT_PS1_SHOWCONFLICTSTATE="yes"
@@ -199,7 +199,7 @@ __git_ps1 () {
 	# local printf_vars_count=${#printf_vars}
 
 	local gitstring="${name}${state:+$separator$state}"
-	if [ -n "${GIT_PS1_STATEBEFORENAME-}" ]; then
+	if [ -n "${state-}" ] && [ -n "${GIT_PS1_STATEBEFORENAME-}" ]; then
 		gitstring="${state}${state:+$separator$name}"
 	fi
 
