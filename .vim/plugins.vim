@@ -188,6 +188,14 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 " let g:ycm_key_list_select_completion = ['<Tab>', '<Down>']
 let g:ycm_key_list_select_completion = ['<Down>']
 
+" Turn semantic completion for specific filetypes
+" NOTE: Use g:ycm_filetype_blacklist to completely turn off YCM instead
+let g:ycm_filetype_specific_completion_to_disable = {
+      \ 'javascript': 1,
+      \ 'gitcommit': 1
+      \}
+
+
 " ----------------------------------------------------------------------
 "   junegunn/vim-peekaboo
 " ----------------------------------------------------------------------
