@@ -1,0 +1,16 @@
+[user]
+	name = Wojciech Pietrzok
+	email = kosciak@kosciak.net
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore_global
+[pull]
+	rebase = false
+[init]
+	defaultBranch = main
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+[color]
+	ui = auto
