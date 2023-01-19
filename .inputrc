@@ -1,3 +1,25 @@
+## Readline settings
+# See: https://www.gnu.org/software/bash/manual/html_node/Readline-Init-File-Syntax.html
+# See: https://wiki.archlinux.org/title/readline
+
+# Single tab instead of double tab (no bell)
+set show-all-if-unmodified on
+
+# Don't wait for tab after partial completion and show all completions instantly
+# set show-all-if-ambiguous on
+
+# Color files by types (uses LS_COLORS)
+# Note that this may cause completion text blink in some terminals (e.g. xterm).
+set colored-stats on
+# Append char to indicate type
+# set visible-stats on
+# Mark symlinked directories
+set mark-symlinked-directories on
+# Color the common prefix
+set colored-completion-prefix on
+# Color the common prefix in menu-complete
+set menu-complete-display-prefix on
+
 # Use the text that has already been typed as the prefix for searching through
 # commands (i.e. more intelligent Up/Down behavior)
 ## arrow up
@@ -5,10 +27,59 @@
 ## arrow down
 "\e[B":history-search-forward
 
+set keymap vi-command
+# these are for vi-command mode
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+j: history-search-forward
+k: history-search-backward
+set keymap vi-insert
+# these are for vi-insert mode
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+# switch to block cursor before executing a command
+# This will reset cursor after switching back to emacs mode
+RETURN: "\e\n"
+
 # Be more intelligent when autocompleting by also looking at the text after
 # the cursor. For example, when the current line is "cd ~/src/mozil", and
 # the cursor is on the "z", pressing Tab will not autocomplete it to "cd
 # ~/src/mozillail", but to "cd ~/src/mozilla". (This is supported by the
 # Readline used by Bash 4.)
 set skip-completed-text on
+
+## Set Vi mode editing as default, in bash use: 'set -o vi|emacs' to change mode on demand
+# set editing-mode vi
+
+# Mode indicator in prompt (by default prepend line with: '@', '(ins)', '(cmd)'
+set show-mode-in-prompt on
+
+# Don't show default "@" in emacs mode,
+set emacs-mode-string
+
+# Change cursor shape
+set vi-ins-mode-string \1\e[5 q\2
+set vi-cmd-mode-string \1\e[1 q\2
+
+## Set vi insert/command mode
+# \1 - begin sequence of non printing characters
+# \2 - end sequence of non printing characters
+#  1 -> blinking block
+#  2 -> solid block
+#  3 -> blinking underscore
+#  4 -> solid underscore
+#  5 -> blinking vertical bar
+#  6 -> solid vertical bar
+
+# Just set mode string
+# set vi-ins-mode-string +
+# set vi-cmd-mode-string :
+
+# Change cursor shape and color
+# set vi-ins-mode-string \1\e[5 q\e]12;green\a\2
+# set vi-cmd-mode-string \1\e[1 q\e]12;orange\a\2
+
+# More elaborate example
+# set vi-ins-mode-string \1\e[34;1m\2└──[ins] \1\e[0m\2
+# set vi-cmd-mode-string \1\e[33;1m\2└──[cmd] \1\e[0m\2
 
