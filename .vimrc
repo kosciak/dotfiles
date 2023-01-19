@@ -114,6 +114,19 @@ set fillchars+=vert:\     " Removes pipes | that act as seperators on splits
 
 set completeopt=menu  " on completion show only menu, no preview or popup
 
+" Cursor settings:
+" See: https://vim.fandom.com/wiki/Change_cursor_shape_in_different_modes
+"  1 -> blinking block
+"  2 -> solid block
+"  3 -> blinking underscore
+"  4 -> solid underscore
+"  5 -> blinking vertical bar
+"  6 -> solid vertical bar
+let &t_SI = "\e[5 q" " Start INSERT mode
+let &t_SR = "\e[3 q" " Start REPLACE mode
+let &t_EI = "\e[0 q" " End INSERT/REPLACE -> NORMAL mode
+" NOTE: For GUI check :help guicursor
+
 
 " ----------------------------------------------------------------------
 "  Editing
@@ -274,7 +287,7 @@ call plug#begin()
 
   " Completion
     Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
-    Plug 'ervandew/supertab'
+    Plug 'ervandew/supertab'          " Improved Tab completion
 
   " Color previews
     Plug 'ap/vim-css-color'
