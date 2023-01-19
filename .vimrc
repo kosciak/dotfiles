@@ -38,6 +38,37 @@ set encoding=utf-8  " UTF-8 by default
 
 set ttyfast         " fast terminal connection
 
+if &term =~ 'tmux'
+  " In tmux mouse support works only with xterm2
+  set ttymouse=xterm2
+else
+  " Everywhere else (including screen) use sgr
+  set ttymouse=sgr
+endif
+
+" Fix escape sequences
+let &t_Ts = "\e[9m"   " no strikethrough
+let &t_Te = "\e[29m"  " no strikethrough
+let &t_Ce = "\e[4:0m"   " no underline
+let &t_Us = "\e[4:2m"   " underdouble
+let &t_Cs = "\e[4:3m"   " undercurl
+let &t_ds = "\e[4:4m"   " underdotted
+let &t_Ds = "\e[4:5m"   " underdashed
+let &t_AU = "\e[58:5:%dm"   " underline color, set by :help ctermul
+
+" Cursor settings:
+" See: https://vim.fandom.com/wiki/Change_cursor_shape_in_different_modes
+"  1 -> blinking block
+"  2 -> solid block
+"  3 -> blinking underscore
+"  4 -> solid underscore
+"  5 -> blinking vertical bar
+"  6 -> solid vertical bar
+let &t_SI = "\e[5 q" " Start INSERT mode
+let &t_SR = "\e[3 q" " Start REPLACE mode
+let &t_EI = "\e[1 q" " End INSERT/REPLACE -> NORMAL mode
+" NOTE: For GUI check :help guicursor
+
 
 " ----------------------------------------------------------------------
 "  Interface
@@ -113,19 +144,6 @@ autocmd FileType tagbar,nerdtree,ctrlp
 set fillchars+=vert:\     " Removes pipes | that act as seperators on splits
 
 set completeopt=menu  " on completion show only menu, no preview or popup
-
-" Cursor settings:
-" See: https://vim.fandom.com/wiki/Change_cursor_shape_in_different_modes
-"  1 -> blinking block
-"  2 -> solid block
-"  3 -> blinking underscore
-"  4 -> solid underscore
-"  5 -> blinking vertical bar
-"  6 -> solid vertical bar
-let &t_SI = "\e[5 q" " Start INSERT mode
-let &t_SR = "\e[3 q" " Start REPLACE mode
-let &t_EI = "\e[0 q" " End INSERT/REPLACE -> NORMAL mode
-" NOTE: For GUI check :help guicursor
 
 
 " ----------------------------------------------------------------------
