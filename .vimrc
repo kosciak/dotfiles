@@ -69,6 +69,9 @@ let &t_SR = "\e[3 q" " Start REPLACE mode
 let &t_EI = "\e[1 q" " End INSERT/REPLACE -> NORMAL mode
 " NOTE: For GUI check :help guicursor
 
+" reset cursor when leaving vim
+autocmd VimLeave * silent !echo -ne "\e[0 q"
+
 
 " ----------------------------------------------------------------------
 "  Interface
