@@ -49,6 +49,13 @@
             ".screenrc"
         ]
     },
+    "tmux": {
+        "tags": ["user"],
+        "reference": "https://wiki.archlinux.org/title/tmux",
+        "symlink": [
+            ".config/tmux"
+        ]
+    },
     "vim": {
         "tags": ["user"],
         "symlink": [
