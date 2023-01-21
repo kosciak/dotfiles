@@ -1,0 +1,100 @@
+{
+    "packages": [
+        "dnfdragora"
+    ],
+    "editors": [
+        "vim", "vim-X11",
+        "neovim"
+    ],
+    "terminals": [
+        "kitty", "kitty-bash-integration", "kitty-doc",
+        "alacritty",
+        "screen",
+        "tmux"
+    ],
+    "x_tools": [
+        "xprop",
+        "xdotool",
+        "xev",
+        "wmctrl"
+    ],
+    "ls": [
+        "exa",
+        "lsd"
+    ],
+    "file_managers": [
+        "lf",
+        "ranger",
+        "nnn",
+        "mc"
+    ],
+    "top": [
+        "htop",
+        "btop",
+        "nvtop",
+        "iftop"
+    ],
+    "disk": [
+        "duf"
+    ],
+    "sensors": [
+        "lm_sensors",
+        "hddtemp",
+        "xsensors"
+    ],
+    "hardware": [
+        "lshw",
+        "inxi",
+        "solaar",
+        "corectrl",
+        "cpu-x",
+        "gparted"
+    ],
+    "pagers": [
+        "bat",
+        "most"
+    ],
+    "dev": [
+        "git", "git-crypt",
+        "breezy",
+        "meld",
+        "npm", "nodejs",
+        "python2.7",
+        "tidy",
+        "tinc",
+        "openssl"
+    ],
+    "build": [
+        "@development-tools",
+        "make", "automake", "cmake",
+        "gcc-c++",
+        "python3-devel",
+        "freetype2", "fontconfig",
+        "libxcb", "libxkbcommon"
+    ],
+    "zip": [
+        "unzip",
+        "p7zip", "p7zip-plugins"
+    ],
+    "cli_tools": [
+        "trash-cli",
+        "play",
+        "sox"
+    ],
+    "find": [
+        "ripgrep",
+        "the_silver_searcher",
+        "fd-find"
+    ],
+    "misc": [
+        "tldr"
+    ],
+    "fetch": [
+        "neofetch",
+        "screenfetch",
+        "fastfetch", "fastfetch-bash-completion"
+    ],
+    "bluetooth": [
+        "bluez", "python3-bluez", "bluez-libs"
+    ]
+}
