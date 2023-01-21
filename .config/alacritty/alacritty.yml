@@ -452,7 +452,9 @@ cursor:
     #   - Off: Disable blinking by default
     #   - On: Enable blinking by default
     #   - Always: Force the cursor to always blink
-    blinking: On
+    # NOTE: For some reason vim/nvim set non-blinking cursor
+    blinking: Always
+    # blinking: On
 
   # Vi mode cursor style
   #
@@ -468,7 +470,7 @@ cursor:
   # Time after which cursor stops blinking, in seconds.
   #
   # Specifying '0' will disable timeout for blinking.
-  blink_timeout: 5
+  blink_timeout: 0
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
