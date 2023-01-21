@@ -64,7 +64,7 @@ prompt_command() {
 
 	# Change title of terminals
 	case ${TERM} in
-		xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|alacritty|st|konsole*)
+		xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|alacritty|st|konsole*|tmux*)
 			echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\007"
 			;;
 		screen*)
