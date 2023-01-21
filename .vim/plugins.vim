@@ -162,9 +162,9 @@ let g:table_mode_verbose = 0
 let g:bullets_checkbox_markers = '   X'
 let g:bullets_checkbox_partials_toggle = 0
 " Add another cycle or -/*/+
+" and use only num; ROM, ABC, rom, abc are not rendered correctly
 let g:bullets_outline_levels = [
-      \ 'ROM', 'ABC',
-      \ 'num', 'abc', 'rom',
+      \ 'num', 'num', 'num', 'num',
       \ 'std-', 'std*', 'std+',
       \ 'std-', 'std*', 'std+'
       \]

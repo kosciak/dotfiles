@@ -39,8 +39,8 @@ nnoremap <C-W>w <C-W>p
 " Move to next window
 nnoremap <C-W>n <C-W>w
 nnoremap <C-W><C-N> <C-W><C-W>
-nnoremap <C-W>p <C-W>W
 " Move to previous window
+nnoremap <C-W>p <C-W>W
 nnoremap <C-W><C-P> <C-W>W
 " Create new window
 nnoremap <C-W>N <C-W>n
