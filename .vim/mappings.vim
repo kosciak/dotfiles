@@ -19,6 +19,9 @@ map Y y$
 " Reset highlighting
 nnoremap <leader><space> :nohlsearch<cr>
 
+" Reload .vimrc
+nnoremap <leader><C-R> :source $MYVIMRC<CR>:echo "Reloaded .vimrc"<CR>
+
 " Toggle between paste and nopaste, with visual feedback
 nnoremap <leader>p :set invpaste paste?<CR>
 set pastetoggle=<leader>p
@@ -28,6 +31,19 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" A bit more logical windowm switching
+" Switch between previous/next window
+nnoremap <C-W><C-W> <C-W><C-P>
+nnoremap <C-W>w <C-W>p
+" Move to next window
+nnoremap <C-W>n <C-W>w
+nnoremap <C-W><C-N> <C-W><C-W>
+nnoremap <C-W>p <C-W>W
+" Move to previous window
+nnoremap <C-W><C-P> <C-W>W
+" Create new window
+nnoremap <C-W>N <C-W>n
 
 " Close window
 nnoremap <leader>q :close<CR>
@@ -82,10 +98,9 @@ autocmd FileType markdown
   \ nnoremap <buffer> <leader>r :RBListToggle<CR>
 
 " lervag/wiki.vim
-nnoremap <Tab> <Plug>(wiki-link-next)   " Not mapped for some reason...
-
-nnoremap <leader>w<C-P> :execute 'CtrlP ' .. wiki#get_root()<CR>
 nnoremap <leader>ow :execute 'CtrlP ' .. wiki#get_root()<CR>
+nnoremap <leader>wo :execute 'CtrlP ' .. wiki#get_root()<CR>
+nnoremap <leader>w<C-P> :execute 'CtrlP ' .. wiki#get_root()<CR>
 
 " ctrlpvim/ctrlp.vim
 nnoremap <leader>o :CtrlP<CR>

@@ -5,6 +5,7 @@
 " .vim/autoload/statusline.vim
 " .vim/autoload/syntax.vim
 " .vim/ftplugin/mediawiki.vim
+" .vim/ftplugin/help.vim
 "
 " Author: Wojciech 'KosciaK' Pietrzok
 "
@@ -67,10 +68,13 @@ let &t_AU = "\e[58:5:%dm"   " underline color, set by :help ctermul
 let &t_SI = "\e[5 q" " Start INSERT mode
 let &t_SR = "\e[3 q" " Start REPLACE mode
 let &t_EI = "\e[1 q" " End INSERT/REPLACE -> NORMAL mode
-" NOTE: For GUI check :help guicursor
+" For GUI check :help guicursor
+" NOTE: nvim somehow uses guicursor setting in terminal!
+set guicursor+=a:blinkon200
 
 " reset cursor when leaving vim
 autocmd VimLeave * silent !echo -ne "\e[0 q"
+autocmd VimLeave * set guicursor=a:hor100
 
 
 " ----------------------------------------------------------------------
@@ -199,6 +203,11 @@ if has("autocmd")
     \ setlocal textwidth=80 |
     \ call tablemode#Enable()
 
+  " Configuraiotn files related
+  autocmd FileType tmux
+    \ setlocal formatoptions+=ro |
+    \ setlocal textwidth=80
+
   " Python related
   autocmd BufNewFile,BufRead *.py 
     \ setlocal formatoptions+=ro |
@@ -247,8 +256,6 @@ call plug#begin()
     Plug 'duggiefresh/vim-easydir'    " Create directories on :write
 
   " Editing
-    " Plug 'rhysd/clever-f.vim'         " Better f, F, t, T repeating
-
     Plug 'tpope/vim-surround'         " Quoting / parenthesizing made simple
     Plug 'tpope/vim-repeat'           " Repeat supported plugin maps (like vim-surround)
 
@@ -263,6 +270,8 @@ call plug#begin()
 
     Plug 'AndrewRadev/sideways.vim'   " Move items to the righ or left
     Plug 'machakann/vim-swap'         " Arguments swapping
+
+    " Plug 'rhysd/clever-f.vim'         " Better f, F, t, T repeating
 
   " Language packs - syntax, indentation, highlighting
     let g:polyglot_disabled = ['markdown']  " NOTE: MUST be declared BEFORE loading plugin!
@@ -282,10 +291,12 @@ call plug#begin()
     " Plug 'vim-pandoc/vim-pandoc'
     " Plug 'vim-pandoc/vim-pandoc-syntax'
 
-  " Buffers / Tabs
+  " Buffers / Windows / Tabs
     Plug 'jlanzarotta/bufexplorer'    " Buffer explorer / switcher
 
     Plug 'tyru/capture.vim'           " Show Ex command in a buffer
+
+    Plug 'sedm0784/vim-resize-mode'   " Window Resize mode
 
   " Registers
     Plug 'junegunn/vim-peekaboo'      " Show register's contents in sidebar
@@ -314,8 +325,8 @@ call plug#begin()
     Plug 'ap/vim-css-color'
 
   " Version control
-    Plug 'tpope/vim-fugitive'
-    Plug 'junegunn/gv.vim'
+    Plug 'tpope/vim-fugitive'         " Git integration
+    Plug 'junegunn/gv.vim'            " Git commit browser
 
   " Wiki, notes taking, journaling
     Plug 'lervag/wiki.vim'            " Wiki engine
@@ -324,7 +335,7 @@ call plug#begin()
 
   " Icons
     " NOTE: Must be loaded as the last one
-    Plug 'ryanoasis/vim-devicons'
+    Plug 'ryanoasis/vim-devicons'     " Enable NerdFonts support
 
 " End of plugins list
 call plug#end()
