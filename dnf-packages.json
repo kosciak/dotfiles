@@ -96,5 +96,22 @@
     ],
     "bluetooth": [
         "bluez", "python3-bluez", "bluez-libs"
+    ],
+    "desktop": [
+        "google-chrome-stable",
+        "thunderbird",
+        "dino",
+        "gimp", "inkscape",
+        "shutter", "peek",
+        "vlc", "clapper",
+        "file-roller",
+        "keepassxc",
+        "gnucash",
+        "gpxsee",
+        "foliate",
+        "marker", "apostrophe",
+        "deluge",
+        "steam",
+        ""
     ]
 }
