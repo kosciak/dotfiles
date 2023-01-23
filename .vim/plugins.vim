@@ -189,6 +189,9 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 " let g:ycm_key_list_select_completion = ['<Tab>', '<Down>']
 let g:ycm_key_list_select_completion = ['<Down>']
 
+" Do NOT overwrite original mapping to insert previously inserted text
+let g:ycm_key_invoke_completion = ''
+
 " Turn semantic completion for specific filetypes
 " NOTE: Use g:ycm_filetype_blacklist to completely turn off YCM instead
 let g:ycm_filetype_specific_completion_to_disable = {
