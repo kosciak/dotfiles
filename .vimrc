@@ -1,4 +1,5 @@
 " .vimrc
+" .vim/term.vim
 " .vim/plugins.vim
 " .vim/highlights.vim
 " .vim/mappings.vim
@@ -6,6 +7,7 @@
 " .vim/autoload/syntax.vim
 " .vim/ftplugin/mediawiki.vim
 " .vim/ftplugin/help.vim
+" .vim/after/syntax/markdown.vim
 "
 " Author: Wojciech 'KosciaK' Pietrzok
 "
@@ -33,48 +35,13 @@ set wildignore+=*.pyc,*.pyo
 set wildignore+=.git,.git/*
 set wildignore+=.bzr,.bzr/*
 set wildignore+=.svn,.svn/*
+set wildignore+=.hg,.hg/*
 set wildignore+=__pycache__,*/__pycache__/*
 
 set encoding=utf-8  " UTF-8 by default
 
-set ttyfast         " fast terminal connection
-
-if &term =~ 'tmux'
-  " In tmux mouse support works only with xterm2
-  set ttymouse=xterm2
-else
-  " Everywhere else (including screen) use sgr
-  set ttymouse=sgr
-endif
-
-" Fix escape sequences
-let &t_Ts = "\e[9m"   " no strikethrough
-let &t_Te = "\e[29m"  " no strikethrough
-let &t_Ce = "\e[4:0m"   " no underline
-let &t_Us = "\e[4:2m"   " underdouble
-let &t_Cs = "\e[4:3m"   " undercurl
-let &t_ds = "\e[4:4m"   " underdotted
-let &t_Ds = "\e[4:5m"   " underdashed
-let &t_AU = "\e[58:5:%dm"   " underline color, set by :help ctermul
-
-" Cursor settings:
-" See: https://vim.fandom.com/wiki/Change_cursor_shape_in_different_modes
-"  1 -> blinking block
-"  2 -> solid block
-"  3 -> blinking underscore
-"  4 -> solid underscore
-"  5 -> blinking vertical bar
-"  6 -> solid vertical bar
-let &t_SI = "\e[5 q" " Start INSERT mode
-let &t_SR = "\e[3 q" " Start REPLACE mode
-let &t_EI = "\e[1 q" " End INSERT/REPLACE -> NORMAL mode
-" For GUI check :help guicursor
-" NOTE: nvim somehow uses guicursor setting in terminal!
-set guicursor+=a:blinkon200
-
-" reset cursor when leaving vim
-autocmd VimLeave * silent !echo -ne "\e[0 q"
-autocmd VimLeave * set guicursor=a:hor100
+" Terminal and escape sequences settings
+source ~/.vim/term.vim
 
 
 " ----------------------------------------------------------------------
@@ -118,10 +85,6 @@ endif
 
 set ignorecase      " ignore case when searching
 set smartcase       " override ignorecase when Uppercase in search pattern
-
-" NOTE: Hold SHIFT (or CTRL+SHIFT) during selection to disable visual mode!
-set mouse=a         " turn mouse on in all modes
-" set mouse=vicr      " turn mouse on in all modes
 
 set number          " show line numbers
 set numberwidth=5   " mininal number of columns for line numbers

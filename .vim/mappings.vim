@@ -19,6 +19,11 @@ map Y y$
 " Reset highlighting
 nnoremap <leader><space> :nohlsearch<cr>
 
+" Forward f, F, t, T
+nnoremap , ;
+" Backward f, F, t, T
+nnoremap \ ,
+
 " Reload .vimrc
 nnoremap <leader><C-R> :source $MYVIMRC<CR>:echo "Reloaded .vimrc"<CR>
 
