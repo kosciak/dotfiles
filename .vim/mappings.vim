@@ -59,20 +59,32 @@ nnoremap <C-C> <C-A>
 " Fold using space
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
-" scrooloose/nerdtree
+
+" ----------------------------------------------------------------------
+"   scrooloose/nerdtree
+" ----------------------------------------------------------------------
 nnoremap <leader>d :NERDTreeFocus<CR>
 " Open NERDTree and show current file
 nnoremap <leader>c :NERDTreeFind<CR>
 
-" majutsushi/tagbar
+
+" ----------------------------------------------------------------------
+"   majutsushi/tagbar
+" ----------------------------------------------------------------------
 nnoremap <leader>a :TagbarToggle<CR>
 
-" jlanzarotta/bufexplorer
+
+" ----------------------------------------------------------------------
+"   jlanzarotta/bufexplorer
+" ----------------------------------------------------------------------
 " nnoremap <leader>b :BufExplorer<CR>
 nnoremap <leader>b :ToggleBufExplorer<CR>
 
-" AndrewRadev/sideways.vim
-" machakann/vim-swap
+
+" ----------------------------------------------------------------------
+"   AndrewRadev/sideways.vim
+"   machakann/vim-swap
+" ----------------------------------------------------------------------
 " NOTE: Sideways is more versatile, but Swap's interactive mode is so good! 
 let g:swap_no_default_key_mappings = 1
 nnoremap gh :SidewaysLeft<cr>
@@ -83,7 +95,10 @@ nnoremap gs <Plug>(swap-interactive)
 " nmap <leader>sI <Plug>SidewaysArgumentInsertFirst
 " nmap <leader>sA <Plug>SidewaysArgumentAppendLast
 
-" mtth/scratch.vim
+
+" ----------------------------------------------------------------------
+"   mtth/scratch.vim
+" ----------------------------------------------------------------------
 let g:scratch_no_mappings = 1
 nmap <leader>si <plug>(scratch-insert-reuse)
 nmap <leader>sc <plug>(scratch-insert-clear)
@@ -92,22 +107,34 @@ xmap <leader>sc <plug>(scratch-selection-clear)
 nnoremap <leader>ss :Scratch<CR>
 nnoremap <leader>sp :ScratchPreview<CR>
 
-" dkarter/bullets.vim
+
+" ----------------------------------------------------------------------
+"   dkarter/bullets.vim
+" ----------------------------------------------------------------------
 autocmd FileType markdown
   \ nnoremap <buffer> <C-x> :ToggleCheckbox<CR>|
   \ imap <buffer> <C-l> <Plug>(bullets-demote) |
   \ imap <buffer> <C-h> <Plug>(bullets-promote)
 
-" lervag/vim-rainbow-lists
+
+" ----------------------------------------------------------------------
+"   lervag/vim-rainbow-lists
+" ----------------------------------------------------------------------
 autocmd FileType markdown
   \ nnoremap <buffer> <leader>r :RBListToggle<CR>
 
-" lervag/wiki.vim
+
+" ----------------------------------------------------------------------
+"   lervag/wiki.vim
+" ----------------------------------------------------------------------
 nnoremap <leader>ow :execute 'CtrlP ' .. wiki#get_root()<CR>
 nnoremap <leader>wo :execute 'CtrlP ' .. wiki#get_root()<CR>
 nnoremap <leader>w<C-P> :execute 'CtrlP ' .. wiki#get_root()<CR>
 
-" ctrlpvim/ctrlp.vim
+
+" ----------------------------------------------------------------------
+"   ctrlpvim/ctrlp.vim
+" ----------------------------------------------------------------------
 nnoremap <leader>o :CtrlP<CR>
 nnoremap <leader>oo :CtrlP<CR>
 nnoremap <leader>oc :CtrlPCurFile<CR>
@@ -117,14 +144,27 @@ nnoremap <leader>om :CtrlPMRU<CR>
 nnoremap <leader>ob :CtrlPBuffer<CR>
 nnoremap <leader>ol :CtrlPLine<CR>
 
-" tpope/vim-fugitive
-" junegunn/gv.vim
+
+" ----------------------------------------------------------------------
+"   tpope/vim-fugitive
+"   junegunn/gv.vim
+"   airblade/vim-gitgutter
+"   mhinz/vim-signify
+" ----------------------------------------------------------------------
 nnoremap <leader>gv :GV!<CR>
 nnoremap <leader>gl :Git log %<CR>
 nnoremap <leader>gb :Git blame<CR>
 nnoremap <leader>gd :Gvdiffsplit<CR>
 nnoremap <leader>gs :Git<CR>
+" nnoremap <leader>gc :GitGutterBufferToggle<CR>
+nnoremap <leader>gc :SignifyToggle<CR>
 
-" ycm-core/YouCompleteMe
+" nmap ]c <Plug>(GitGutterNextHunk)
+" nmap [c <Plug>(GitGutterPrevHunk)
+
+
+" ----------------------------------------------------------------------
+"   ycm-core/YouCompleteMe
+" ----------------------------------------------------------------------
 " TODO: See: https://github.com/puremourning/.vim-mac/blob/master/plugin/ycm_mappings.vim
 

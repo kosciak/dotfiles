@@ -40,7 +40,10 @@ set wildignore+=__pycache__,*/__pycache__/*
 
 set encoding=utf-8  " UTF-8 by default
 
-" Terminal and escape sequences settings
+set updatetime=500  " Better performance of vim-signify
+
+" Terminal and escape sequences settings and fixes
+" NOTE: Must be set BEFORE setting colorscheme!
 source ~/.vim/term.vim
 
 
@@ -162,7 +165,7 @@ if has("autocmd")
 
   " Markdown related
   autocmd FileType markdown
-    \ setlocal formatoptions+=ro |
+    \ setlocal formatoptions+=aro |
     \ setlocal textwidth=80 |
     \ call tablemode#Enable()
 
@@ -215,7 +218,7 @@ call plug#begin()
   " Config
     Plug 'tpope/vim-sensible'         " Sensible default settings
 
-  " Filesystem
+  " Files
     Plug 'duggiefresh/vim-easydir'    " Create directories on :write
 
   " Editing
@@ -234,6 +237,8 @@ call plug#begin()
     Plug 'AndrewRadev/sideways.vim'   " Move items to the righ or left
     Plug 'machakann/vim-swap'         " Arguments swapping
 
+    Plug 'alvan/vim-closetag'         " Auto close HTML tags
+
     " Plug 'rhysd/clever-f.vim'         " Better f, F, t, T repeating
 
   " Language packs - syntax, indentation, highlighting
@@ -246,6 +251,8 @@ call plug#begin()
       " Plug 'Vimjas/vim-python-pep8-indent'
 
     Plug 'chikamichi/mediawiki.vim'
+
+    " Plug 'groenewege/vim-less'        " TODO: Check
 
     Plug 'tmhedberg/simpylfold'           " Python folding rules
     Plug 'jeetsukumaran/vim-pythonsense'  " Python text objects and motions
@@ -290,6 +297,7 @@ call plug#begin()
   " Version control
     Plug 'tpope/vim-fugitive'         " Git integration
     Plug 'junegunn/gv.vim'            " Git commit browser
+    Plug 'mhinz/vim-signify'          " Show changed/added/deleted lines
 
   " Wiki, notes taking, journaling
     Plug 'lervag/wiki.vim'            " Wiki engine
@@ -312,7 +320,7 @@ source ~/.vim/plugins.vim
 
 
 " ----------------------------------------------------------------------
-"  Colorscheme
+"  Colorscheme and Highlights
 " ----------------------------------------------------------------------
 
 set t_Co=256                " force 256 colors

@@ -4,7 +4,7 @@
 " Author: Wojciech 'KosciaK' Pietrzok
 "
 " ----------------------------------------------------------------------
-"  Colorscheme
+"  Colorscheme and Highlights
 "  NOTE: highlight by default is global
 " ----------------------------------------------------------------------
 
@@ -54,4 +54,14 @@ hi diffLine ctermfg=6 guifg=Cyan
 " call matchadd('Conceal', '\[X\]', 0, 12, {'conceal': ''})
 " call matchadd('Conceal', '\[x\]', 0, 13, {'conceal': ''})
 " hi Conceal ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
+
+hi SignColumn ctermbg=254
+
+hi SignifySignAdd cterm=bold ctermfg=2 ctermbg=254
+hi SignifySignChange cterm=bold ctermfg=130 ctermbg=254
+hi SignifySignDelete cterm=bold ctermfg=1 ctermbg=254
+
+hi GitGutterAdd    guifg=#009900 ctermfg=2 cterm=bold ctermbg=254
+hi GitGutterChange guifg=#bbbb00 ctermfg=130 cterm=bold ctermbg=254
+hi GitGutterDelete guifg=#ff2222 ctermfg=1 cterm=bold ctermbg=254
 

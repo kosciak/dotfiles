@@ -139,8 +139,10 @@ let g:vim_markdown_folding_style_pythonic = 1
 let g:vim_markdown_folding_level = 6
 
 " Auto insert bullets for Shift-O to work, and indent=2 for textwrap
-let g:vim_markdown_auto_insert_bullets = 1
-let g:vim_markdown_new_list_item_indent = 2
+" NOTE: But this breaks formatoptions+=a setting for automatic reformatting
+"       when text is added in the middle of line
+let g:vim_markdown_auto_insert_bullets = 0    " = 1
+let g:vim_markdown_new_list_item_indent = 0   " = 2
 
 let g:vim_markdown_strikethrough = 1
 let g:vim_markdown_frontmatter = 1
@@ -161,6 +163,7 @@ let g:table_mode_verbose = 0
 " ----------------------------------------------------------------------
 let g:bullets_checkbox_markers = '   X'
 let g:bullets_checkbox_partials_toggle = 0
+
 " Add another cycle or -/*/+
 " and use only num; ROM, ABC, rom, abc are not rendered correctly
 let g:bullets_outline_levels = [
@@ -168,6 +171,11 @@ let g:bullets_outline_levels = [
       \ 'std-', 'std*', 'std+',
       \ 'std-', 'std*', 'std+'
       \]
+
+" Create bullet in new line above (when in the middle of list)
+let g:bullets_custom_mappings = [
+    \ ['nmap', 'O', 'k<Plug>(bullets-newline)'],
+\]
 
 " ----------------------------------------------------------------------
 "   mtth/scratch.vim
@@ -199,6 +207,10 @@ let g:ycm_filetype_specific_completion_to_disable = {
       \ 'gitcommit': 1
       \}
 
+" ----------------------------------------------------------------------
+"   mhinz/vim-signify
+" ----------------------------------------------------------------------
+let g:signify_disable_by_default = 1
 
 " ----------------------------------------------------------------------
 "   junegunn/vim-peekaboo
@@ -223,10 +235,22 @@ let g:wiki_link_target_type = 'md'
 " TODO: Update TOC on save (if exists!)
 " See: https://github.com/mzlogin/vim-markdown-toc/blob/master/ftplugin/markdown.vim
 
+" ----------------------------------------------------------------------
+"   'alvan/vim-closetag'
+" ----------------------------------------------------------------------
+let g:closetag_filetypes = 'html,xhtml,phtml,markdown'
+
+
+" ----------------------------------------------------------------------
+"  OBSOLETE plugins
+"  Keep settings in case I want to use them again
+" ----------------------------------------------------------------------
+
+" ----------------------------------------------------------------------
 "   rhysd/clever-f.vim
+" ----------------------------------------------------------------------
 let g:clever_f_show_prompt = 1
 let g:clever_f_highlight_timeout_ms=1000
-
 
 " ----------------------------------------------------------------------
 "   fholgado/minibufexpl.vim
@@ -236,4 +260,13 @@ let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 0
 let g:miniBufExplModSelTarget = 1
 let g:miniBufExplUseSingleClick = 1
+
+" ----------------------------------------------------------------------
+"   airblade/vim-gitgutter
+" ----------------------------------------------------------------------
+let g:gitgutter_enabled = 0   " Turn off by default
+let g:gitgutter_map_keys = 0
+let g:gitgutter_sign_added = '++'
+let g:gitgutter_sign_modified = '~~'
+let g:gitgutter_sign_removed = '__'
 
