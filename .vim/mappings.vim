@@ -28,8 +28,11 @@ nnoremap \ ,
 nnoremap <leader><C-R> :source $MYVIMRC<CR>:echo "Reloaded .vimrc"<CR>
 
 " Toggle between paste and nopaste, with visual feedback
-nnoremap <leader>p :set invpaste paste?<CR>
-set pastetoggle=<leader>p
+nnoremap <leader>P :set invpaste paste?<CR>
+set pastetoggle=<leader>P
+
+" Toggle between spell and nospell
+nnoremap <leader>S :setlocal spell! spell?<CR>
 
 " Split navigations without pressing Ctrl-W first
 nnoremap <C-J> <C-W><C-J>
@@ -51,7 +54,7 @@ nnoremap <C-W><C-P> <C-W>W
 nnoremap <C-W>N <C-W>n
 
 " Close window
-nnoremap <leader>q :close<CR>
+nnoremap <silent> <leader>q :close<CR>
 
 " Increment (not to interfere with screen leader key)
 nnoremap <C-C> <C-A>
@@ -118,13 +121,6 @@ autocmd FileType markdown
 
 
 " ----------------------------------------------------------------------
-"   lervag/vim-rainbow-lists
-" ----------------------------------------------------------------------
-autocmd FileType markdown
-  \ nnoremap <buffer> <leader>r :RBListToggle<CR>
-
-
-" ----------------------------------------------------------------------
 "   lervag/wiki.vim
 " ----------------------------------------------------------------------
 nnoremap <leader>ow :execute 'CtrlP ' .. wiki#get_root()<CR>
@@ -157,7 +153,11 @@ nnoremap <leader>gb :Git blame<CR>
 nnoremap <leader>gd :Gvdiffsplit<CR>
 nnoremap <leader>gs :Git<CR>
 " nnoremap <leader>gc :GitGutterBufferToggle<CR>
-nnoremap <leader>gc :SignifyToggle<CR>
+" NOTE: SignifyToggle* works for current buffer only
+nnoremap <silent> <leader>gc :SignifyToggle<CR>
+nnoremap <silent> <leader>gC :SignifyToggleHighlight<CR>
+
+nnoremap <silent> <leader>? :SignifyHunkDiff<CR>
 
 " nmap ]c <Plug>(GitGutterNextHunk)
 " nmap [c <Plug>(GitGutterPrevHunk)

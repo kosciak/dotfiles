@@ -29,6 +29,7 @@ let g:NERDTreeRespectWildIgnore = 1 " Don't show files in wildignore
 let g:NERDTreeMapOpenSplit = 's'    " Remap split to 's'
 let g:NERDTreeMapOpenVSplit = 'v'   " Remap vertical split to 'v'
 
+
 " ----------------------------------------------------------------------
 "   Xuyuanp/nerdtree-git-plugin
 " ----------------------------------------------------------------------
@@ -36,6 +37,7 @@ let g:NERDTreeGitStatusCwdOnly = 1
 let g:NERDTreeGitStatusUseNerdFonts = 0
 let g:NERDTreeGitStatusShowClean = 0
 let g:NERDTreeGitStatusAlignIfConceal = 0
+
 
 " ----------------------------------------------------------------------
 "   tiagofumo/vim-nerdtree-syntax-highlight
@@ -69,6 +71,7 @@ let g:NERDTreeSyntaxEnabledExactMatches = [
 let g:NERDTreeHighlightFolders = 1          " enables folder icon highlighting using exact match
 let g:NERDTreeHighlightFoldersFullName = 1  " highlights the folder name
 
+
 " ----------------------------------------------------------------------
 "   ryanoasis/vim-devicons
 " ----------------------------------------------------------------------
@@ -95,11 +98,13 @@ let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {
       \ 'dropbox'   : '',
       \}
 
+
 " ----------------------------------------------------------------------
 "   majutsushi/tagbar
 " ----------------------------------------------------------------------
 let g:tagbar_autoclose = 1
 let g:tagbar_compact = 2
+
 
 " ----------------------------------------------------------------------
 "   jlanzarotta/bufexplorer
@@ -108,6 +113,7 @@ let g:bufExplorerDefaultHelp = 0
 let g:bufExplorerSplitOutPathName = 0
 let g:bufExplorerShowRelativePath = 1
 let g:bufExplorerDisableDefaultKeyMapping = 1
+
 
 " ----------------------------------------------------------------------
 "   ctrlpvim/ctrlp.vim
@@ -153,10 +159,12 @@ let g:vim_markdown_toc_autofit = 1
 
 map <F13> <Plug>Markdown_EditUrlUnderCursor   " re-enable default <ge> mapping
 
+
 " ----------------------------------------------------------------------
 "   dhruvasagar/vim-table-mode
 " ----------------------------------------------------------------------
 let g:table_mode_verbose = 0
+
 
 " ----------------------------------------------------------------------
 "   dkarter/bullets.vim
@@ -177,17 +185,20 @@ let g:bullets_custom_mappings = [
     \ ['nmap', 'O', 'k<Plug>(bullets-newline)'],
 \]
 
+
 " ----------------------------------------------------------------------
 "   mtth/scratch.vim
 " ----------------------------------------------------------------------
 let g:scratch_insert_autohide = 0
 let g:scratch_filetype = 'markdown'
 
+
 " ----------------------------------------------------------------------
 "   majutsushi/tagbar
 " ----------------------------------------------------------------------
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
+
 
 " ----------------------------------------------------------------------
 "   ycm-core/YouCompleteMe
@@ -207,10 +218,29 @@ let g:ycm_filetype_specific_completion_to_disable = {
       \ 'gitcommit': 1
       \}
 
+
 " ----------------------------------------------------------------------
 "   mhinz/vim-signify
 " ----------------------------------------------------------------------
 let g:signify_disable_by_default = 1
+let g:signify_number_highlight = 1
+
+augroup signifyHunks
+  " NOTE: Not sure why won't work when in .vim/autoload/signify.vim
+  " Reset current group to prevent problems with (re)sourcing .vimrc
+  au!
+
+  autocmd User SignifyHunk call s:show_current_hunk()
+
+  function! s:show_current_hunk() abort
+    let h = sy#util#get_hunk_stats()
+    if !empty(h)
+      echo printf('[Hunk %d/%d]', h.current_hunk, h.total_hunks)
+    endif
+  endfunction
+
+augroup END
+
 
 " ----------------------------------------------------------------------
 "   junegunn/vim-peekaboo
@@ -234,6 +264,7 @@ let g:wiki_link_target_type = 'md'
 
 " TODO: Update TOC on save (if exists!)
 " See: https://github.com/mzlogin/vim-markdown-toc/blob/master/ftplugin/markdown.vim
+
 
 " ----------------------------------------------------------------------
 "   'alvan/vim-closetag'

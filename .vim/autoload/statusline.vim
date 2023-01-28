@@ -55,9 +55,17 @@ function! statusline#Icon(...) abort
 endfunc
 
 
-function! statusline#Git(...) abort
+function! statusline#GitBranch(...) abort
+  " NOTE: Requires Fugitive
   let branch  = FugitiveHead()
   return statusline#Format(branch, a:000)
+endfunc
+
+
+function! statusline#Hunks(...) abort
+  " NOTE: Requires Signify
+  let hunks   = sy#repo#get_stats_decorated()
+  return statusline#Format(hunks, a:000)
 endfunc
 
 
@@ -68,7 +76,8 @@ endfunc
 
 
 function! statusline#Spell(...) abort
-  let option  = &spell ? '[spell]' : ''
+  let lang = &spelllang
+  let option  = &spell ? '[spell:'..lang..']' : ''
   return statusline#Format(option, a:000)
 endfunc
 
