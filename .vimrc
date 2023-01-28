@@ -219,7 +219,7 @@ call plug#begin()
   " Config
     Plug 'tpope/vim-sensible'         " Sensible default settings
 
-  " Files
+  " Filesystem
     Plug 'duggiefresh/vim-easydir'    " Create directories on :write
 
   " Editing
@@ -266,7 +266,7 @@ call plug#begin()
 
     Plug 'tyru/capture.vim'           " Show Ex command in a buffer
 
-    Plug 'sedm0784/vim-resize-mode'   " Window Resize mode
+    " Plug 'sedm0784/vim-resize-mode'   " Window Resize mode
 
   " Registers
     Plug 'junegunn/vim-peekaboo'      " Show register's contents in sidebar
@@ -304,6 +304,9 @@ call plug#begin()
 
     Plug 'mtth/scratch.vim'           " Temporary scratch buffer
 
+    Plug 'junegunn/goyo.vim'
+    Plug 'junegunn/limelight.vim'
+
   " Icons
     " NOTE: Must be loaded as the last one
     Plug 'ryanoasis/vim-devicons'     " Enable NerdFonts support
@@ -326,7 +329,13 @@ source ~/.vim/plugins.vim
 set t_Co=256                " force 256 colors
 set background=light        " force light background
 
-source ~/.vim/highlights.vim
+function! s:sourceHighlights()
+  source ~/.vim/highlights.vim
+endfunc
+
+" Source custom highlights after changing colorscheme
+call s:sourceHighlights()
+autocmd! ColorScheme * call s:sourceHighlights()
 
 
 " ----------------------------------------------------------------------

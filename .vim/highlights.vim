@@ -15,14 +15,7 @@
 " hi NonText term=bold ctermfg=7 gui=bold guifg=Blue
 
 hi CursorLine ctermbg=254 cterm=NONE
-augroup CLClear
-    autocmd! ColorScheme * hi CursorLine ctermbg=253 cterm=NONE
-augroup END
-
 hi CursorLineNR term=bold cterm=bold ctermbg=254
-augroup CLNRSet
-    autocmd! ColorScheme * hi CursorLineNR cterm=bold ctermbg=253
-augroup END
 
 " hi StatusLineNormal cterm=reverse,italic
 hi StatusLineNormal cterm=reverse

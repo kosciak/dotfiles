@@ -40,6 +40,14 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Resize windows
+nnoremap <C-W>+ <C-W>=
+nnoremap <C-W>= <C-W>+
+nnoremap <silent> <C-UP> :resize +2<CR>
+nnoremap <silent> <C-DOWN> :resize -2<CR>
+nnoremap <silent> <C-LEFT> :vertical resize -2<CR>
+nnoremap <silent> <C-RIGHT> :vertical resize +2<CR>
+
 " A bit more logical windowm switching
 " Switch between previous/next window
 nnoremap <C-W><C-W> <C-W><C-P>

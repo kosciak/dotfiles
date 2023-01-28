@@ -273,6 +273,20 @@ let g:closetag_filetypes = 'html,xhtml,phtml,markdown'
 
 
 " ----------------------------------------------------------------------
+"   'junegunn/goyo.vim'
+"   'junegunn/limelight.vim'
+" ----------------------------------------------------------------------
+let g:limelight_conceal_ctermfg = 'gray'
+" let g:limelight_conceal_ctermfg = 240
+
+augroup GoyoLimelight
+  au!
+  autocmd! User GoyoEnter Limelight
+  autocmd! User GoyoLeave Limelight!
+augroup END
+
+
+" ----------------------------------------------------------------------
 "  OBSOLETE plugins
 "  Keep settings in case I want to use them again
 " ----------------------------------------------------------------------
