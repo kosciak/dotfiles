@@ -24,6 +24,10 @@ nnoremap , ;
 " Backward f, F, t, T
 nnoremap \ ,
 
+" Go to previous file
+nnoremap <silent> <leader><C-O> :BufSurfBack<CR>
+nnoremap <silent> <leader><C-I> :BufSurfForward<CR>
+
 " Reload .vimrc
 nnoremap <leader><C-R> :source $MYVIMRC<CR>:echo "Reloaded .vimrc"<CR>
 
@@ -156,10 +160,11 @@ nnoremap <leader>ol :CtrlPLine<CR>
 "   mhinz/vim-signify
 " ----------------------------------------------------------------------
 nnoremap <leader>gv :GV!<CR>
+nnoremap <leader>gg :Git<CR>
+nnoremap <leader>gs :Git<CR>
 nnoremap <leader>gl :Git log %<CR>
 nnoremap <leader>gb :Git blame<CR>
 nnoremap <leader>gd :Gvdiffsplit<CR>
-nnoremap <leader>gs :Git<CR>
 " nnoremap <leader>gc :GitGutterBufferToggle<CR>
 " NOTE: SignifyToggle* works for current buffer only
 nnoremap <silent> <leader>gc :SignifyToggle<CR>

@@ -165,8 +165,9 @@ if has("autocmd")
   autocmd FileType svn setlocal noexpandtab
 
   " Markdown related
+  " NOTE: setting formatoptions+=a causes strange effects in bullets lists
   autocmd FileType markdown
-    \ setlocal formatoptions+=aro |
+    \ setlocal formatoptions+=ro |
     \ setlocal textwidth=80 |
     \ call tablemode#Enable()
 
@@ -264,6 +265,8 @@ call plug#begin()
   " Buffers / Windows / Tabs
     Plug 'jlanzarotta/bufexplorer'    " Buffer explorer / switcher
 
+    Plug 'ton/vim-bufsurf'
+
     Plug 'tyru/capture.vim'           " Show Ex command in a buffer
 
     " Plug 'sedm0784/vim-resize-mode'   " Window Resize mode
@@ -296,6 +299,7 @@ call plug#begin()
 
   " Version control
     Plug 'tpope/vim-fugitive'         " Git integration
+    Plug 'tpope/vim-rhubarb'		  " :GBrowse GitHub support
     Plug 'junegunn/gv.vim'            " Git commit browser
     Plug 'mhinz/vim-signify'          " Show changed/added/deleted lines
 
@@ -304,6 +308,7 @@ call plug#begin()
 
     Plug 'mtth/scratch.vim'           " Temporary scratch buffer
 
+  " Distraction free mode
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim'
 

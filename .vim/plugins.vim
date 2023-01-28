@@ -270,6 +270,7 @@ let g:wiki_link_target_type = 'md'
 "   'alvan/vim-closetag'
 " ----------------------------------------------------------------------
 let g:closetag_filetypes = 'html,xhtml,phtml,markdown'
+let g:closetag_close_shortcut = '/>' " Use //> to type />
 
 
 " ----------------------------------------------------------------------
