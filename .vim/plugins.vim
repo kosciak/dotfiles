@@ -119,8 +119,11 @@ let g:bufExplorerDisableDefaultKeyMapping = 1
 "   ctrlpvim/ctrlp.vim
 " ----------------------------------------------------------------------
 let g:ctrlp_working_path_mode = 'wa'  " start from cwd instead of root
-let g:ctrlp_switch_buffer = 0 "'et'
+let g:ctrlp_switch_buffer = 0 "'Et'
 let g:ctrlp_show_hidden = 1
+let g:ctrlp_match_current_file = 1
+" Increase number of results
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:100'
 
 " Ignore files from .gitignore
 " let g:ctrlp_user_command = {

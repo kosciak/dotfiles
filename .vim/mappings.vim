@@ -24,10 +24,6 @@ nnoremap , ;
 " Backward f, F, t, T
 nnoremap \ ,
 
-" Go to previous file
-nnoremap <silent> <leader><C-O> :BufSurfBack<CR>
-nnoremap <silent> <leader><C-I> :BufSurfForward<CR>
-
 " Reload .vimrc
 nnoremap <leader><C-R> :source $MYVIMRC<CR>:echo "Reloaded .vimrc"<CR>
 
@@ -44,9 +40,11 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" Resize windows
+" Increase and decrease size without pressing Shift
 nnoremap <C-W>+ <C-W>=
 nnoremap <C-W>= <C-W>+
+
+" Resize windows using Ctrl+arrows
 nnoremap <silent> <C-UP> :resize +2<CR>
 nnoremap <silent> <C-DOWN> :resize -2<CR>
 nnoremap <silent> <C-LEFT> :vertical resize -2<CR>
@@ -69,10 +67,19 @@ nnoremap <C-W>N <C-W>n
 nnoremap <silent> <leader>q :close<CR>
 
 " Increment (not to interfere with screen leader key)
-nnoremap <C-C> <C-A>
+" nnoremap <C-C> <C-A>
+nmap <C-C> <C-A>
 
 " Fold using space
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+
+
+" ----------------------------------------------------------------------
+"   ton/vim-bufsurf
+" ----------------------------------------------------------------------
+" Go to previous file
+nnoremap <silent> <leader><C-O> :BufSurfBack<CR>
+nnoremap <silent> <leader><C-I> :BufSurfForward<CR>
 
 
 " ----------------------------------------------------------------------

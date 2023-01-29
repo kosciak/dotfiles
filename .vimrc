@@ -224,10 +224,10 @@ call plug#begin()
     Plug 'duggiefresh/vim-easydir'    " Create directories on :write
 
   " Editing
-    Plug 'tpope/vim-surround'         " Quoting / parenthesizing made simple
     Plug 'tpope/vim-repeat'           " Repeat supported plugin maps (like vim-surround)
-
+    Plug 'tpope/vim-surround'         " Quoting / parenthesizing made simple
     Plug 'tpope/vim-commentary'       " Commenting stuff out
+    Plug 'tpope/vim-speeddating'      " Increment / decrement dates
 
     Plug 'godlygeek/tabular'          " Tabularize text NOTE: Load *before* vim-markdown!
     Plug 'dhruvasagar/vim-table-mode' " Table creator and formatter
@@ -265,7 +265,7 @@ call plug#begin()
   " Buffers / Windows / Tabs
     Plug 'jlanzarotta/bufexplorer'    " Buffer explorer / switcher
 
-    Plug 'ton/vim-bufsurf'
+    Plug 'ton/vim-bufsurf'            " Jump to previous / next file
 
     Plug 'tyru/capture.vim'           " Show Ex command in a buffer
 
