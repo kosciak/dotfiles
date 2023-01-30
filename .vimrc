@@ -1,6 +1,8 @@
 " .vimrc
+" .gvimrc
 " .vim/term.vim
 " .vim/plugins.vim
+" .vim/plugins-obsolete.vim
 " .vim/highlights.vim
 " .vim/mappings.vim
 " .vim/autoload/statusline.vim
@@ -50,6 +52,12 @@ source ~/.vim/term.vim
 " ----------------------------------------------------------------------
 "  Interface
 " ----------------------------------------------------------------------
+
+" Use English for everything in Vim
+function! s:setLanguage() abort
+  silent exec 'language en_US.utf8'
+endfunc
+call s:setLanguage()
 
 set title           " set window title
 
@@ -176,6 +184,11 @@ if has("autocmd")
     \ setlocal formatoptions+=ro |
     \ setlocal textwidth=80
 
+  " Configuraiotn files related
+  autocmd FileType vim
+    \ setlocal tabstop=2 |
+    \ setlocal shiftwidth=2
+
   " Python related
   autocmd BufNewFile,BufRead *.py 
     \ setlocal formatoptions+=ro |
@@ -258,6 +271,8 @@ call plug#begin()
     Plug 'tmhedberg/simpylfold'           " Python folding rules
     Plug 'jeetsukumaran/vim-pythonsense'  " Python text objects and motions
 
+    Plug 'raimon49/requirements.txt.vim'  " Syntax for requirements.txt files
+
     " Plug 'SidOfc/mkdx'                  " Feature rich if not too complicated
     " Plug 'vim-pandoc/vim-pandoc'
     " Plug 'vim-pandoc/vim-pandoc-syntax'
@@ -277,6 +292,7 @@ call plug#begin()
   " Search
     Plug 'ctrlpvim/ctrlp.vim'         " Full path fuzzy finder
     Plug 'dyng/ctrlsf.vim'            " TODO: Configure!
+    Plug 'lokikl/vim-ctrlp-ag' 				" TOFO: Check and configure
     Plug 'jremmen/vim-ripgrep'        " TODO: Check if needed
 
   " Files

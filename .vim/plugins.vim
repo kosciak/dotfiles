@@ -31,15 +31,6 @@ let g:NERDTreeMapOpenVSplit = 'v'   " Remap vertical split to 'v'
 
 
 " ----------------------------------------------------------------------
-"   Xuyuanp/nerdtree-git-plugin
-" ----------------------------------------------------------------------
-let g:NERDTreeGitStatusCwdOnly = 1
-let g:NERDTreeGitStatusUseNerdFonts = 0
-let g:NERDTreeGitStatusShowClean = 0
-let g:NERDTreeGitStatusAlignIfConceal = 0
-
-
-" ----------------------------------------------------------------------
 "   tiagofumo/vim-nerdtree-syntax-highlight
 " ----------------------------------------------------------------------
 let g:NERDTreeLimitedSyntax = 1
@@ -112,6 +103,7 @@ let g:tagbar_compact = 2
 let g:bufExplorerDefaultHelp = 0
 let g:bufExplorerSplitOutPathName = 0
 let g:bufExplorerShowRelativePath = 1
+let g:bufExplorerFindActive = 0
 let g:bufExplorerDisableDefaultKeyMapping = 1
 
 
@@ -202,6 +194,11 @@ let g:scratch_filetype = 'markdown'
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
+" ----------------------------------------------------------------------
+"   tmhedberg/simpylfold
+" ----------------------------------------------------------------------
+let g:SimpylFold_docstring_preview = 1
+
 
 " ----------------------------------------------------------------------
 "   ycm-core/YouCompleteMe
@@ -251,6 +248,7 @@ augroup END
 let g:peekaboo_window = 'vert bo 40new'
 let g:peekaboo_delay = 500
 
+
 " ----------------------------------------------------------------------
 "   lervag/wiki.vim
 " ----------------------------------------------------------------------
@@ -288,34 +286,4 @@ augroup GoyoLimelight
   autocmd! User GoyoEnter Limelight
   autocmd! User GoyoLeave Limelight!
 augroup END
-
-
-" ----------------------------------------------------------------------
-"  OBSOLETE plugins
-"  Keep settings in case I want to use them again
-" ----------------------------------------------------------------------
-
-" ----------------------------------------------------------------------
-"   rhysd/clever-f.vim
-" ----------------------------------------------------------------------
-let g:clever_f_show_prompt = 1
-let g:clever_f_highlight_timeout_ms=1000
-
-" ----------------------------------------------------------------------
-"   fholgado/minibufexpl.vim
-" ----------------------------------------------------------------------
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 0
-let g:miniBufExplModSelTarget = 1
-let g:miniBufExplUseSingleClick = 1
-
-" ----------------------------------------------------------------------
-"   airblade/vim-gitgutter
-" ----------------------------------------------------------------------
-let g:gitgutter_enabled = 0   " Turn off by default
-let g:gitgutter_map_keys = 0
-let g:gitgutter_sign_added = '++'
-let g:gitgutter_sign_modified = '~~'
-let g:gitgutter_sign_removed = '__'
 

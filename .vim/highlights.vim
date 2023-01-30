@@ -58,3 +58,7 @@ hi GitGutterAdd    guifg=#009900 ctermfg=2 cterm=bold ctermbg=254
 hi GitGutterChange guifg=#bbbb00 ctermfg=130 cterm=bold ctermbg=254
 hi GitGutterDelete guifg=#ff2222 ctermfg=1 cterm=bold ctermbg=254
 
+" requirements.txt
+hi def link requirementsPackageName Structure
+hi def link requirementsVersionSpecifiers Operator
+

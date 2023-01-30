@@ -21,8 +21,10 @@ nnoremap <leader><space> :nohlsearch<cr>
 
 " Forward f, F, t, T
 nnoremap , ;
+vnoremap , ;
 " Backward f, F, t, T
 nnoremap \ ,
+vnoremap \ ,
 
 " Reload .vimrc
 nnoremap <leader><C-R> :source $MYVIMRC<CR>:echo "Reloaded .vimrc"<CR>
@@ -101,6 +103,9 @@ nnoremap <leader>a :TagbarToggle<CR>
 " ----------------------------------------------------------------------
 " nnoremap <leader>b :BufExplorer<CR>
 nnoremap <leader>b :ToggleBufExplorer<CR>
+nnoremap <leader>bb :ToggleBufExplorer<CR>
+nnoremap <leader>bv :BufExplorerVerticalSplit<CR>
+nnoremap <leader>bs :BufExplorerHorizontalSplit<CR>
 
 
 " ----------------------------------------------------------------------
@@ -109,13 +114,15 @@ nnoremap <leader>b :ToggleBufExplorer<CR>
 " ----------------------------------------------------------------------
 " NOTE: Sideways is more versatile, but Swap's interactive mode is so good! 
 let g:swap_no_default_key_mappings = 1
-nnoremap gh :SidewaysLeft<cr>
-nnoremap gl :SidewaysRight<cr>
-nnoremap gs <Plug>(swap-interactive)
-" nmap <leader>si <Plug>SidewaysArgumentInsertBefore
-" nmap <leader>sa <Plug>SidewaysArgumentAppendAfter
-" nmap <leader>sI <Plug>SidewaysArgumentInsertFirst
-" nmap <leader>sA <Plug>SidewaysArgumentAppendLast
+nnoremap gsh :SidewaysLeft<CR>
+nnoremap gsl :SidewaysRight<CR>
+nnoremap gsj :SidewaysJumpRight<CR>
+nnoremap gsk :SidewaysJumpLeft<CR>
+nnoremap gss <Plug>(swap-interactive)
+nmap gsi <Plug>SidewaysArgumentInsertBefore
+nmap gsa <Plug>SidewaysArgumentAppendAfter
+nmap gsI <Plug>SidewaysArgumentInsertFirst
+nmap gsA <Plug>SidewaysArgumentAppendLast
 
 
 " ----------------------------------------------------------------------
@@ -156,8 +163,9 @@ nnoremap <leader>oc :CtrlPCurFile<CR>
 nnoremap <leader>od :CtrlPCurWD<CR>
 nnoremap <leader>or :CtrlPRoot<CR>
 nnoremap <leader>om :CtrlPMRU<CR>
-nnoremap <leader>ob :CtrlPBuffer<CR>
 nnoremap <leader>ol :CtrlPLine<CR>
+nnoremap <leader>ob :CtrlPBuffer<CR>
+nnoremap <leader>bo :CtrlPBuffer<CR>
 
 
 " ----------------------------------------------------------------------
