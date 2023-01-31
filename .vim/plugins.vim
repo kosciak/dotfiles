@@ -284,6 +284,13 @@ let g:cssColorVimDoNotMessMyUpdatetime = 1
 
 
 " ----------------------------------------------------------------------
+" 	wellle/targets.vim
+" ----------------------------------------------------------------------
+" Only consider targets fully contained in current line
+let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr rr ll'
+
+
+" ----------------------------------------------------------------------
 "   junegunn/goyo.vim
 "   junegunn/limelight.vim
 " ----------------------------------------------------------------------

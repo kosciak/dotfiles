@@ -267,7 +267,8 @@ call plug#begin()
 
     Plug 'chikamichi/mediawiki.vim'
 
-    " Plug 'groenewege/vim-less'        " TODO: Check
+    Plug 'michaeljsmith/vim-indent-object' 	" Indentation oriented text objects
+    Plug 'wellle/targets.vim'             " Improved text objects
 
     Plug 'tmhedberg/simpylfold'           " Python folding rules
     Plug 'jeetsukumaran/vim-pythonsense'  " Python text objects and motions
@@ -277,6 +278,8 @@ call plug#begin()
     " Plug 'SidOfc/mkdx'                  " Feature rich if not too complicated
     " Plug 'vim-pandoc/vim-pandoc'
     " Plug 'vim-pandoc/vim-pandoc-syntax'
+
+    " Plug 'groenewege/vim-less'          " TODO: Check
 
   " Buffers / Windows / Tabs
     Plug 'jlanzarotta/bufexplorer'    " Buffer explorer / switcher
