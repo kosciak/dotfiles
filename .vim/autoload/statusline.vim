@@ -83,6 +83,7 @@ endfunc
 
 
 function! statusline#Tag(flags, ...) abort
+  " NOTE: Requires Tagbar
   let tag     = tagbar#currenttag('%s', a:flags)
   return statusline#Format(tag, a:000)
 endfunc

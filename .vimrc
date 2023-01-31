@@ -42,7 +42,7 @@ set wildignore+=__pycache__,*/__pycache__/*
 
 set encoding=utf-8  " UTF-8 by default
 
-set updatetime=500  " Better performance of vim-signify
+set updatetime=100  " Better performance of vim-signify, YCM, and others
 
 " Terminal and escape sequences settings and fixes
 " NOTE: Must be set BEFORE setting colorscheme!
@@ -257,6 +257,7 @@ call plug#begin()
 
   " Language packs - syntax, indentation, highlighting
     let g:polyglot_disabled = ['markdown']  " NOTE: MUST be declared BEFORE loading plugin!
+    " let g:polyglot_disabled = ['autoindent']  " Disable indentation heuristics
     Plug 'sheerun/vim-polyglot'           " Collection of language packs
       " Provided by polyglot (install separately if you need help file):
       Plug 'plasticboy/vim-markdown'      " Updated version

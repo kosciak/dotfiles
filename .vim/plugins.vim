@@ -94,7 +94,9 @@ let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {
 "   majutsushi/tagbar
 " ----------------------------------------------------------------------
 let g:tagbar_autoclose = 1
+let g:tagbar_autofocus = 1
 let g:tagbar_compact = 2
+let g:tagbar_show_tag_count = 1
 
 
 " ----------------------------------------------------------------------
@@ -189,12 +191,6 @@ let g:scratch_filetype = 'markdown'
 
 
 " ----------------------------------------------------------------------
-"   majutsushi/tagbar
-" ----------------------------------------------------------------------
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
-
-" ----------------------------------------------------------------------
 "   tmhedberg/simpylfold
 " ----------------------------------------------------------------------
 let g:SimpylFold_docstring_preview = 1
@@ -217,6 +213,13 @@ let g:ycm_filetype_specific_completion_to_disable = {
       \ 'javascript': 1,
       \ 'gitcommit': 1
       \}
+
+
+" ----------------------------------------------------------------------
+"   ervandew/supertab
+" ----------------------------------------------------------------------
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
 
 " ----------------------------------------------------------------------
@@ -268,15 +271,21 @@ let g:wiki_link_target_type = 'md'
 
 
 " ----------------------------------------------------------------------
-"   'alvan/vim-closetag'
+"   alvan/vim-closetag
 " ----------------------------------------------------------------------
 let g:closetag_filetypes = 'html,xhtml,phtml,markdown'
 let g:closetag_close_shortcut = '/>' " Use //> to type />
 
 
 " ----------------------------------------------------------------------
-"   'junegunn/goyo.vim'
-"   'junegunn/limelight.vim'
+" 	skammer/vim-css-color
+" ----------------------------------------------------------------------
+let g:cssColorVimDoNotMessMyUpdatetime = 1
+
+
+" ----------------------------------------------------------------------
+"   junegunn/goyo.vim
+"   junegunn/limelight.vim
 " ----------------------------------------------------------------------
 let g:limelight_conceal_ctermfg = 'gray'
 " let g:limelight_conceal_ctermfg = 240

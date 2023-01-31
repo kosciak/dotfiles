@@ -95,7 +95,8 @@ nnoremap <leader>c :NERDTreeFind<CR>
 " ----------------------------------------------------------------------
 "   majutsushi/tagbar
 " ----------------------------------------------------------------------
-nnoremap <leader>a :TagbarToggle<CR>
+nnoremap <leader>a :TagbarOpen fj<CR>
+nnoremap <leader>A :TagbarClose<CR>
 
 
 " ----------------------------------------------------------------------
@@ -163,9 +164,15 @@ nnoremap <leader>oc :CtrlPCurFile<CR>
 nnoremap <leader>od :CtrlPCurWD<CR>
 nnoremap <leader>or :CtrlPRoot<CR>
 nnoremap <leader>om :CtrlPMRU<CR>
+
+nnoremap <leader>ot :CtrlPBufTag<CR>
+nnoremap <leader>oT :CtrlPBufTagAll<CR>
+
 nnoremap <leader>ol :CtrlPLine<CR>
+
 nnoremap <leader>ob :CtrlPBuffer<CR>
 nnoremap <leader>bo :CtrlPBuffer<CR>
+nnoremap <leader>b<C-P> :CtrlPBuffer<CR>
 
 
 " ----------------------------------------------------------------------
