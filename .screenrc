@@ -29,6 +29,9 @@ altscreen on
 # utf8 by default
 defutf8 on
 
+# reduce input sequence timeout
+maptimeout 5
+
 # terminfo and termcap for nice 256 color terminal
 # allow bold colors - necessary for some reason
 # attrcolor b ".I"
