@@ -178,9 +178,10 @@ let g:bullets_outline_levels = [
       \]
 
 " Create bullet in new line above (when in the middle of list)
-let g:bullets_custom_mappings = [
-    \ ['nmap', 'O', 'k<Plug>(bullets-newline)'],
-\]
+" NOTE: Breaks normal O behaviour on first line of file
+" let g:bullets_custom_mappings = [
+"     \ ['nmap', 'O', '<Plug>(bullets-newline)'],
+" \]
 
 
 " ----------------------------------------------------------------------
