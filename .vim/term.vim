@@ -62,8 +62,8 @@ let &t_RS = "\eP$q q\e\\"   " request terminal cursor shape
 " Focus tracking
 let &t_fe = "\e[?1004h"
 let &t_fd = "\e[?1004l"
-execute "set <FocusGained>=\<Esc>[I"
-execute "set <FocusLost>=\<Esc>[O"
+" execute "set <FocusGained>=\<Esc>[I"
+" execute "set <FocusLost>=\<Esc>[O"
 
 " Window title
 let &t_ST = "\e[22;2t"      " Set window title
