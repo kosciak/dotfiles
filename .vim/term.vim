@@ -11,19 +11,17 @@ set ttyfast         " fast terminal connection
 
 " Set correct ttymouse, and turn mouse on/OFF
 " NOTE: Hold SHIFT (or CTRL+SHIFT) during selection to disable visual mode!
+set ttymouse=sgr
+set mouse=a
+
 if &term =~ 'tmux'
   " In tmux mouse support works only with xterm2
   set ttymouse=xterm2
-	set mouse=a         " turn mouse on in all modes
 elseif &term =~ 'screen'
-  " Everywhere else (including screen) use sgr
-  set ttymouse=sgr
-	" NOTE: mouse in screen causes issues with ESC
-	set mouse=         	" turn mouse OFF in all modes
-else
-  " Everywhere else (including screen) use sgr
-  set ttymouse=sgr
-	set mouse=a         " turn mouse on in all modes
+	" NOTE: in screen mouse causes problems with ESC (you need to press it
+	" 			twice). Omitting Insert mode seems to mostly fix it. You can escape
+	" 			from Insert mode by pressing ESC once, but still twice in CtrlP
+	set mouse=nvch 						" turn mouse ON in all modes, except Insert
 endif
 
 " set balloonevalterm
