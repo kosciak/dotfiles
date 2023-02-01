@@ -27,7 +27,7 @@ nnoremap \ ,
 vnoremap \ ,
 
 " Reload .vimrc
-nnoremap <leader><C-R> :source $MYVIMRC<CR>:echo "Reloaded .vimrc"<CR>
+nnoremap <leader><C-R> :source $MYVIMRC<CR>:echo "Reloaded "..fnamemodify($MYVIMRC,':p:~')<CR>
 
 " Toggle between paste and nopaste, with visual feedback
 nnoremap <leader>P :set invpaste paste?<CR>
@@ -87,8 +87,9 @@ nnoremap <silent> <leader><C-I> :BufSurfForward<CR>
 " ----------------------------------------------------------------------
 "   scrooloose/nerdtree
 " ----------------------------------------------------------------------
-nnoremap <leader>d :NERDTreeFocus<CR>
-" Open NERDTree and show current file
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <leader>r :NERDTreeVCS<CR>
+nnoremap <leader>d :NERDTreeCWD<CR>
 nnoremap <leader>c :NERDTreeFind<CR>
 
 
@@ -158,6 +159,7 @@ nnoremap <leader>w<C-P> :execute 'CtrlP ' .. wiki#get_root()<CR>
 " ----------------------------------------------------------------------
 "   ctrlpvim/ctrlp.vim
 " ----------------------------------------------------------------------
+" TODO: Consider using <leader>f (find) instead of <leader>o (open)
 nnoremap <leader>o :CtrlP<CR>
 nnoremap <leader>oo :CtrlP<CR>
 nnoremap <leader>oc :CtrlPCurFile<CR>
@@ -165,8 +167,8 @@ nnoremap <leader>od :CtrlPCurWD<CR>
 nnoremap <leader>or :CtrlPRoot<CR>
 nnoremap <leader>om :CtrlPMRU<CR>
 
-nnoremap <leader>ot :CtrlPBufTag<CR>
-nnoremap <leader>oT :CtrlPBufTagAll<CR>
+nnoremap <leader>oa :CtrlPBufTag<CR>
+nnoremap <leader>oA :CtrlPBufTagAll<CR>
 
 nnoremap <leader>ol :CtrlPLine %<CR>
 nnoremap <leader>oL :CtrlPLine<CR>

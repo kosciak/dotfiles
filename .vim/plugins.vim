@@ -116,6 +116,7 @@ let g:ctrlp_working_path_mode = 'wa'  " start from cwd instead of root
 let g:ctrlp_switch_buffer = 0 "'Et'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_match_current_file = 1
+
 " Increase number of results
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:100'
 
@@ -230,11 +231,7 @@ let g:signify_disable_by_default = 1
 let g:signify_number_highlight = 1
 
 augroup signifyHunks
-  " NOTE: Not sure why won't work when in .vim/autoload/signify.vim
-  " Reset current group to prevent problems with (re)sourcing .vimrc
   au!
-
-  autocmd User SignifyHunk call s:show_current_hunk()
 
   function! s:show_current_hunk() abort
     let h = sy#util#get_hunk_stats()
@@ -242,6 +239,9 @@ augroup signifyHunks
       echo printf('[Hunk %d/%d]', h.current_hunk, h.total_hunks)
     endif
   endfunction
+
+  " NOTE: Not sure why won't work when in .vim/autoload/signify.vim
+  autocmd User SignifyHunk call s:show_current_hunk()
 
 augroup END
 
@@ -298,9 +298,20 @@ let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr rr ll'
 let g:limelight_conceal_ctermfg = 'gray'
 " let g:limelight_conceal_ctermfg = 240
 
-augroup GoyoLimelight
+augroup GoyoLimelightIntegration
   au!
+
   autocmd! User GoyoEnter Limelight
   autocmd! User GoyoLeave Limelight!
+
 augroup END
+
+
+" ----------------------------------------------------------------------
+"   Yggdroot/LeaderF
+" ----------------------------------------------------------------------
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_WindowHeight = 10
+let g:Lf_StlSeparator = { 'left': '', 'right': '' }
+let g:Lf_ReverseOrder = 1
 

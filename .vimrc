@@ -120,8 +120,14 @@ endif
 set cursorline
 " with only line number, EXCEPT selected FileTypes:
 set cursorlineopt=number
-autocmd FileType tagbar,nerdtree,ctrlp
- \ set cursorlineopt=both
+
+augroup SpecialCursorlineopt
+  au!
+
+  autocmd FileType tagbar,nerdtree,ctrlp
+  \ set cursorlineopt=both
+
+augroup END
 
 set fillchars+=vert:\     " Removes pipes | that act as seperators on splits
 
@@ -159,17 +165,12 @@ set hidden          " allow closing of windows with unsaved buffers
 "  Autocommands
 " ----------------------------------------------------------------------
 
-if has("autocmd")
-
-  " separate autocmd group
-  augroup vimrcEx
-  " delete previous settings for this group
+augroup vimrcEx
   au!
 
   autocmd BufRead *.txt setfiletype text
 
   autocmd FileType text setlocal noexpandtab
-  autocmd FileType vim setlocal noexpandtab
   autocmd FileType svn setlocal noexpandtab
 
   " Markdown related
@@ -208,9 +209,7 @@ if has("autocmd")
     \   exe "normal! g`\"" |
     \ endif
 
-  augroup END
-
-endif " has("autocmd")
+augroup END
 
 
 " ----------------------------------------------------------------------
@@ -267,7 +266,7 @@ call plug#begin()
 
     Plug 'chikamichi/mediawiki.vim'
 
-    Plug 'michaeljsmith/vim-indent-object' 	" Indentation oriented text objects
+    Plug 'michaeljsmith/vim-indent-object'  " Indentation oriented text objects
     Plug 'wellle/targets.vim'             " Improved text objects
 
     Plug 'tmhedberg/simpylfold'           " Python folding rules
@@ -279,7 +278,7 @@ call plug#begin()
     " Plug 'vim-pandoc/vim-pandoc'
     " Plug 'vim-pandoc/vim-pandoc-syntax'
 
-    " Plug 'groenewege/vim-less'          " TODO: Check
+    " Plug 'groenewege/vim-less'          " TODO: Check if needed
 
   " Buffers / Windows / Tabs
     Plug 'jlanzarotta/bufexplorer'    " Buffer explorer / switcher
@@ -295,14 +294,31 @@ call plug#begin()
 
   " Search
     Plug 'ctrlpvim/ctrlp.vim'         " Full path fuzzy finder
+
+    " Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+
+    " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    " Plug 'junegunn/fzf.vim'
+
     Plug 'dyng/ctrlsf.vim'            " TODO: Configure!
-    Plug 'lokikl/vim-ctrlp-ag' 				" TOFO: Check and configure
-    Plug 'jremmen/vim-ripgrep'        " TODO: Check if needed
+
+    " Plug 'lokikl/vim-ctrlp-ag'        " TODO: Check and configure
+    " Plug 'jremmen/vim-ripgrep'        " TODO: Check if needed
 
   " Files
     Plug 'scrooloose/nerdtree'
-    " Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+    " Plug 'Xuyuanp/nerdtree-git-plugin'
+
+    " Plug 'lambdalisue/fern.vim'
+    " Plug 'lambdalisue/nerdfont.vim'
+    " Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+    " Plug 'lambdalisue/glyph-palette.vim'
+    " Plug 'lambdalisue/fern-git-status.vim'
+    " Plug 'lambdalisue/fern-hijack.vim'
+    " Plug 'yuki-yano/fern-preview.vim'
+    " Plug 'KosukeMizuno/ctrlp-fern-action.vim'
+    " let g:fern#renderer = "nerdfont"
 
     " Plug 'obaland/vfiler.vim'
     " Plug 'obaland/vfiler-column-devicons'
@@ -312,6 +328,7 @@ call plug#begin()
 
   " Completion
     Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
+
     Plug 'ervandew/supertab'          " Improved Tab completion
 
   " Color previews
@@ -319,7 +336,7 @@ call plug#begin()
 
   " Version control
     Plug 'tpope/vim-fugitive'         " Git integration
-    Plug 'tpope/vim-rhubarb'		  " :GBrowse GitHub support
+    Plug 'tpope/vim-rhubarb'          " :GBrowse GitHub support
     Plug 'junegunn/gv.vim'            " Git commit browser
     Plug 'mhinz/vim-signify'          " Show changed/added/deleted lines
 
@@ -358,9 +375,15 @@ function! s:sourceHighlights()
   source ~/.vim/highlights.vim
 endfunc
 
-" Source custom highlights after changing colorscheme
 call s:sourceHighlights()
-autocmd! ColorScheme * call s:sourceHighlights()
+
+augroup ColorSchemeChange
+  au!
+
+  " Source highlights after changing colorscheme
+  autocmd ColorScheme * call s:sourceHighlights()
+
+augroup END
 
 
 " ----------------------------------------------------------------------
