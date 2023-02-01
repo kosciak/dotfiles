@@ -168,7 +168,8 @@ nnoremap <leader>om :CtrlPMRU<CR>
 nnoremap <leader>ot :CtrlPBufTag<CR>
 nnoremap <leader>oT :CtrlPBufTagAll<CR>
 
-nnoremap <leader>ol :CtrlPLine<CR>
+nnoremap <leader>ol :CtrlPLine %<CR>
+nnoremap <leader>oL :CtrlPLine<CR>
 
 nnoremap <leader>ob :CtrlPBuffer<CR>
 nnoremap <leader>bo :CtrlPBuffer<CR>
