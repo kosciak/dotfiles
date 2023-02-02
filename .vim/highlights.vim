@@ -48,6 +48,9 @@ hi diffLine                               ctermfg=6   guifg=Cyan
 " call matchadd('Conceal', '\[x\]', 0, 13, {'conceal': ''})
 " hi Conceal ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
 
+hi Pmenu                  ctermfg=0   ctermbg=7     guibg=LightMagenta
+hi PmenuSel   cterm=bold  ctermfg=0   ctermbg=7     guibg=Grey
+
 hi FoldColumn term=standout   ctermfg=4   ctermbg=253   guifg=DarkBlue guibg=Grey
 hi Folded     term=standout   ctermfg=4   ctermbg=253   guifg=DarkBlue guibg=LightGrey
 

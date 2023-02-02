@@ -80,8 +80,8 @@ nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 "   ton/vim-bufsurf
 " ----------------------------------------------------------------------
 " Go to previous file
-nnoremap <silent> <leader><C-O> :BufSurfBack<CR>
-nnoremap <silent> <leader><C-I> :BufSurfForward<CR>
+nnoremap <silent> <leader><C-O> <Plug>(buf-surf-back)
+nnoremap <silent> <leader><C-I> <Plug>(buf-surf-forward)
 
 
 " ----------------------------------------------------------------------
@@ -143,9 +143,9 @@ nnoremap <leader>sp :ScratchPreview<CR>
 "   dkarter/bullets.vim
 " ----------------------------------------------------------------------
 autocmd FileType markdown
-  \ nnoremap <buffer> <C-x> :ToggleCheckbox<CR>|
-  \ imap <buffer> <C-l> <Plug>(bullets-demote) |
-  \ imap <buffer> <C-h> <Plug>(bullets-promote)
+  \ nnoremap <buffer> <C-X> :ToggleCheckbox<CR>|
+  \ imap <buffer> <C-L> <Plug>(bullets-demote)|
+  \ imap <buffer> <C-H> <Plug>(bullets-promote)
 
 
 " ----------------------------------------------------------------------

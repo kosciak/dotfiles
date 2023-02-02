@@ -42,6 +42,8 @@ set wildignore+=__pycache__,*/__pycache__/*
 
 set encoding=utf-8  " UTF-8 by default
 
+set nomodeline      " Disable modeline magic settings
+
 set updatetime=100  " Better performance of vim-signify, YCM, and others
 
 " Terminal and escape sequences settings and fixes
@@ -266,13 +268,13 @@ call plug#begin()
 
     Plug 'chikamichi/mediawiki.vim'
 
-    Plug 'michaeljsmith/vim-indent-object'  " Indentation oriented text objects
-    Plug 'wellle/targets.vim'             " Improved text objects
+    Plug 'raimon49/requirements.txt.vim'  " Syntax for requirements.txt files
 
     Plug 'tmhedberg/simpylfold'           " Python folding rules
     Plug 'jeetsukumaran/vim-pythonsense'  " Python text objects and motions
 
-    Plug 'raimon49/requirements.txt.vim'  " Syntax for requirements.txt files
+    Plug 'michaeljsmith/vim-indent-object'  " Indentation oriented text objects
+    Plug 'wellle/targets.vim'             " Improved text objects
 
     " Plug 'SidOfc/mkdx'                  " Feature rich if not too complicated
     " Plug 'vim-pandoc/vim-pandoc'
@@ -327,7 +329,7 @@ call plug#begin()
     Plug 'majutsushi/tagbar'          " Tags tree explorer
 
   " Completion
-    Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
+    Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --ts-completer' }
 
     Plug 'ervandew/supertab'          " Improved Tab completion
 

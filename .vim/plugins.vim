@@ -138,7 +138,6 @@ let g:ctrlp_user_command = {
 " ----------------------------------------------------------------------
 let g:vim_markdown_follow_anchor = 1
 
-" let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_folding_style_pythonic = 1
 let g:vim_markdown_folding_level = 6
 
@@ -155,7 +154,11 @@ let g:vim_markdown_frontmatter = 1
 
 let g:vim_markdown_toc_autofit = 1
 
-map <F13> <Plug>Markdown_EditUrlUnderCursor   " re-enable default <ge> mapping
+" re-enable default <ge> mapping
+map <Plug> <Plug>Markdown_EditUrlUnderCursor
+
+map [h <Plug>Markdown_MoveToCurHeader
+map [u <Plug>Markdown_MoveToParentHeader
 
 
 " ----------------------------------------------------------------------
@@ -212,7 +215,6 @@ let g:ycm_key_invoke_completion = ''
 " Turn semantic completion for specific filetypes
 " NOTE: Use g:ycm_filetype_blacklist to completely turn off YCM instead
 let g:ycm_filetype_specific_completion_to_disable = {
-      \ 'javascript': 1,
       \ 'gitcommit': 1
       \}
 
