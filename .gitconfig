@@ -12,6 +12,8 @@
 	st = status
 	ci = commit
 	co = checkout
+	sdiff = diff --staged
+	unstage = restore --staged
 [color]
 	ui = auto
 [log]
