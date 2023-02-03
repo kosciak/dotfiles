@@ -229,6 +229,11 @@ let g:ycm_filetype_specific_completion_to_disable = {
 " ----------------------------------------------------------------------
 let g:SuperTabDefaultCompletionType = "context"
 
+let g:SuperTabRetainCompletionDuration = "completion"
+
+let g:SuperTabLongestEnhanced = 1
+let g:SuperTabLongestHighlight = 0
+
 " NOTE: Default <c-p> messes up with YCM
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
