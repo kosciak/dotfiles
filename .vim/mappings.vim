@@ -73,7 +73,7 @@ nnoremap <silent> <leader>q :close<CR>
 nmap <C-C> <C-A>
 
 " Fold using space
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+" nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
 
 " ----------------------------------------------------------------------

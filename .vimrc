@@ -89,7 +89,37 @@ set statusline+=%5p%%               " Percentage through file in lines
 set statusline+=\                   " Space
 
 set showcmd         " display incomplete commands
-"set wildmode=longest,list,full
+
+set wildmode=longest,full
+" set wildoptions=fuzzy
+set wildoptions=pum
+
+" On completion show only menu, no preview or popup
+" NOTE: YCM changes 'menu' to 'menuone' and removes 'longest'
+"       https://github.com/ycm-core/YouCompleteMe/issues/562
+"       Well... completeopt has global scope so no luck with that
+set completeopt=menuone,longest
+let s:override_completeopt = &completeopt
+let s:restore_completeopt = &completeopt
+
+function! s:overrideCompleteopt() abort
+  if exists("g:loaded_youcompleteme") && has_key(g:ycm_filetype_blacklist, &ft)
+    let s:restore_completeopt = &completeopt
+    let &completeopt = s:override_completeopt
+  endif
+endfunc
+
+function! s:restoreCompleteopt() abort
+  if exists("g:loaded_youcompleteme") && has_key(g:ycm_filetype_blacklist, &ft)
+    let &completeopt = s:restore_completeopt
+  endif
+endfunc
+
+augroup RestoreCompleteopt
+  au!
+  autocmd InsertEnter * call s:overrideCompleteopt()
+  autocmd InsertLeave * call s:restoreCompleteopt()
+augroup END
 
 set magic           " magic on for regular expressions
 
@@ -133,8 +163,6 @@ augroup END
 
 set fillchars+=vert:\     " Removes pipes | that act as seperators on splits
 
-set completeopt=menu  " on completion show only menu, no preview or popup
-
 
 " ----------------------------------------------------------------------
 "  Editing
@@ -155,6 +183,8 @@ set smartindent     " smart autoindenting when starting new line
 set spelllang=en,pl
 set spellsuggest=best,10
 
+set dictionary+=/usr/share/dict/words
+
 
 " ----------------------------------------------------------------------
 "  Windows, tabs, buffers
@@ -167,7 +197,7 @@ set hidden          " allow closing of windows with unsaved buffers
 "  Autocommands
 " ----------------------------------------------------------------------
 
-augroup vimrcEx
+augroup vimrc
   au!
 
   autocmd BufRead *.txt setfiletype text
@@ -180,6 +210,7 @@ augroup vimrcEx
   autocmd FileType markdown
     \ setlocal formatoptions+=ro |
     \ setlocal textwidth=80 |
+    \ setlocal complete+=kspell |
     \ call tablemode#Enable()
 
   " Configuraiotn files related

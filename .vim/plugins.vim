@@ -204,13 +204,18 @@ let g:SimpylFold_docstring_preview = 1
 " ----------------------------------------------------------------------
 "   ycm-core/YouCompleteMe
 " ----------------------------------------------------------------------
+" let g:ycm_add_preview_to_completeopt="popup"
 let g:ycm_autoclose_preview_window_after_completion = 1
+
 " only use the `Down` key to select the first item
 " let g:ycm_key_list_select_completion = ['<Tab>', '<Down>']
 let g:ycm_key_list_select_completion = ['<Down>']
 
-" Do NOT overwrite original mapping to insert previously inserted text
-let g:ycm_key_invoke_completion = ''
+" TODO: Do NOT overwrite original mapping to insert previously inserted text
+" NOTE: Well... invoking completion seems important, so until I fin other key
+"       that might be used instead le'ts use Ctrl-Space.
+"       To get default behaviour use C-A in instert mode instead
+let g:ycm_key_invoke_completion = '<C-@>'
 
 " Turn semantic completion for specific filetypes
 " NOTE: Use g:ycm_filetype_blacklist to completely turn off YCM instead
@@ -223,6 +228,8 @@ let g:ycm_filetype_specific_completion_to_disable = {
 "   ervandew/supertab
 " ----------------------------------------------------------------------
 let g:SuperTabDefaultCompletionType = "context"
+
+" NOTE: Default <c-p> messes up with YCM
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
 
