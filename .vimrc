@@ -91,8 +91,10 @@ set statusline+=\                   " Space
 set showcmd         " display incomplete commands
 
 set wildmode=longest,full
-" set wildoptions=fuzzy
-set wildoptions=pum
+if v:version > 900
+  " set wildoptions=fuzzy
+  set wildoptions=pum
+endif
 
 " On completion show only menu, no preview or popup
 " NOTE: YCM changes 'menu' to 'menuone' and removes 'longest'
