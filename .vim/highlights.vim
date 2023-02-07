@@ -17,6 +17,8 @@
 hi CursorLine                 cterm=NONE  ctermbg=254
 hi CursorLineNR   term=bold   cterm=bold  ctermbg=254
 
+hi ColorColumn    term=reverse  ctermbg=254   guibg=LightRed
+
 " hi StatusLineNormal cterm=reverse,italic
 hi StatusLineNormal   cterm=reverse
 
@@ -26,15 +28,15 @@ hi TagbarScope          cterm=bold  ctermfg=5
 hi TagbarAccessPublic               ctermfg=70
 
 " Markup - bold headers
-hi htmlTitle  term=bold   cterm=bold  ctermfg=5   gui=bold guifg=Magenta
-hi htmlH1     term=bold   cterm=bold  ctermfg=5   gui=bold guifg=Magenta
+hi htmlH1     term=bold   cterm=bold  ctermfg=8   gui=bold guifg=Magenta
+hi htmlH2     term=bold   cterm=bold  ctermfg=0   gui=bold guifg=Magenta
 
 " Markup - list markers
 hi mkdListItem          term=bold   cterm=bold  ctermfg=2     gui=bold guifg=Green
 hi mkdRule              term=bold   cterm=bold  ctermfg=2     gui=bold guifg=Green
 " with bold checkboxes: [ ] [x]
-hi mkdListItemCheckbox  term=bold   cterm=bold  ctermbg=254   gui=bold
-hi mkdHeading           term=bold   cterm=bold  ctermbg=254   gui=bold
+hi mkdListItemCheckbox  term=bold   cterm=bold              ctermbg=254   gui=bold
+hi mkdHeading           term=bold   cterm=bold  ctermfg=4   ctermbg=254   gui=bold
 
 " Diff
 hi diffAdded                              ctermfg=2   guifg=Green

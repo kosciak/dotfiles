@@ -10,6 +10,15 @@
 " let mapleader = ','
 let mapleader = ';'
 
+" Forward f, F, t, T
+nnoremap , ;
+vnoremap , ;
+onoremap , ;
+" Backward f, F, t, T
+nnoremap \ ,
+vnoremap \ ,
+onoremap \ ,
+
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
@@ -18,13 +27,6 @@ map Y y$
 
 " Reset highlighting
 nnoremap <leader><space> :nohlsearch<cr>
-
-" Forward f, F, t, T
-nnoremap , ;
-vnoremap , ;
-" Backward f, F, t, T
-nnoremap \ ,
-vnoremap \ ,
 
 " Reload .vimrc
 nnoremap <leader><C-R> :source $MYVIMRC<CR>:echo "Reloaded "..fnamemodify($MYVIMRC,':p:~')<CR>
@@ -151,6 +153,15 @@ autocmd FileType markdown
 " ----------------------------------------------------------------------
 "   lervag/wiki.vim
 " ----------------------------------------------------------------------
+nnoremap <silent> <Plug>WikiLinkToggleMapping :WikiLinkToggle<CR>
+            \ :call repeat#set("\<Plug>WikiLinkToggleMapping")<CR>
+
+nnoremap <silent> <Plug>WikiLinkExtractHeaderMapping :WikiLinkExtractHeader<CR>
+            \ :call repeat#set("\<Plug>WikiLinkExtractHeaderMapping")<CR>
+
+nnoremap <leader>wf <Plug>WikiLinkToggleMapping
+nnoremap <leader>wh <Plug>WikiLinkExtractHeaderMapping
+
 nnoremap <leader>ow :execute 'CtrlP ' .. wiki#get_root()<CR>
 nnoremap <leader>wo :execute 'CtrlP ' .. wiki#get_root()<CR>
 nnoremap <leader>w<C-P> :execute 'CtrlP ' .. wiki#get_root()<CR>
@@ -159,7 +170,8 @@ nnoremap <leader>w<C-P> :execute 'CtrlP ' .. wiki#get_root()<CR>
 " ----------------------------------------------------------------------
 "   ctrlpvim/ctrlp.vim
 " ----------------------------------------------------------------------
-" TODO: Consider using <leader>f (find) instead of <leader>o (open)
+" TODO: Consider using <leader>f (find) instead of <leader>o (open), although
+"       it might be better to use <leader>f for searching with ctrlsf
 nnoremap <leader>o :CtrlP<CR>
 nnoremap <leader>oo :CtrlP<CR>
 nnoremap <leader>oc :CtrlPCurFile<CR>
@@ -205,4 +217,6 @@ nnoremap <silent> <leader>? :SignifyHunkDiff<CR>
 "   ycm-core/YouCompleteMe
 " ----------------------------------------------------------------------
 " TODO: See: https://github.com/puremourning/.vim-mac/blob/master/plugin/ycm_mappings.vim
+
+nmap <leader>D <plug>(YCMHover)
 

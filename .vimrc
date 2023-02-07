@@ -165,6 +165,8 @@ augroup END
 
 set fillchars+=vert:\     " Removes pipes | that act as seperators on splits
 
+set colorcolumn=+1        " Highlight column after textwidth (if set)
+
 
 " ----------------------------------------------------------------------
 "  Editing

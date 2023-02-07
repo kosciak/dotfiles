@@ -165,6 +165,12 @@ map [u <Plug>Markdown_MoveToParentHeader
 "   dhruvasagar/vim-table-mode
 " ----------------------------------------------------------------------
 let g:table_mode_verbose = 0
+let g:table_mode_insert_column_before_map = '<leader>tic'
+let g:table_mode_insert_column_after_map = '<leader>tac'
+let g:table_mode_motion_left_map = '[\'   " '[<Bar>'
+let g:table_mode_motion_right_map = ']\'  " ']<Bar>'
+let g:table_mode_cell_text_object_a_map = 'a\'  " 'a<Bar>'
+let g:table_mode_cell_text_object_i_map = 'i\'  " 'i<Bar>'
 
 
 " ----------------------------------------------------------------------
@@ -271,15 +277,42 @@ let g:peekaboo_delay = 500
 "   lervag/wiki.vim
 " ----------------------------------------------------------------------
 let g:wiki_root = '~/projekty/wiki'
-let wiki_global_load = 1
-let g:wiki_link_toggle_on_follow = 0
-let g:wiki_write_on_nav = 1
 
-let g:wiki_toc_title = ''
-
+" Use Markdown format
 let g:wiki_filetypes = ['md']
 let g:wiki_link_extension = '.md'
 let g:wiki_link_target_type = 'md'
+
+" Enable on all wiki_filetypes
+let g:wiki_global_load = 1
+
+" Do NOT toggle link when using follow lik mapping
+" OR at least not when using <Enter> to follow
+let g:wiki_link_toggle_on_follow = 0
+
+" Write before navigating from file
+let g:wiki_write_on_nav = 1
+
+let g:wiki_toc_title = 'TOC:'	  " '' special characters break pandoc export
+
+" Let's make sure filenames are consistent
+let g:wiki_map_text_to_link = 'WikiTextToLink'
+let g:wiki_map_create_page = 'WikiCreatePage'
+
+function WikiLinkFormat(text) abort
+  return substitute(tolower(a:text), '\s\+', '_', 'g')
+endfunction
+
+function WikiTextToLink(text) abort
+  return [WikiLinkFormat(a:text), a:text]
+endfunc
+
+function WikiCreatePage(name) abort
+  return wiki#get_root() . '/' . WikiLinkFormat(a:name)
+endfunc
+
+" TODO: g:wiki_mappings_global, g:wiki_mappings_local
+
 
 " TODO: Update TOC on save (if exists!)
 " See: https://github.com/mzlogin/vim-markdown-toc/blob/master/ftplugin/markdown.vim

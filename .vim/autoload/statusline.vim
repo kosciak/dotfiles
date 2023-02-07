@@ -28,11 +28,16 @@ endfunc
 
 function! statusline#GetPath(...) abort
   let path = substitute(expand('%:h'), '^\.$', '', 'i')
+  let cwd = fnamemodify(getcwd(), ':~')
+  if path[0] ==# '/' || path[0:2] ==# '../'
+    let path = expand('%:~:h')
+  endif
+  if path[0:strlen(cwd)-1] ==# cwd
+    let path = path[strlen(cwd)+1:]
+  endif
 
   if strlen(path) == 0
     return ''
-  elseif path[0] ==# '/' || path[0:2] ==# '../'
-    return expand('%:~:h') .. '/'
   else
     return path .. '/'
   endif
