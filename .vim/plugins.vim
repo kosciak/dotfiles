@@ -187,6 +187,12 @@ let g:bullets_outline_levels = [
       \ 'std-', 'std*', 'std+'
       \]
 
+" Support for repeated mappings
+let g:bullets_custom_mappings = [
+      \ ['nmap', '>>', '<Plug>BulletsDemoteMapping'],
+      \ ['nmap', '<<', '<Plug>BulletsPromoteMapping'],
+      \]
+
 " Create bullet in new line above (when in the middle of list)
 " NOTE: Breaks normal O behaviour on first line of file
 " let g:bullets_custom_mappings = [
@@ -312,6 +318,10 @@ function WikiCreatePage(name) abort
 endfunc
 
 " TODO: g:wiki_mappings_global, g:wiki_mappings_local
+" let g:wiki_mappings_local = {
+"       \ '<Plug>WikiLinkToggleMapping': '<leader>wf',
+"       \ '<Plug>WikiLinkExtractHeaderMapping': '<leader>wh',
+"       \}
 
 
 " TODO: Update TOC on save (if exists!)

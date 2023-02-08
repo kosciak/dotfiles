@@ -144,8 +144,13 @@ nnoremap <leader>sp :ScratchPreview<CR>
 " ----------------------------------------------------------------------
 "   dkarter/bullets.vim
 " ----------------------------------------------------------------------
+nnoremap <silent> <Plug>BulletsDemoteMapping :BulletDemote<CR>
+            \:call repeat#set("\<Plug>BulletsDemoteMapping")<CR>
+nnoremap <silent> <Plug>BulletsPromoteMapping :BulletPromote<CR>
+            \:call repeat#set("\<Plug>BulletsPromoteMapping")<CR>
+
 autocmd FileType markdown
-  \ nnoremap <buffer> <C-X> :ToggleCheckbox<CR>|
+  \ nnoremap <buffer> <C-X> <Plug>(bullets-toggle-checkbox)|
   \ imap <buffer> <C-L> <Plug>(bullets-demote)|
   \ imap <buffer> <C-H> <Plug>(bullets-promote)
 
@@ -154,10 +159,10 @@ autocmd FileType markdown
 "   lervag/wiki.vim
 " ----------------------------------------------------------------------
 nnoremap <silent> <Plug>WikiLinkToggleMapping :WikiLinkToggle<CR>
-            \ :call repeat#set("\<Plug>WikiLinkToggleMapping")<CR>
+            \:call repeat#set("\<Plug>WikiLinkToggleMapping")<CR>
 
 nnoremap <silent> <Plug>WikiLinkExtractHeaderMapping :WikiLinkExtractHeader<CR>
-            \ :call repeat#set("\<Plug>WikiLinkExtractHeaderMapping")<CR>
+            \:call repeat#set("\<Plug>WikiLinkExtractHeaderMapping")<CR>
 
 nnoremap <leader>wf <Plug>WikiLinkToggleMapping
 nnoremap <leader>wh <Plug>WikiLinkExtractHeaderMapping
