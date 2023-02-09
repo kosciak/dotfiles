@@ -1,4 +1,5 @@
 " .vimrc
+" .vim/plug.vim
 " .vim/plugins.vim
 "
 " Author: Wojciech 'KosciaK' Pietrzok
@@ -6,6 +7,15 @@
 " ----------------------------------------------------------------------
 "  Plugins settings
 " ----------------------------------------------------------------------
+
+" ----------------------------------------------------------------------
+"   tpope/vim-unimpaired
+" ----------------------------------------------------------------------
+" Disable option toggling
+let g:nremap = {
+      \ '=s': '', '>s': '', '<s': '',
+      \ '[o': '', ']o': '', 'yo': '',
+      \}
 
 " ----------------------------------------------------------------------
 "   scrooloose/nerdtree
@@ -134,6 +144,36 @@ let g:ctrlp_user_command = {
 
 
 " ----------------------------------------------------------------------
+"   dyng/ctrlsf.vim
+" ----------------------------------------------------------------------
+let g:ctrlsf_auto_focus = {
+    \ "at" : "start",
+    \ "duration_less_than": 1000
+    \ }
+
+let g:ctrlsf_auto_close = {
+    \ "normal" : 0,
+    \ "compact": 1
+    \}
+
+let g:ctrlsf_case_sensitive = 'smart'
+
+let g:ctrlsf_default_view_mode = 'compact'
+let g:ctrlsf_compact_winsize = 10
+
+let g:ctrlsf_indent = 2
+
+" let g:ctrlsf_default_root = 'project+ww'
+let g:ctrlsf_default_root = 'cwd'
+
+let g:ctrlsf_populate_qflist = 1
+
+let g:ctrlsf_extra_backend_args = {
+    \ 'rg': '--hidden'
+    \ }
+
+
+" ----------------------------------------------------------------------
 "   plasticboy/vim-markdown
 " ----------------------------------------------------------------------
 let g:vim_markdown_follow_anchor = 1
@@ -167,8 +207,10 @@ map [u <Plug>Markdown_MoveToParentHeader
 let g:table_mode_verbose = 0
 let g:table_mode_insert_column_before_map = '<leader>tic'
 let g:table_mode_insert_column_after_map = '<leader>tac'
-let g:table_mode_motion_left_map = '[\'   " '[<Bar>'
-let g:table_mode_motion_right_map = ']\'  " ']<Bar>'
+let g:table_mode_motion_left_map = '[\'         " '[<Bar>'
+let g:table_mode_motion_right_map = ']\'        " ']<Bar>'
+let g:table_mode_motion_up_map = '[<Bar>'       " '{<Bar>'
+let g:table_mode_motion_down_map = ']<Bar>'     " '}<Bar>'
 let g:table_mode_cell_text_object_a_map = 'a\'  " 'a<Bar>'
 let g:table_mode_cell_text_object_i_map = 'i\'  " 'i<Bar>'
 
@@ -254,7 +296,9 @@ let g:SuperTabContextDefaultCompletionType = "<c-n>"
 "   mhinz/vim-signify
 " ----------------------------------------------------------------------
 let g:signify_disable_by_default = 1
-let g:signify_number_highlight = 1
+
+let g:signify_number_highlight = 0
+let g:signify_line_highlight = 0
 
 augroup signifyHunks
   au!
@@ -362,13 +406,4 @@ augroup GoyoLimelightIntegration
   autocmd! User GoyoLeave Limelight!
 
 augroup END
-
-
-" ----------------------------------------------------------------------
-"   Yggdroot/LeaderF
-" ----------------------------------------------------------------------
-let g:Lf_WindowPosition = 'popup'
-let g:Lf_WindowHeight = 10
-let g:Lf_StlSeparator = { 'left': '', 'right': '' }
-let g:Lf_ReverseOrder = 1
 

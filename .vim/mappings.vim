@@ -32,11 +32,14 @@ nnoremap <leader><space> :nohlsearch<cr>
 nnoremap <leader><C-R> :source $MYVIMRC<CR>:echo "Reloaded "..fnamemodify($MYVIMRC,':p:~')<CR>
 
 " Toggle between paste and nopaste, with visual feedback
-nnoremap <leader>P :set invpaste paste?<CR>
+nnoremap <leader>P :setlocal invpaste paste?<CR>
 set pastetoggle=<leader>P
 
 " Toggle between spell and nospell
 nnoremap <leader>S :setlocal spell! spell?<CR>
+
+" Toggle beteen list and nolist
+nnoremap <leader>L :setlocal list! list?<CR>
 
 " Split navigations without pressing Ctrl-W first
 nnoremap <C-J> <C-W><C-J>
@@ -150,9 +153,9 @@ nnoremap <silent> <Plug>BulletsPromoteMapping :BulletPromote<CR>
             \:call repeat#set("\<Plug>BulletsPromoteMapping")<CR>
 
 autocmd FileType markdown
-  \ nnoremap <buffer> <C-X> <Plug>(bullets-toggle-checkbox)|
-  \ imap <buffer> <C-L> <Plug>(bullets-demote)|
-  \ imap <buffer> <C-H> <Plug>(bullets-promote)
+  \ nnoremap <buffer> <C-X> <Plug>(bullets-toggle-checkbox)
+  " \ imap <buffer> <C-L> <Plug>(bullets-demote)|
+  " \ imap <buffer> <C-H> <Plug>(bullets-promote)
 
 
 " ----------------------------------------------------------------------
@@ -193,6 +196,12 @@ nnoremap <leader>oL :CtrlPLine<CR>
 nnoremap <leader>ob :CtrlPBuffer<CR>
 nnoremap <leader>bo :CtrlPBuffer<CR>
 nnoremap <leader>b<C-P> :CtrlPBuffer<CR>
+
+
+" ----------------------------------------------------------------------
+"   dyng/ctrlsf.vim
+" ----------------------------------------------------------------------
+nmap <leader>/ <Plug>CtrlSFPrompt
 
 
 " ----------------------------------------------------------------------

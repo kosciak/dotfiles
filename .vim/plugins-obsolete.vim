@@ -39,3 +39,12 @@ let g:NERDTreeGitStatusUseNerdFonts = 0
 let g:NERDTreeGitStatusShowClean = 0
 let g:NERDTreeGitStatusAlignIfConceal = 0
 
+
+" ----------------------------------------------------------------------
+"   Yggdroot/LeaderF
+" ----------------------------------------------------------------------
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_WindowHeight = 10
+let g:Lf_StlSeparator = { 'left': '', 'right': '' }
+let g:Lf_ReverseOrder = 1
+
