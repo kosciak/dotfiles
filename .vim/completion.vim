@@ -23,7 +23,9 @@ endif
 "   - only insert longest common text for matches
 "   - no preview or popup
 " ----------------------------------------------------------------------
-set completeopt=menuone,longest
+if exists('s:override_completeopt') == 0
+  set completeopt=menuone,longest
+endif
 
 " NOTE: YCM changes 'menu' to 'menuone' and removes 'longest'
 "       https://github.com/ycm-core/YouCompleteMe/issues/562

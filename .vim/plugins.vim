@@ -36,9 +36,6 @@ let g:NERDTreeIgnore = [
       \]
 let g:NERDTreeRespectWildIgnore = 1 " Don't show files in wildignore
 
-let g:NERDTreeMapOpenSplit = 's'    " Remap split to 's'
-let g:NERDTreeMapOpenVSplit = 'v'   " Remap vertical split to 'v'
-
 
 " ----------------------------------------------------------------------
 "   tiagofumo/vim-nerdtree-syntax-highlight
@@ -68,7 +65,7 @@ let g:NERDTreeSyntaxEnabledExactMatches = [
 " let g:NERDTreeExactMatchHighlightFullName = 1
 " let g:NERDTreePatternMatchHighlightFullName = 1
 
-" Highlight full name (not only icons) of folders
+" Highlight full name (not only icons) of folderx
 let g:NERDTreeHighlightFolders = 1          " enables folder icon highlighting using exact match
 let g:NERDTreeHighlightFoldersFullName = 1  " highlights the folder name
 
@@ -87,6 +84,7 @@ let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
 let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
 let g:WebDevIconsNerdTreeAfterGlyphPadding = " "
 
+if exists('g:loaded_webdevicons') == 0
 " Adding custom decoration rules
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
       \ 'ttf'   : '',
@@ -98,6 +96,7 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
 let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {
       \ 'dropbox'   : '',
       \}
+endif
 
 
 " ----------------------------------------------------------------------
@@ -116,7 +115,6 @@ let g:bufExplorerDefaultHelp = 0
 let g:bufExplorerSplitOutPathName = 0
 let g:bufExplorerShowRelativePath = 1
 let g:bufExplorerFindActive = 0
-let g:bufExplorerDisableDefaultKeyMapping = 1
 
 
 " ----------------------------------------------------------------------
@@ -129,6 +127,16 @@ let g:ctrlp_match_current_file = 1
 
 " Increase number of results
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:100'
+
+let g:ctrlp_lazy_update = 100
+
+let g:fruzzy#usenative = 1
+let g:cpsm_highlight_mode = 'detailed'
+let g:cpsm_query_inverting_delimiter = ' '
+" let g:ctrlp_match_func = {'match': 'fruzzy#ctrlp#matcher'}
+" let g:ctrlp_match_func = {'match': 'pymatcher#PyMatch'}
+" let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+" let g:ctrlp_match_func = {'match': 'ctrlp_matchfuzzy#matcher'}
 
 " Ignore files from .gitignore
 " let g:ctrlp_user_command = {
@@ -194,25 +202,11 @@ let g:vim_markdown_frontmatter = 1
 
 let g:vim_markdown_toc_autofit = 1
 
-" re-enable default <ge> mapping
-map <Plug> <Plug>Markdown_EditUrlUnderCursor
-
-map [h <Plug>Markdown_MoveToCurHeader
-map [u <Plug>Markdown_MoveToParentHeader
-
 
 " ----------------------------------------------------------------------
 "   dhruvasagar/vim-table-mode
 " ----------------------------------------------------------------------
 let g:table_mode_verbose = 0
-let g:table_mode_insert_column_before_map = '<leader>tic'
-let g:table_mode_insert_column_after_map = '<leader>tac'
-let g:table_mode_motion_left_map = '[\'         " '[<Bar>'
-let g:table_mode_motion_right_map = ']\'        " ']<Bar>'
-let g:table_mode_motion_up_map = '[<Bar>'       " '{<Bar>'
-let g:table_mode_motion_down_map = ']<Bar>'     " '}<Bar>'
-let g:table_mode_cell_text_object_a_map = 'a\'  " 'a<Bar>'
-let g:table_mode_cell_text_object_i_map = 'i\'  " 'i<Bar>'
 
 
 " ----------------------------------------------------------------------
@@ -229,24 +223,13 @@ let g:bullets_outline_levels = [
       \ 'std-', 'std*', 'std+'
       \]
 
-" Support for repeated mappings
-let g:bullets_custom_mappings = [
-      \ ['nmap', '>>', '<Plug>BulletsDemoteMapping'],
-      \ ['nmap', '<<', '<Plug>BulletsPromoteMapping'],
-      \]
-
-" Create bullet in new line above (when in the middle of list)
-" NOTE: Breaks normal O behaviour on first line of file
-" let g:bullets_custom_mappings = [
-"     \ ['nmap', 'O', '<Plug>(bullets-newline)'],
-" \]
-
 
 " ----------------------------------------------------------------------
 "   mtth/scratch.vim
 " ----------------------------------------------------------------------
 let g:scratch_insert_autohide = 0
 let g:scratch_filetype = 'markdown'
+let g:scratch_height = 10
 
 
 " ----------------------------------------------------------------------
@@ -260,16 +243,6 @@ let g:SimpylFold_docstring_preview = 1
 " ----------------------------------------------------------------------
 " let g:ycm_add_preview_to_completeopt="popup"
 let g:ycm_autoclose_preview_window_after_completion = 1
-
-" only use the `Down` key to select the first item
-" let g:ycm_key_list_select_completion = ['<Tab>', '<Down>']
-let g:ycm_key_list_select_completion = ['<Down>']
-
-" TODO: Do NOT overwrite original mapping to insert previously inserted text
-" NOTE: Well... invoking completion seems important, so until I fin other key
-"       that might be used instead le'ts use Ctrl-Space.
-"       To get default behaviour use C-A in instert mode instead
-let g:ycm_key_invoke_completion = '<C-@>'
 
 " Turn semantic completion for specific filetypes
 " NOTE: Use g:ycm_filetype_blacklist to completely turn off YCM instead
@@ -361,12 +334,6 @@ function WikiCreatePage(name) abort
   return wiki#get_root() . '/' . WikiLinkFormat(a:name)
 endfunc
 
-" TODO: g:wiki_mappings_global, g:wiki_mappings_local
-" let g:wiki_mappings_local = {
-"       \ '<Plug>WikiLinkToggleMapping': '<leader>wf',
-"       \ '<Plug>WikiLinkExtractHeaderMapping': '<leader>wh',
-"       \}
-
 
 " TODO: Update TOC on save (if exists!)
 " See: https://github.com/mzlogin/vim-markdown-toc/blob/master/ftplugin/markdown.vim
@@ -401,9 +368,7 @@ let g:limelight_conceal_ctermfg = 'gray'
 
 augroup GoyoLimelightIntegration
   au!
-
   autocmd! User GoyoEnter Limelight
   autocmd! User GoyoLeave Limelight!
-
 augroup END
 

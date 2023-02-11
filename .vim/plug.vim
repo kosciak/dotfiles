@@ -89,6 +89,10 @@ call plug#begin()
     Plug 'romainl/vim-cool'           " Auto disable search highlighting
 
     Plug 'ctrlpvim/ctrlp.vim'         " Full path fuzzy finder
+    " Plug 'raghur/fruzzy', { 'do': { -> fruzzy#install() } }
+    " Plug 'FelikZ/ctrlp-py-matcher'
+    " Plug 'mattn/ctrlp-matchfuzzy'
+    " Plug 'nixprime/cpsm', { 'do': './install.sh' }
 
     " Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 

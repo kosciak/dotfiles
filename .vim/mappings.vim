@@ -73,6 +73,10 @@ nnoremap <C-W>N <C-W>n
 " Close window
 nnoremap <silent> <leader>q :close<CR>
 
+" Splits
+nnoremap <silent> <leader>s :sp<CR>
+nnoremap <silent> <leader>v :vs<CR>
+
 " Increment (not to interfere with screen leader key)
 " nnoremap <C-C> <C-A>
 nmap <C-C> <C-A>
@@ -97,6 +101,9 @@ nnoremap <leader>r :NERDTreeVCS<CR>
 nnoremap <leader>d :NERDTreeCWD<CR>
 nnoremap <leader>c :NERDTreeFind<CR>
 
+let g:NERDTreeMapOpenSplit = 's'    " Remap split to 's'
+let g:NERDTreeMapOpenVSplit = 'v'   " Remap vertical split to 'v'
+
 
 " ----------------------------------------------------------------------
 "   majutsushi/tagbar
@@ -108,11 +115,27 @@ nnoremap <leader>A :TagbarClose<CR>
 " ----------------------------------------------------------------------
 "   jlanzarotta/bufexplorer
 " ----------------------------------------------------------------------
+let g:bufExplorerDisableDefaultKeyMapping = 1
 " nnoremap <leader>b :BufExplorer<CR>
 nnoremap <leader>b :ToggleBufExplorer<CR>
-nnoremap <leader>bb :ToggleBufExplorer<CR>
-nnoremap <leader>bv :BufExplorerVerticalSplit<CR>
-nnoremap <leader>bs :BufExplorerHorizontalSplit<CR>
+" nnoremap <leaderbb :ToggleBufExplorer<CR>
+" nnoremap <leader>bv :BufExplorerVerticalSplit<CR>
+" nnoremap <leader>bs :BufExplorerHorizontalSplit<CR>
+
+
+" ----------------------------------------------------------------------
+"   mtth/scratch.vim
+" ----------------------------------------------------------------------
+let g:scratch_no_mappings = 1
+" TODO: consider <leader>` or even <leader>~
+nnoremap <leader>` :Scratch<CR>
+nnoremap <leader>~ :ScratchPreview<CR>
+" nmap <leader>si <plug>(scratch-insert-reuse)
+" nmap <leader>sc <plug>(scratch-insert-clear)
+" xmap <leader>si <plug>(scratch-selection-reuse)
+" xmap <leader>sc <plug>(scratch-selection-clear)
+" nnoremap <leader>ss :Scratch<CR>
+" nnoremap <leader>sp :ScratchPreview<CR>
 
 
 " ----------------------------------------------------------------------
@@ -121,27 +144,16 @@ nnoremap <leader>bs :BufExplorerHorizontalSplit<CR>
 " ----------------------------------------------------------------------
 " NOTE: Sideways is more versatile, but Swap's interactive mode is so good! 
 let g:swap_no_default_key_mappings = 1
-nnoremap gsh :SidewaysLeft<CR>
-nnoremap gsl :SidewaysRight<CR>
+
+nmap gsh <Plug>SidewaysLeft
+nmap gsl <Plug>SidewaysRight
 nnoremap gsj :SidewaysJumpRight<CR>
 nnoremap gsk :SidewaysJumpLeft<CR>
-nnoremap gss <Plug>(swap-interactive)
+nmap gss <Plug>(swap-interactive)
 nmap gsi <Plug>SidewaysArgumentInsertBefore
 nmap gsa <Plug>SidewaysArgumentAppendAfter
 nmap gsI <Plug>SidewaysArgumentInsertFirst
 nmap gsA <Plug>SidewaysArgumentAppendLast
-
-
-" ----------------------------------------------------------------------
-"   mtth/scratch.vim
-" ----------------------------------------------------------------------
-let g:scratch_no_mappings = 1
-nmap <leader>si <plug>(scratch-insert-reuse)
-nmap <leader>sc <plug>(scratch-insert-clear)
-xmap <leader>si <plug>(scratch-selection-reuse)
-xmap <leader>sc <plug>(scratch-selection-clear)
-nnoremap <leader>ss :Scratch<CR>
-nnoremap <leader>sp :ScratchPreview<CR>
 
 
 " ----------------------------------------------------------------------
@@ -152,10 +164,37 @@ nnoremap <silent> <Plug>BulletsDemoteMapping :BulletDemote<CR>
 nnoremap <silent> <Plug>BulletsPromoteMapping :BulletPromote<CR>
             \:call repeat#set("\<Plug>BulletsPromoteMapping")<CR>
 
-autocmd FileType markdown
-  \ nnoremap <buffer> <C-X> <Plug>(bullets-toggle-checkbox)
-  " \ imap <buffer> <C-L> <Plug>(bullets-demote)|
-  " \ imap <buffer> <C-H> <Plug>(bullets-promote)
+" Support for repeated mappings
+let g:bullets_custom_mappings = [
+      \ ['nmap', '>>', '<Plug>BulletsDemoteMapping'],
+      \ ['nmap', '<<', '<Plug>BulletsPromoteMapping'],
+      \]
+
+
+" ----------------------------------------------------------------------
+"   dhruvasagar/vim-table-mode
+" ----------------------------------------------------------------------
+let g:table_mode_disable_tableize_mappings = 1
+let g:table_mode_map_prefix = '<leader><C-T>'
+let g:table_mode_toggle_map = '<C-T>'
+let g:table_mode_insert_column_before_map = '<leader>tic'
+let g:table_mode_insert_column_after_map = '<leader>tac'
+let g:table_mode_motion_left_map = '[\'         " '[<Bar>'
+let g:table_mode_motion_right_map = ']\'        " ']<Bar>'
+let g:table_mode_motion_up_map = '[<Bar>'       " '{<Bar>'
+let g:table_mode_motion_down_map = ']<Bar>'     " '}<Bar>'
+let g:table_mode_cell_text_object_a_map = 'a\'  " 'a<Bar>'
+let g:table_mode_cell_text_object_i_map = 'i\'  " 'i<Bar>'
+
+
+" ----------------------------------------------------------------------
+"   plasticboy/vim-markdown
+" ----------------------------------------------------------------------
+map [h <Plug>Markdown_MoveToCurHeader
+map [u <Plug>Markdown_MoveToParentHeader
+
+" re-enable default <ge> mapping
+map <Plug> <Plug>Markdown_EditUrlUnderCursor
 
 
 " ----------------------------------------------------------------------
@@ -167,8 +206,31 @@ nnoremap <silent> <Plug>WikiLinkToggleMapping :WikiLinkToggle<CR>
 nnoremap <silent> <Plug>WikiLinkExtractHeaderMapping :WikiLinkExtractHeader<CR>
             \:call repeat#set("\<Plug>WikiLinkExtractHeaderMapping")<CR>
 
-nnoremap <leader>wf <Plug>WikiLinkToggleMapping
-nnoremap <leader>wh <Plug>WikiLinkExtractHeaderMapping
+" g:wiki_mappings_global, g:wiki_mappings_local
+let g:wiki_mappings_local = {
+      \ '<plug>(wiki-link-follow-split)': '<leader>ws',
+      \ '<plug>(wiki-link-follow-vsplit)': '<leader>wv',
+      \ 'x_<plug>(wiki-link-toggle-visual)': 'gl',
+      \ '<plug>(wiki-link-toggle)': '<nop>',
+      \ '<plug>(wiki-tag-list)': '<nop>',
+      \ '<plug>(wiki-tag-search)': '<nop>',
+      \ '<plug>(wiki-tag-reload)': '<nop>',
+      \ '<plug>(wiki-tag-rename)': '<nop>',
+      \ '<plug>(wiki-link-show)': '<nop>',
+      \ '<plug>(wiki-link-extract-header)': '<nop>',
+      \ '<plug>(wiki-export)': '<nop>',
+      \ 'x_<plug>(wiki-export)': '<nop>',
+      \}
+
+augroup wikiLocalMappings
+  au!
+  autocmd User WikiBufferInitialized
+        \ nnoremap <buffer> <leader>wh <Plug>WikiLinkExtractHeaderMapping
+  autocmd User WikiBufferInitialized
+        \ nnoremap <buffer> <leader>wl <Plug>WikiLinkToggleMapping
+  autocmd User WikiBufferInitialized
+        \ nnoremap <buffer> <leader>wf <Plug>(wiki-link-follow)
+augroup END
 
 nnoremap <leader>ow :execute 'CtrlP ' .. wiki#get_root()<CR>
 nnoremap <leader>wo :execute 'CtrlP ' .. wiki#get_root()<CR>
@@ -194,8 +256,8 @@ nnoremap <leader>ol :CtrlPLine %<CR>
 nnoremap <leader>oL :CtrlPLine<CR>
 
 nnoremap <leader>ob :CtrlPBuffer<CR>
-nnoremap <leader>bo :CtrlPBuffer<CR>
-nnoremap <leader>b<C-P> :CtrlPBuffer<CR>
+" nnoremap <leader>bo :CtrlPBuffer<CR>
+" nnoremap <leader>b<C-P> :CtrlPBuffer<CR>
 
 
 " ----------------------------------------------------------------------
@@ -231,6 +293,16 @@ nnoremap <silent> <leader>? :SignifyHunkDiff<CR>
 "   ycm-core/YouCompleteMe
 " ----------------------------------------------------------------------
 " TODO: See: https://github.com/puremourning/.vim-mac/blob/master/plugin/ycm_mappings.vim
+
+" only use the `Down` key to select the first item
+" let g:ycm_key_list_select_completion = ['<Tab>', '<Down>']
+let g:ycm_key_list_select_completion = ['<Down>']
+
+" TODO: Do NOT overwrite original mapping to insert previously inserted text
+" NOTE: Well... invoking completion seems important, so until I fin other key
+"       that might be used instead le'ts use Ctrl-Space.
+"       To get default behaviour use C-A in instert mode instead
+let g:ycm_key_invoke_completion = '<C-@>'
 
 nmap <leader>D <plug>(YCMHover)
 
