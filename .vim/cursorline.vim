@@ -13,10 +13,12 @@ set cursorline
 set cursorlineopt=number
 
 " ... EXCEPT selected FileTypes
+" TODO: Maybe just check if &number is set?
 let s:cursorlineopt_both = [
       \ 'bufexplorer',
       \ 'tagbar',
       \ 'nerdtree',
+      \ 'fern',
       \ 'ctrlp',
       \ 'ctrlsf',
       \ 'help',
@@ -24,8 +26,8 @@ let s:cursorlineopt_both = [
       \]
 
 function! s:setCursorlineopt() abort
-  " TODO: Maybe just check if &number is set?
-  if index(s:cursorlineopt_both, &ft) < 0
+  " if index(s:cursorlineopt_both, &ft) < 0
+  if &number
     set cursorlineopt=number
   else
     set cursorlineopt=both

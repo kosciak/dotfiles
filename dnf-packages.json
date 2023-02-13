@@ -70,7 +70,8 @@
         "gcc-c++",
         "python3-devel",
         "freetype2", "fontconfig",
-        "libxcb", "libxkbcommon"
+        "libxcb", "libxkbcommon",
+        "boost-devel"
     ],
     "zip": [
         "unzip",
@@ -79,11 +80,13 @@
     "cli_tools": [
         "trash-cli",
         "play",
-        "sox"
+        "sox",
+        "asciinema"
     ],
     "find": [
         "ripgrep",
         "the_silver_searcher",
+        "fzf",
         "fd-find"
     ],
     "misc": [

@@ -9,9 +9,10 @@
 " ----------------------------------------------------------------------
 
 " Auto install Vim-plug manager
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+let plug_url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs '.plug_url
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -27,6 +28,8 @@ call plug#begin()
 
   " Filesystem
     Plug 'duggiefresh/vim-easydir'    " Create directories on :write
+
+    Plug 'airblade/vim-rooter'        " Find project's root directory
 
   " Editing
     Plug 'tpope/vim-repeat'           " Repeat supported plugin maps (like vim-surround)
@@ -96,13 +99,17 @@ call plug#begin()
 
     " Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 
-    " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    " Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'pbogut/fzf-mru.vim'
+    " Plug 'chengzeyi/fzf-preview.vim'
 
     Plug 'dyng/ctrlsf.vim'            " TODO: Configure!
 
     " Plug 'lokikl/vim-ctrlp-ag'        " TODO: Check and configure
     " Plug 'jremmen/vim-ripgrep'        " TODO: Check if needed
+
+    " Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 
   " Files
     Plug 'scrooloose/nerdtree'
@@ -112,15 +119,26 @@ call plug#begin()
     " Plug 'lambdalisue/fern.vim'
     " Plug 'lambdalisue/nerdfont.vim'
     " Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+    " Plug 'lambdalisue/fern-renderer-devicons.vim'
+    " Plug 'a5ob7r/fern-renderer-lsflavor.vim'
+    " Plug 'khalidchawtany/fern-renderer-plain.vim'
     " Plug 'lambdalisue/glyph-palette.vim'
     " Plug 'lambdalisue/fern-git-status.vim'
     " Plug 'lambdalisue/fern-hijack.vim'
+    " Plug 'lambdalisue/fern-mapping-mark-children.vim'
+    " Plug 'lambdalisue/fern-mapping-git.vim'
+    " Plug 'lambdalisue/fern-mapping-quickfix.vim'
+    " Plug 'lambdalisue/fern-mapping-project-top.vim'
+    " Plug 'lambdalisue/fern-bookmark.vim'
+    " Plug 'LumaKernel/fern-mapping-fzf.vim'
     " Plug 'yuki-yano/fern-preview.vim'
     " Plug 'KosukeMizuno/ctrlp-fern-action.vim'
-    " let g:fern#renderer = "nerdfont"
+    " Plug 'andykog/fern-highlight.vim'
 
     " Plug 'obaland/vfiler.vim'
     " Plug 'obaland/vfiler-column-devicons'
+
+    " Plug 'troydm/easytree.vim'
 
   " Tags
     Plug 'majutsushi/tagbar'          " Tags tree explorer
@@ -141,6 +159,8 @@ call plug#begin()
 
   " Wiki, notes taking, journaling
     Plug 'lervag/wiki.vim'            " Wiki engine
+
+    Plug 'mzlogin/vim-markdown-toc'   " TOC generator and updater
 
     Plug 'mtth/scratch.vim'           " Temporary scratch buffer
 

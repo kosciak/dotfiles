@@ -1,10 +1,14 @@
 " .vimrc
-" .vim/autoload/statusline.vim
+" .vim/autoload/sline.vim
+" .vim/autoload/dirs.vim
 "
 " Author: Wojciech 'KosciaK' Pietrzok
 "
+" ----------------------------------------------------------------------
+"  sline - Simple Statusline
+" ----------------------------------------------------------------------
 
-function! statusline#Format(txt, args) abort
+function! sline#Format(txt, args) abort
   let before  = len(a:args) > 0 ? a:args[0] : ''
   let after   = len(a:args) > 1 ? a:args[1] : ''
 
@@ -26,15 +30,8 @@ function! statusline#Format(txt, args) abort
 endfunc
 
 
-function! statusline#GetPath(...) abort
-  let path = substitute(expand('%:h'), '^\.$', '', 'i')
-  let cwd = fnamemodify(getcwd(), ':~')
-  if path[0] ==# '/' || path[0:2] ==# '../'
-    let path = expand('%:~:h')
-  endif
-  if path[0:strlen(cwd)-1] ==# cwd
-    let path = path[strlen(cwd)+1:]
-  endif
+function! sline#GetPath(...) abort
+  let path = dirs#RelativeToCWD(dirs#Dir())
 
   if strlen(path) == 0
     return ''
@@ -43,19 +40,19 @@ function! statusline#GetPath(...) abort
   endif
 endfunc
 
-function! statusline#Path(...) abort
-  let path = statusline#GetPath()
-  return statusline#Format(path, a:000)
+function! sline#Path(...) abort
+  let path = sline#GetPath()
+  return sline#Format(path, a:000)
 endfunc
 
 
-function! statusline#Filename(...) abort
+function! sline#Filename(...) abort
   let file = expand('%:t')
-  return statusline#Format(file, a:000)
+  return sline#Format(file, a:000)
 endfunc
 
 
-function! statusline#Icon(...) abort
+function! sline#Icon(...) abort
   if exists('*WebDevIconsGetFileTypeSymbol')
     " Requires: ryanoasis/vim-devicons
     let icon = WebDevIconsGetFileTypeSymbol()
@@ -65,22 +62,22 @@ function! statusline#Icon(...) abort
   else
     let icon = ''
   endif
-  return statusline#Format(icon, a:000)
+  return sline#Format(icon, a:000)
 endfunc
 
 
-function! statusline#GitBranch(...) abort
+function! sline#GitBranch(...) abort
   if exists('*FugitiveHead')
     " Requires: tpope/vim-fugitive
     let branch = FugitiveHead()
   else
     let branch = ''
   endif
-  return statusline#Format(branch, a:000)
+  return sline#Format(branch, a:000)
 endfunc
 
 
-function! statusline#Hunks(...) abort
+function! sline#Hunks(...) abort
   if exists('*sy#repo#get_stats_decorated')
     " Requires: mhinz/vim-signify
     let hunks = sy#repo#get_stats_decorated()
@@ -106,30 +103,30 @@ function! statusline#Hunks(...) abort
   else
     let hunks = ''
   endif
-  return statusline#Format(hunks, a:000)
+  return sline#Format(hunks, a:000)
 endfunc
 
 
-function! statusline#Paste(...) abort
+function! sline#Paste(...) abort
   let option = &paste ? '[paste]' : ''
-  return statusline#Format(option, a:000)
+  return sline#Format(option, a:000)
 endfunc
 
 
-function! statusline#Spell(...) abort
+function! sline#Spell(...) abort
   let lang = &spelllang
   let option = &spell ? '[spell:'..lang..']' : ''
-  return statusline#Format(option, a:000)
+  return sline#Format(option, a:000)
 endfunc
 
 
-function! statusline#Tag(flags, ...) abort
+function! sline#Tag(flags, ...) abort
   if exists('*tagbar#currenttag')
     " Requires: preservim/tagbar
     let tag = tagbar#currenttag('%s', a:flags)
   else
     let tag = ''
   endif
-  return statusline#Format(tag, a:000)
+  return sline#Format(tag, a:000)
 endfunc
 

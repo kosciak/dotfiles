@@ -9,7 +9,8 @@
 " .vim/plugins-obsolete.vim
 " .vim/highlights.vim
 " .vim/mappings.vim
-" .vim/autoload/statusline.vim
+" .vim/autoload/dirs.vim
+" .vim/autoload/sline.vim
 " .vim/autoload/syntax.vim
 " .vim/ftplugin/mediawiki.vim
 " .vim/ftplugin/help.vim
@@ -72,15 +73,6 @@ set title           " set window title
 " Remove pipes | that act as seperators on splits
 set fillchars+=vert:\ 
 
-" Statusline
-source ~/.vim/statusline.vim
-
-" Cursorline
-source ~/.vim/cursorline.vim
-
-" Command line and Insert mode completion
-source ~/.vim/completion.vim
-
 set showcmd         " display incomplete commands
 
 if &t_Co > 2 || has("gui_running")
@@ -97,9 +89,12 @@ set wrap
 set linebreak
 " Column used for number will be used fot text of wrapped lines
 set cpoptions+=n    
-" String to put at the start of wrapped lines NOTE: Keep it in sync with
-" numberwidth
+" String to put at the start of wrapped lines
+" NOTE: Keep it in sync with numberwidth
 set showbreak=>>>>\ 
+
+" NOTE: Needs 'set list' to work and show listchars!
+set listchars=tab:→\ ,eol:¶,extends:→,precedes:<,trail:·,nbsp:°
 
 set scrolloff=3     " let X lines before/after cursor during scroll
 
@@ -113,6 +108,15 @@ endif
 
 set showmatch       " show matching brackets
 
+" Statusline
+source ~/.vim/statusline.vim
+
+" Cursorline
+source ~/.vim/cursorline.vim
+
+" Command line and Insert mode completion
+source ~/.vim/completion.vim
+
 
 " ----------------------------------------------------------------------
 "  Editing
@@ -125,9 +129,6 @@ set expandtab       " expand tabs into spaces
 
 set autoindent      " indent when moving to the next line
 set smartindent     " smart autoindenting when starting new line
-
-" NOTE: Needs 'set list' to work and show listchars!
-set listchars=tab:→\ ,eol:¶,extends:→,precedes:<,trail:·,nbsp:°
 
 " Spellchecking: English and Polish, show 10 best suggestions
 set spelllang=en,pl

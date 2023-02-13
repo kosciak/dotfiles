@@ -17,6 +17,53 @@ let g:nremap = {
       \ '[o': '', ']o': '', 'yo': '',
       \}
 
+
+" ----------------------------------------------------------------------
+"   airblade/vim-rooter
+" ----------------------------------------------------------------------
+let g:rooter_manual_only = 1
+let g:rooter_cd_cmd = 'lcd'
+let g:rooter_silent_chdir = 1
+
+
+" ----------------------------------------------------------------------
+"   lambdalisue/fern.vim
+" ----------------------------------------------------------------------
+let g:fern#default_hidden = 1
+let g:fern#drawer_width = 40
+let g:fern#drawer_hover_popup_delay = 100
+let g:fern#scheme#file#show_absolute_path_on_root_label = 1
+
+let g:fern#disable_default_mappings = 1
+
+let g:fern#renderer#default#leading = '  '
+let g:fern#renderer#default#leaf_symbol = '  '  " NOTE: non-breaking space!
+let g:fern#renderer#default#collapsed_symbol = '▸ '
+let g:fern#renderer#default#expanded_symbol = '▾ '
+
+let g:fern#renderer = "nerdfont"
+let g:fern#renderer#nerdfont#indent_markers = 0
+let g:fern#renderer#nerdfont#leading = '  '
+
+" let g:fern#renderer = "devicons"
+let g:fern#renderer#devicons#leading = '  '
+
+" let g:fern#renderer = 'lsflavor'
+
+" let g:fern#renderer = "plain"
+
+function! s:init_fern() abort
+  " Write custom code here
+  setlocal nonumber
+  setlocal signcolumn=auto
+endfunction
+
+augroup my-fern
+  autocmd! *
+  autocmd FileType fern call s:init_fern()
+augroup END
+
+
 " ----------------------------------------------------------------------
 "   scrooloose/nerdtree
 " ----------------------------------------------------------------------
@@ -65,7 +112,7 @@ let g:NERDTreeSyntaxEnabledExactMatches = [
 " let g:NERDTreeExactMatchHighlightFullName = 1
 " let g:NERDTreePatternMatchHighlightFullName = 1
 
-" Highlight full name (not only icons) of folderx
+" Highlight full name (not only icons) of folders
 let g:NERDTreeHighlightFolders = 1          " enables folder icon highlighting using exact match
 let g:NERDTreeHighlightFoldersFullName = 1  " highlights the folder name
 
@@ -179,6 +226,71 @@ let g:ctrlsf_populate_qflist = 1
 let g:ctrlsf_extra_backend_args = {
     \ 'rg': '--hidden'
     \ }
+
+
+" ----------------------------------------------------------------------
+"   junegunn/fzf
+"   junegunn/fzf.vim
+" ----------------------------------------------------------------------
+let g:fzf_command_prefix = 'Fzf'
+
+let g:fzf_layout = { 'down': '11' }
+" let g:fzf_preview_window = []
+let g:fzf_preview_window = ['hidden,border-none,right,50%', 'ctrl-/']
+
+let g:fzf_colors = {
+    \ 'fg':      ['fg', 'Normal'],
+    \ 'bg':      ['bg', 'Normal'],
+    \ 'hl':      ['fg', 'Identifier'],
+    \ 'fg+':     ['fg', 'FzfCurrentItem'],
+    \ 'bg+':     ['bg', 'FzfCurrentItem'],
+    \ 'hl+':     ['fg', 'Identifier'],
+    \ 'info':    ['fg', 'Comment'],
+    \ 'separator':  ['fg', 'FzfSeparator'],
+    \ 'border':  ['fg', 'Ignore'],
+    \ 'prompt':  ['fg', 'Conditional'],
+    \ 'query':   ['fg', 'Normal'],
+    \ 'pointer': ['fg', 'Comment'],
+    \ 'marker':  ['fg', 'Constant'],
+    \ 'spinner': ['fg', 'Label'],
+    \ 'header':  ['fg', 'Comment'],
+    \}
+
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+" NOTE: C-S may clash with toggle-sort
+let g:fzf_action = {
+    \ 'ctrl-q': function('s:build_quickfix_list'),
+    \ 'ctrl-t': 'tab split',
+    \ 'ctrl-s': 'split',
+    \ 'ctrl-v': 'vsplit',
+    \}
+
+function! s:fzf_statusline()
+  " Override statusline as you like
+  setlocal statusline=%#StatusLine#\ >\ fz%#StatusLineNC#f
+endfunction
+
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
+
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+" Fzf commands
+command! -bang FzfProjectsFiles call fzf#vim#files('~/projekty', <bang>0)
+
+
+" ----------------------------------------------------------------------
+"   pbogut/fzf-mru.vim
+" ----------------------------------------------------------------------
+let g:fzf_mru_relative = 1
+let g:fzf_mru_no_sort = 1
+let g:fzf_mru_exclude_current_file = 0
 
 
 " ----------------------------------------------------------------------
@@ -335,8 +447,16 @@ function WikiCreatePage(name) abort
 endfunc
 
 
-" TODO: Update TOC on save (if exists!)
-" See: https://github.com/mzlogin/vim-markdown-toc/blob/master/ftplugin/markdown.vim
+" ----------------------------------------------------------------------
+"   mzlogin/vim-markdown-toc
+" ----------------------------------------------------------------------
+let g:vmt_auto_update_on_save = 1
+
+let g:vmt_fence_text = 'toc'
+let g:vmt_fence_closing_text = '/toc'
+let g:vmt_fence_hidden_markdown_style = 'GFM'
+
+let g:vmt_list_indent_text = '  '
 
 
 " ----------------------------------------------------------------------

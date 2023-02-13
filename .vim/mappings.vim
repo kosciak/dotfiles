@@ -199,6 +199,7 @@ map <Plug> <Plug>Markdown_EditUrlUnderCursor
 
 " ----------------------------------------------------------------------
 "   lervag/wiki.vim
+"   mzlogin/vim-markdown-toc
 " ----------------------------------------------------------------------
 nnoremap <silent> <Plug>WikiLinkToggleMapping :WikiLinkToggle<CR>
             \:call repeat#set("\<Plug>WikiLinkToggleMapping")<CR>
@@ -211,15 +212,17 @@ let g:wiki_mappings_local = {
       \ '<plug>(wiki-link-follow-split)': '<leader>ws',
       \ '<plug>(wiki-link-follow-vsplit)': '<leader>wv',
       \ 'x_<plug>(wiki-link-toggle-visual)': 'gl',
-      \ '<plug>(wiki-link-toggle)': '<nop>',
-      \ '<plug>(wiki-tag-list)': '<nop>',
-      \ '<plug>(wiki-tag-search)': '<nop>',
-      \ '<plug>(wiki-tag-reload)': '<nop>',
-      \ '<plug>(wiki-tag-rename)': '<nop>',
-      \ '<plug>(wiki-link-show)': '<nop>',
-      \ '<plug>(wiki-link-extract-header)': '<nop>',
-      \ '<plug>(wiki-export)': '<nop>',
-      \ 'x_<plug>(wiki-export)': '<nop>',
+      \ '<plug>(wiki-link-toggle)': '',
+      \ '<plug>(wiki-page-toc)': '',
+      \ '<plug>(wiki-page-toc-local)': '',
+      \ '<plug>(wiki-tag-list)': '',
+      \ '<plug>(wiki-tag-search)': '',
+      \ '<plug>(wiki-tag-reload)': '',
+      \ '<plug>(wiki-tag-rename)': '',
+      \ '<plug>(wiki-link-show)': '',
+      \ '<plug>(wiki-link-extract-header)': '',
+      \ '<plug>(wiki-export)': '',
+      \ 'x_<plug>(wiki-export)': '',
       \}
 
 augroup wikiLocalMappings
@@ -230,6 +233,10 @@ augroup wikiLocalMappings
         \ nnoremap <buffer> <leader>wl <Plug>WikiLinkToggleMapping
   autocmd User WikiBufferInitialized
         \ nnoremap <buffer> <leader>wf <Plug>(wiki-link-follow)
+  autocmd User WikiBufferInitialized
+        \ nnoremap <buffer> <leader>wt :GenTocGFM<CR>
+  autocmd User WikiBufferInitialized
+        \ nnoremap <buffer> <leader>fh <plug>(wiki-fzf-toc)
 augroup END
 
 nnoremap <leader>ow :execute 'CtrlP ' .. wiki#get_root()<CR>
@@ -247,6 +254,8 @@ nnoremap <leader>oo :CtrlP<CR>
 nnoremap <leader>oc :CtrlPCurFile<CR>
 nnoremap <leader>od :CtrlPCurWD<CR>
 nnoremap <leader>or :CtrlPRoot<CR>
+nnoremap <leader>op :CtrlP ~/projekty<CR>
+
 nnoremap <leader>om :CtrlPMRU<CR>
 
 nnoremap <leader>oa :CtrlPBufTag<CR>
@@ -264,6 +273,33 @@ nnoremap <leader>ob :CtrlPBuffer<CR>
 "   dyng/ctrlsf.vim
 " ----------------------------------------------------------------------
 nmap <leader>/ <Plug>CtrlSFPrompt
+
+
+" ----------------------------------------------------------------------
+"   dyng/ctrlsf.vim
+" ----------------------------------------------------------------------
+nnoremap <leader>ff :FzfFiles<CR>
+nnoremap <leader>fc :execute 'FzfFiles ' .. expand('%:h')<CR>
+nnoremap <leader>fd :execute 'FzfFiles ' .. fnamemodify(getcwd(), ':~')<CR>
+" TODO: fr - project root
+nnoremap <leader>fr :FzfGFiles<CR>
+nnoremap <leader>fp :FzfProjectsFiles<CR>
+
+nnoremap <leader>fm :FZFMru<CR>
+
+nnoremap <leader>fw <plug>(wiki-fzf-pages)
+
+nnoremap <leader>fa :FzfBTags<CR>
+nnoremap <leader>fA :FzfTags<CR>
+
+nnoremap <leader>fl :FzfBLines<CR>
+nnoremap <leader>fL :FzfLines<CR>
+
+nnoremap <leader>fH :FzfHelptags<CR>
+
+nnoremap <leader>fb :FzfBuffers<CR>
+
+nnoremap <leader>fS :FzfGFiles?<CR>
 
 
 " ----------------------------------------------------------------------
@@ -306,3 +342,5 @@ let g:ycm_key_invoke_completion = '<C-@>'
 
 nmap <leader>D <plug>(YCMHover)
 
+
+" nnoremap <silent> <leader>f :Fern . -drawer -reveal=% -toggle<CR>

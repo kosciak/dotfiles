@@ -16,6 +16,10 @@
 hi def link StatusLineNormal   StatusLineNC
 
 
+hi FzfCurrentItem   cterm=NONE  ctermfg=0   ctermbg=254
+hi FzfSeparator     cterm=NONE  ctermfg=7
+
+
 " Cursor line, number column, sign column, fold column
 hi CursorColumn                           ctermbg=254
 hi CursorLine                 cterm=NONE  ctermbg=254
