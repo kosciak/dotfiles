@@ -42,6 +42,13 @@
             ".mostrc"
         ]
     },
+    "bat": {
+        "tags": ["user"],
+        "reference": "https://github.com/sharkdp/bat",
+        "symlink": [
+            ".config/bat/config"
+        ]
+    },
     "screen": {
         "tags": ["user"],
         "reference": "https://wiki.archlinux.org/title/GNU_Screen",
