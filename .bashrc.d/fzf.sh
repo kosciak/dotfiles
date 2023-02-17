@@ -5,7 +5,7 @@ export FZF_DEFAULT_OPTS=' --multi --filepath-word --info=inline'
 export FZF_DEFAULT_OPTS+=' --prompt=\>\>\>\  --marker=+'
 export FZF_DEFAULT_OPTS+=" --bind='ctrl-w:backward-kill-word'"
 export FZF_DEFAULT_OPTS+=" --bind='ctrl-a:toggle-all'"
-export FZF_DEFAULT_OPTS+=" --bind='ctrl-s:toggle-sort'"
+export FZF_DEFAULT_OPTS+=" --bind='ctrl-o:toggle-sort'"
 export FZF_DEFAULT_OPTS+=" --bind='ctrl-/:toggle-preview'"
 export FZF_DEFAULT_OPTS+=' --color=light,hl:6,fg+:regular,bg+:254,hl+:6,'
 export FZF_DEFAULT_OPTS+='prompt:regular:130,query:regular,info:4,separator:7,'

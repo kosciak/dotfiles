@@ -41,14 +41,14 @@ let g:fern#renderer#default#leaf_symbol = '  '  " NOTE: non-breaking space!
 let g:fern#renderer#default#collapsed_symbol = '▸ '
 let g:fern#renderer#default#expanded_symbol = '▾ '
 
-let g:fern#renderer = "nerdfont"
+" let g:fern#renderer = "nerdfont"
 let g:fern#renderer#nerdfont#indent_markers = 0
 let g:fern#renderer#nerdfont#leading = '  '
 
 " let g:fern#renderer = "devicons"
 let g:fern#renderer#devicons#leading = '  '
 
-" let g:fern#renderer = 'lsflavor'
+let g:fern#renderer = 'lsflavor'
 
 " let g:fern#renderer = "plain"
 
@@ -282,7 +282,20 @@ autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " Fzf commands
-command! -bang FzfProjectsFiles call fzf#vim#files('~/projekty', <bang>0)
+" See: https://vi.stackexchange.com/questions/20842/how-can-i-merge-two-dictionaries-in-vim
+" TODO: declare commands using g:fzf_command_prefix
+command! -bang FzfDirFiles
+  \ call fzf#vim#files(fnamemodify(dirs#Dir(), ':~:.'), fzf#vim#with_preview(), <bang>0)
+command! -bang FzfCWDFiles
+  \ call fzf#vim#files(fnamemodify(dirs#CWD(), ':~'), fzf#vim#with_preview(), <bang>0)
+command! -bang FzfLocalCWDFiles
+  \ call fzf#vim#files(fnamemodify(dirs#LocalCWD(), ':~'), fzf#vim#with_preview(), <bang>0)
+command! -bang FzfGlobalCWDFiles
+  \ call fzf#vim#files(fnamemodify(dirs#GlobalCWD(), ':~'), fzf#vim#with_preview(), <bang>0)
+command! -bang FzfRootDirFiles
+  \ call fzf#vim#files(fnamemodify(dirs#RootDir(), ':~'), fzf#vim#with_preview(), <bang>0)
+command! -bang FzfProjectsDirFiles
+  \ call fzf#vim#files(fnamemodify(dirs#ProjectsDir(), ':~'), fzf#vim#with_preview(), <bang>0)
 
 
 " ----------------------------------------------------------------------
@@ -385,19 +398,17 @@ let g:signify_disable_by_default = 1
 let g:signify_number_highlight = 0
 let g:signify_line_highlight = 0
 
+function! s:show_current_hunk() abort
+  let h = sy#util#get_hunk_stats()
+  if !empty(h)
+    echo printf('[Hunk %d/%d]', h.current_hunk, h.total_hunks)
+  endif
+endfunction
+
 augroup signifyHunks
   au!
-
-  function! s:show_current_hunk() abort
-    let h = sy#util#get_hunk_stats()
-    if !empty(h)
-      echo printf('[Hunk %d/%d]', h.current_hunk, h.total_hunks)
-    endif
-  endfunction
-
   " NOTE: Not sure why won't work when in .vim/autoload/signify.vim
   autocmd User SignifyHunk call s:show_current_hunk()
-
 augroup END
 
 
@@ -428,7 +439,8 @@ let g:wiki_link_toggle_on_follow = 0
 " Write before navigating from file
 let g:wiki_write_on_nav = 1
 
-let g:wiki_toc_title = 'TOC:'	  " '' special characters break pandoc export
+" NOTE: special characters like '' break pandoc export
+let g:wiki_toc_title = 'TOC:'
 
 " Let's make sure filenames are consistent
 let g:wiki_map_text_to_link = 'WikiTextToLink'
@@ -450,7 +462,7 @@ endfunc
 " ----------------------------------------------------------------------
 "   mzlogin/vim-markdown-toc
 " ----------------------------------------------------------------------
-let g:vmt_auto_update_on_save = 1
+let g:vmt_auto_update_on_save = 0
 
 let g:vmt_fence_text = 'toc'
 let g:vmt_fence_closing_text = '/toc'
@@ -487,7 +499,7 @@ let g:limelight_conceal_ctermfg = 'gray'
 " let g:limelight_conceal_ctermfg = 240
 
 augroup GoyoLimelightIntegration
-  au!
+  au! *
   autocmd! User GoyoEnter Limelight
   autocmd! User GoyoLeave Limelight!
 augroup END

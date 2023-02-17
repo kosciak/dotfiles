@@ -31,7 +31,7 @@ endfunc
 
 
 function! sline#GetPath(...) abort
-  let path = dirs#RelativeToCWD(dirs#Dir())
+  let path = dirs#RelativeTo(dirs#Dir(), dirs#CWD())
 
   if strlen(path) == 0
     return ''

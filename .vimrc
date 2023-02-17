@@ -222,10 +222,8 @@ call s:sourceHighlights()
 
 augroup ColorSchemeChange
   au!
-
   " Source highlights after changing colorscheme
   autocmd ColorScheme * call s:sourceHighlights()
-
 augroup END
 
 

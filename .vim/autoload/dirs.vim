@@ -22,16 +22,6 @@ function! dirs#RelativeTo(path, dir) abort
 endfunc
 
 
-function! dirs#RelativeToCWD(path) abort
-  return dirs#RelativeTo(a:path, getcwd())
-endfunc
-
-
-function! dirs#RelativeToRoot(path) abort
-  return dirs#RelativeTo(a:path, dirs#RootDir())
-endfunc
-
-
 function! dirs#Dir(...) abort
   let path = a:0 > 0 ? fnamemodify(a:1, ':p') : expand('%:p')
   if isdirectory(path)
@@ -42,14 +32,29 @@ function! dirs#Dir(...) abort
 endfunc
 
 
-function! dirs#CWD() abort
+function! dirs#LocalCWD() abort
+  " working directory for current window
   return getcwd()
+endfunc
+
+
+function! dirs#CWD() abort
+  " NOTE: By default use working directory for current tab
+  return getcwd(-1, 0)
+endfunc
+
+
+function! dirs#GlobalCWD() abort
+  " global working directory
+  return getcwd(-1)
 endfunc
 
 
 function! dirs#RootDir() abort
   if exists('*FindRootDirectory')
     let dir = FindRootDirectory()
+  elseif exists('*projectroot#guess')
+    let dir = projectroot#guess()
   else
     let dir = ''
   endif

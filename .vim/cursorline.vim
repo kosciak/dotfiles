@@ -36,8 +36,6 @@ endfunc
 
 augroup SpecialCursorlineopt
   au!
-
   autocmd FileType * call s:setCursorlineopt()
-
 augroup END
 

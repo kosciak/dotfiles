@@ -96,6 +96,7 @@ nnoremap <silent> <leader><C-I> <Plug>(buf-surf-forward)
 " ----------------------------------------------------------------------
 "   scrooloose/nerdtree
 " ----------------------------------------------------------------------
+" TODO: File Explorer mappings need some leader key!
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <leader>r :NERDTreeVCS<CR>
 nnoremap <leader>d :NERDTreeCWD<CR>
@@ -142,7 +143,7 @@ nnoremap <leader>~ :ScratchPreview<CR>
 "   AndrewRadev/sideways.vim
 "   machakann/vim-swap
 " ----------------------------------------------------------------------
-" NOTE: Sideways is more versatile, but Swap's interactive mode is so good! 
+" NOTE: Sideways is more versatile, but Swap's interactive mode is so good!
 let g:swap_no_default_key_mappings = 1
 
 nmap gsh <Plug>SidewaysLeft
@@ -225,23 +226,23 @@ let g:wiki_mappings_local = {
       \ 'x_<plug>(wiki-export)': '',
       \}
 
+function! s:WikiBufferInit() abort
+  nnoremap <buffer> <leader>wh <Plug>WikiLinkExtractHeaderMapping
+  nnoremap <buffer> <leader>wl <Plug>WikiLinkToggleMapping
+  nnoremap <buffer> <leader>wf <Plug>(wiki-link-follow)
+  nnoremap <buffer> <leader>wT :GenTocGFM<CR>
+  nnoremap <buffer> <leader>wt :UpdateToc<CR>
+  nnoremap <buffer> <leader>fh <plug>(wiki-fzf-toc)
+endfunc
+
 augroup wikiLocalMappings
   au!
-  autocmd User WikiBufferInitialized
-        \ nnoremap <buffer> <leader>wh <Plug>WikiLinkExtractHeaderMapping
-  autocmd User WikiBufferInitialized
-        \ nnoremap <buffer> <leader>wl <Plug>WikiLinkToggleMapping
-  autocmd User WikiBufferInitialized
-        \ nnoremap <buffer> <leader>wf <Plug>(wiki-link-follow)
-  autocmd User WikiBufferInitialized
-        \ nnoremap <buffer> <leader>wt :GenTocGFM<CR>
-  autocmd User WikiBufferInitialized
-        \ nnoremap <buffer> <leader>fh <plug>(wiki-fzf-toc)
+  autocmd User WikiBufferInitialized call s:WikiBufferInit()
 augroup END
 
-nnoremap <leader>ow :execute 'CtrlP ' .. wiki#get_root()<CR>
-nnoremap <leader>wo :execute 'CtrlP ' .. wiki#get_root()<CR>
-nnoremap <leader>w<C-P> :execute 'CtrlP ' .. wiki#get_root()<CR>
+nnoremap <leader>ow :execute 'CtrlP ' .. dirs#WikiRootDir()<CR>
+nnoremap <leader>wo :execute 'CtrlP ' .. dirs#WikiRootDir()<CR>
+nnoremap <leader>w<C-P> :execute 'CtrlP ' .. dirs#WikiRootDir()<CR>
 
 
 " ----------------------------------------------------------------------
@@ -250,8 +251,7 @@ nnoremap <leader>w<C-P> :execute 'CtrlP ' .. wiki#get_root()<CR>
 " TODO: Consider using <leader>f (find) instead of <leader>o (open), although
 "       it might be better to use <leader>f for searching with ctrlsf
 nnoremap <leader>o :CtrlP<CR>
-nnoremap <leader>oo :CtrlP<CR>
-nnoremap <leader>oc :CtrlPCurFile<CR>
+nnoremap <leader>of :CtrlPCurFile<CR>
 nnoremap <leader>od :CtrlPCurWD<CR>
 nnoremap <leader>or :CtrlPRoot<CR>
 nnoremap <leader>op :CtrlP ~/projekty<CR>
@@ -265,8 +265,6 @@ nnoremap <leader>ol :CtrlPLine %<CR>
 nnoremap <leader>oL :CtrlPLine<CR>
 
 nnoremap <leader>ob :CtrlPBuffer<CR>
-" nnoremap <leader>bo :CtrlPBuffer<CR>
-" nnoremap <leader>b<C-P> :CtrlPBuffer<CR>
 
 
 " ----------------------------------------------------------------------
@@ -276,18 +274,18 @@ nmap <leader>/ <Plug>CtrlSFPrompt
 
 
 " ----------------------------------------------------------------------
-"   dyng/ctrlsf.vim
+"   junegunn/fzf
+"   junegunn/fzf.vim
 " ----------------------------------------------------------------------
-nnoremap <leader>ff :FzfFiles<CR>
-nnoremap <leader>fc :execute 'FzfFiles ' .. expand('%:h')<CR>
-nnoremap <leader>fd :execute 'FzfFiles ' .. fnamemodify(getcwd(), ':~')<CR>
-" TODO: fr - project root
-nnoremap <leader>fr :FzfGFiles<CR>
-nnoremap <leader>fp :FzfProjectsFiles<CR>
+nnoremap <leader>F :FZF<space>
+nnoremap <leader>fF :FZF<space>
+
+nnoremap <leader>ff :FzfDirFiles<CR>
+nnoremap <leader>fd :FzfCWDFiles<CR>
+nnoremap <leader>fr :FzfRootDirFiles<CR>
+nnoremap <leader>fp :FzfProjectsDirFiles<CR>
 
 nnoremap <leader>fm :FZFMru<CR>
-
-nnoremap <leader>fw <plug>(wiki-fzf-pages)
 
 nnoremap <leader>fa :FzfBTags<CR>
 nnoremap <leader>fA :FzfTags<CR>
@@ -295,9 +293,14 @@ nnoremap <leader>fA :FzfTags<CR>
 nnoremap <leader>fl :FzfBLines<CR>
 nnoremap <leader>fL :FzfLines<CR>
 
+nnoremap <leader>fb :FzfBuffers<CR>
+
+nnoremap <leader>f/ :FzfHistory/<CR>
+nnoremap <leader>f: :FzfHistory:<CR>
+
 nnoremap <leader>fH :FzfHelptags<CR>
 
-nnoremap <leader>fb :FzfBuffers<CR>
+nnoremap <leader>fw <plug>(wiki-fzf-pages)
 
 nnoremap <leader>fS :FzfGFiles?<CR>
 
@@ -319,7 +322,7 @@ nnoremap <leader>gd :Gvdiffsplit<CR>
 nnoremap <silent> <leader>gc :SignifyToggle<CR>
 nnoremap <silent> <leader>gC :SignifyToggleHighlight<CR>
 
-nnoremap <silent> <leader>? :SignifyHunkDiff<CR>
+nnoremap <silent> <leader>' :SignifyHunkDiff<CR>
 
 " nmap ]c <Plug>(GitGutterNextHunk)
 " nmap [c <Plug>(GitGutterPrevHunk)
