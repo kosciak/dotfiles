@@ -64,17 +64,17 @@ let &t_RS = "\eP$q q\e\\"   " request terminal cursor shape
 " Focus tracking
 let &t_fe = "\e[?1004h"
 let &t_fd = "\e[?1004l"
-" execute "set <FocusGained>=\<Esc>[I"
-" execute "set <FocusLost>=\<Esc>[O"
+execute "set <FocusGained>=\<Esc>[I"
+execute "set <FocusLost>=\<Esc>[O"
 
 " Window title
 let &t_ST = "\e[22;2t"      " Set window title
 let &t_RT = "\e[23;2t"      " Restore window title
 
-" let &t_vi = "\e[?25l" " cursor invisible
+let &t_vi = "\e[?25l" " cursor invisible
 " let &t_ve = "\e[?12l\e[?25h" " cursor visible
 let &t_ve = "\e[?25h" " cursor visible
-" let &t_vs = "\e[?12h" " cursor very visible (blink)
+let &t_vs = "\e[?12h" " cursor very visible (blink)
 
 " Cursor shapes per mode
 " See: https://vim.fandom.com/wiki/Change_cursor_shape_in_different_modes
@@ -84,10 +84,13 @@ let &t_ve = "\e[?25h" " cursor visible
 let &t_SI = "\e[5 q" " Start INSERT mode
 let &t_SR = "\e[3 q" " Start REPLACE mode
 let &t_EI = "\e[1 q" " End INSERT/REPLACE -> NORMAL mode
+if &term =~ 'alacritty'
+  let &t_EI ..= &t_ve
+endif
 
 " Enter and exit termcap mode
 " t_te should resets cursor back to default on VIM exit
-let &t_ti ..= &t_EI
+let &t_ti .= &t_EI
 let &t_te ..= "\e[0 q"
 
 " For GUI check :help guicursor

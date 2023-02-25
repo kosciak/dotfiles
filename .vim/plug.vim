@@ -29,6 +29,8 @@ call plug#begin()
   " Filesystem
     Plug 'duggiefresh/vim-easydir'    " Create directories on :write
 
+    Plug 'tpope/vim-eunuch'           " Wraps some shell commands like mv, cp, rm
+
     Plug 'airblade/vim-rooter'        " Find project's root directory
 
   " Editing
@@ -51,7 +53,11 @@ call plug#begin()
     " Plug 'rhysd/clever-f.vim'         " Better f, F, t, T repeating
 
   " Language packs - syntax, indentation, highlighting
-    let g:polyglot_disabled = ['markdown']  " NOTE: MUST be declared BEFORE loading plugin!
+    " NOTE: MUST be declared BEFORE loading plugin!
+    let g:polyglot_disabled = [
+          \ 'markdown',
+          \ 'requirements',
+          \]
     " let g:polyglot_disabled = ['autoindent']  " Disable indentation heuristics
     Plug 'sheerun/vim-polyglot'           " Collection of language packs
       " Provided by polyglot (install separately if you need help file):
@@ -59,10 +65,10 @@ call plug#begin()
       " Plug 'pangloss/vim-javascript'
       " Plug 'vim-python/python-syntax'
       " Plug 'Vimjas/vim-python-pep8-indent'
+      " Plug 'tpope/vim-sleuth'
+      Plug 'raimon49/requirements.txt.vim'  " filetype not detected correctly
 
     Plug 'chikamichi/mediawiki.vim'
-
-    Plug 'raimon49/requirements.txt.vim'  " Syntax for requirements.txt files
 
     Plug 'tmhedberg/simpylfold'           " Python folding rules
     Plug 'jeetsukumaran/vim-pythonsense'  " Python text objects and motions
