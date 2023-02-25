@@ -2,7 +2,7 @@ chip "nct6798-isa-0290"
   label fan1 "CHA1 fan"
   label fan2 "CPU fan"
   label fan3 "CHA2 fan"
-  ignore fan4
+  label fan4 "CHA3 fan"
   ignore fan5
   ignore fan6
   ignore fan7
