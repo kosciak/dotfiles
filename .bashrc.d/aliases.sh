@@ -9,22 +9,24 @@ alias ll.='ll -d .*'
 
 # exa
 if [ -f "/usr/bin/exa" ]; then
+    # NOTE: eza is fork of exa that is still maintained
     # alias exa='exa --group --git --icons --classify'
     alias exa='exa --group --icons --classify'
+    alias eza='eza --group --icons --classify'
 
     # NOTE: Keep original ls intact for backward compatibility
-    # alias ls='exa'
-    alias ll='exa -l --group-directories-first'
-    alias l.='exa -d --group-directories-first .*'
+    # alias ls='eza'
+    alias ll='eza -l --group-directories-first'
+    alias l.='eza -d --group-directories-first .*'
 
-    # NOTE: exa by default don't support -A and don't show '.' and '..' dirs
+    # NOTE: exa/eza by default don't support -A and don't show '.' and '..' dirs
     #       Use -aa to show them
-    alias la='exa -a'
-    alias lla='exa -la --group-directories-first'
+    alias la='eza -a'
+    alias lla='eza -la --group-directories-first'
 
     # shorthand for: ls -lt
-    alias lt='exa -l --sort new --reverse'
-    alias lta='exa -la --sort new --reverse'
+    alias lt='eza -l --sort new --reverse'
+    alias lta='eza -la --sort new --reverse'
 fi
 
 
