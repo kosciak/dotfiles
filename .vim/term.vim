@@ -72,7 +72,6 @@ let &t_ST = "\e[22;2t"      " Set window title
 let &t_RT = "\e[23;2t"      " Restore window title
 
 let &t_vi = "\e[?25l" " cursor invisible
-" let &t_ve = "\e[?12l\e[?25h" " cursor visible
 let &t_ve = "\e[?25h" " cursor visible
 let &t_vs = "\e[?12h" " cursor very visible (blink)
 
@@ -85,6 +84,8 @@ let &t_SI = "\e[5 q" " Start INSERT mode
 let &t_SR = "\e[3 q" " Start REPLACE mode
 let &t_EI = "\e[1 q" " End INSERT/REPLACE -> NORMAL mode
 if &term =~ 'alacritty'
+  " NOTE: Seem to work only with cursor.style.blinking=Always in Alacritty
+  let &t_ve = "\e[?12l\e[?25h" " cursor visible
   let &t_EI ..= &t_ve
 endif
 
