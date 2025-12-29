@@ -465,12 +465,12 @@ cursor:
   #vi_mode_style: None
 
   # Cursor blinking interval in milliseconds.
-  blink_interval: 750
+  blink_interval: 700
 
   # Time after which cursor stops blinking, in seconds.
   #
   # Specifying '0' will disable timeout for blinking.
-  blink_timeout: 0
+  blink_timeout: 13
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
