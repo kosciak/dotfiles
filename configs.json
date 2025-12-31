@@ -35,6 +35,13 @@
             ".dircolors"
         ]
     },
+    "tealdeer": {
+        "tags": ["user"],
+        "reference": "https://github.com/sharkdp/bat",
+        "symlink": [
+            ".config/tealdeer/config.toml"
+        ]
+    },
     "most": {
         "tags": ["user"],
         "reference": "https://github.com/FauxFaux/most-pager",

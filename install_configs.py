@@ -105,6 +105,10 @@ def check_src_file(src):
 
 
 def check_dst_file(src, dst, mode):
+    if not dst.parent.exists():
+        log.info('Creating: %s', dst.parent)
+        dst.mkdir(parents=True, exist_ok=True)
+
     if dst.exists():
         if mode == Mode.SYMLINK and dst.is_symlink() and dst.readlink() == src:
             log.info('%8s: %s -> %s', 'OK', dst, src)

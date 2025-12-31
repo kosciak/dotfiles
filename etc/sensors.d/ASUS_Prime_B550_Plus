@@ -10,6 +10,9 @@ chip "nct6798-isa-0290"
 chip "amdgpu-pci-0a00"
   label fan1 "GPU fan"
 
+chip "amdgpu-pci-0b00"
+  label fan1 "GPU fan"
+
 chip "iwlwifi_1-virtual-0"
   label temp1 "WiFi temp"
 

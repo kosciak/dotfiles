@@ -1,0 +1,67 @@
+Packages:
+  - vim vimx
+  - neovim
+  - cmake gcc-c++ make python3-devel
+  - breezy
+  - tmux screen
+  - npm
+  - fzf
+  - ripgrep
+  - fd-find
+  - htop btop iftop nvtop
+  - procs
+  - lshw
+  - tealdeer
+  - dust duf dua
+  - exiftool
+  - fastfetch
+  - lm_sensors hddtemp
+  - unrar unzip p7zip p7zip-plugins
+  - bluez python3-bluez bluez-libs
+  - steam
+Apps:
+  - kitty
+  - alacritty
+  # - foot
+  - Dostrajanie
+  - Ustawienia GDM
+  - Edytor dconf
+  - Menadżer rozszerzeń (Extensions)
+  - Oprogramowanie sprzętowe (Firmware)
+  - Solaar
+  - Zasoby
+  - Zasoby komputera
+  - GParted
+  - File Roller
+  - Deluge
+  - Fragments
+  - KeePassXC
+  - Secrets # from Flathub
+  - Authenticator
+  - Apostrof # from Flathub
+  - Foliate
+  - Dino
+  - GnuCash
+  - Meld
+  - DB Browser for SQLite
+  - Inkscape
+  - GIMP
+  - Krita
+  - Eyedropper
+  - Upscaler
+  - VLC
+  - Clapper
+  - Lorem
+  - Peek
+  - Play Timer
+  - GPXSee
+  # - Screenkey # OBSOLETE on Wayland?
+  - 
+COPR:
+  - eza
+Downloaded:
+  - Google Chrome
+  - Unified Remote
+  - TODO: Deco v01 02
+
+
