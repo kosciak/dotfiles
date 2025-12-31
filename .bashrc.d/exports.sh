@@ -11,6 +11,11 @@ export HISTCONTROL=ignorespace:ignoredups:erasedups
 export HISTSIZE=10000
 
 
+## NerdFonts support in less
+# export LESSUTFCHARDEF=e000-f8ff:p,f0001-fffff:p
+export LESSUTFCHARDEF=e000-e09f:w,e0a0-e0bf:p,e0c0-f8ff:w,f0001-fffff:w
+
+
 ## Setup XDG_* directories
 #  See: https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 if [ -z "$XDG_CONFIG_HOME" ] ; then

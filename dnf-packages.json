@@ -67,15 +67,16 @@
     "build": [
         "@development-tools",
         "make", "automake", "cmake",
-        "gcc-c++",
+        "gcc", "gcc-c++",
         "python3-devel",
         "freetype2", "fontconfig",
         "libxcb", "libxkbcommon",
         "boost-devel"
     ],
-    "zip": [
+    "archive": [
         "unzip",
-        "p7zip", "p7zip-plugins"
+        "p7zip", "p7zip-plugins",
+        "unrar"
     ],
     "cli_tools": [
         "trash-cli",
@@ -90,6 +91,7 @@
         "fd-find"
     ],
     "misc": [
+        "tealdeer",
         "tldr"
     ],
     "fetch": [

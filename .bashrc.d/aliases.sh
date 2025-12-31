@@ -9,10 +9,14 @@ alias ll.='ll -d .*'
 
 # exa
 if [ -f "/usr/bin/exa" ]; then
-    # NOTE: eza is fork of exa that is still maintained
     # alias exa='exa --group --git --icons --classify'
     alias exa='exa --group --icons --classify'
+fi
+if [ -f "/usr/bin/eza" ]; then
+    # NOTE: eza is a fork of exa that is still maintained
     alias eza='eza --group --icons --classify'
+
+    # Consider: https://github.com/eza-community/eza/issues/980#issuecomment-2499761779
 
     # NOTE: Keep original ls intact for backward compatibility
     # alias ls='eza'
@@ -25,8 +29,8 @@ if [ -f "/usr/bin/exa" ]; then
     alias lla='eza -la --group-directories-first'
 
     # shorthand for: ls -lt
-    alias lt='eza -l --sort new --reverse'
-    alias lta='eza -la --sort new --reverse'
+    alias lt='eza -l --group-directories-first --sort new --reverse'
+    alias lta='eza -la --group-directories-first --sort new --reverse'
 fi
 
 
