@@ -56,7 +56,9 @@ Apps:
   - Play Timer
   - GPXSee
   # - Screenkey # OBSOLETE on Wayland?
-  - 
+TODO:
+  - Koleje
+  - Turn On
 COPR:
   - eza
 Downloaded:
