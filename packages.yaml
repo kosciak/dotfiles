@@ -1,10 +1,11 @@
 Packages:
+  - foot
   - vim vimx
   - neovim
   - cmake gcc-c++ make python3-devel
-  - breezy
+  - breezy git
   - tmux screen
-  - npm
+  - npm nodejs
   - fzf
   - ripgrep
   - fd-find
@@ -18,11 +19,12 @@ Packages:
   - lm_sensors hddtemp
   - unrar unzip p7zip p7zip-plugins
   - bluez python3-bluez bluez-libs
+  - testdisk
   - steam
+  - tinc
 Apps:
   - kitty
   - alacritty
-  # - foot
   - Dostrajanie
   - Ustawienia GDM
   - Edytor dconf
@@ -44,26 +46,37 @@ Apps:
   - GnuCash
   - Meld
   - DB Browser for SQLite
-  - Inkscape
   - GIMP
+  - Inkscape
   - Krita
   - Eyedropper
+  - Cherrypick
   - Upscaler
+  - Peek
   - VLC
   - Clapper
   - Lorem
-  - Peek
+  - Embellish
   - Play Timer
   - GPXSee
-  # - Screenkey # OBSOLETE on Wayland?
-TODO:
-  - Koleje
   - Turn On
+  - Koleje
+  - Discord
+  - Spotify
+TODO:
+  - tailscale
+  - Thunderbird
+  - Darktable / RawTherapee
+  - Audacity
+  - OBS Studio
+  - Synology Drive
+  - Dropbox
+  # - Screenkey # OBSOLETE on Wayland?
 COPR:
   - eza
 Downloaded:
   - Google Chrome
   - Unified Remote
-  - TODO: Deco v01 02
+  - XPPen Deco v01 02
 
 

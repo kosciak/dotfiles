@@ -1,7 +1,7 @@
 
 # Virtualenvwrapper settings and startup
 # TODO: Change to WORKON_HOME to ~/.cache/venvs
-export WORKON_HOME=$HOME/projekty/.virtualenvs
+export WORKON_HOME=$HOME/.cache/venvs
 export PROJECT_HOME=$HOME/projekty
 
 
