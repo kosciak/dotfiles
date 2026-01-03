@@ -92,6 +92,13 @@
             ".config/alacritty"
         ]
     },
+    "krita": {
+        "tags": ["user"],
+        "reference": "https://docs.krita.org/en/KritaFAQ.html#where-are-the-configuration-files-stored",
+        "symlink": [
+            ".config/kritarc"
+        ]
+    },
 
     "X": {
         "tags": ["obsolete"],
