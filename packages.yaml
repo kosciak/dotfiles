@@ -1,71 +1,127 @@
-Packages:
-  - foot
-  - vim vimx
-  - vim-default-editor
-  - neovim
-  - cmake gcc-c++ make python3-devel
-  - breezy git
-  - tmux screen
-  - npm nodejs
-  - fzf
-  - ripgrep
-  - fd-find
-  - htop btop iftop nvtop
-  - procs
-  - lshw
-  - tealdeer
-  - dust duf dua
-  - exiftool
-  - fastfetch
-  - lm_sensors hddtemp
-  - unrar unzip p7zip p7zip-plugins
-  - bluez python3-bluez bluez-libs
-  - testdisk
-  - steam
-  - tinc
-Apps:
-  - kitty
-  - alacritty
-  - Dostrajanie
-  - Ustawienia GDM
-  - Edytor dconf
-  - Menadżer rozszerzeń (Extensions)
-  - Oprogramowanie sprzętowe (Firmware)
-  - Solaar
-  - Zasoby
-  - Zasoby komputera
-  - GParted
-  - File Roller
-  - Deluge
-  - Fragments
-  - KeePassXC
-  - Secrets # from Flathub
-  - Authenticator
-  - Apostrof # from Flathub
-  - Foliate
-  - Dino
-  - GnuCash
-  - Meld
-  - DB Browser for SQLite
-  - GIMP
-  - Inkscape
-  - Krita
-  - Eyedropper
-  - Cherrypick
-  - Upscaler
-  - Peek
-  - VLC
-  - Clapper
-  - Lorem
-  - Embellish
-  - Play Timer
-  - GPXSee
-  - Turn On
-  - Koleje
-  - Discord
-  - Spotify
+DNF:
+  terminals:
+    - kitty
+    - alacritty
+    - foot foot-terminfo
+  terminal-multiplexers:
+    - tmux screen
+  editors:
+    - vim vimx
+    - vim-default-editor
+    - neovim
+  build-tools:
+    - cmake gcc-c++ make python3-devel
+  cvs:
+    - breezy git
+  javascript:
+    - npm nodejs
+  rust:
+    - rustup # installed from repo
+  sqlite:
+    - sqlitebrowser
+  dev-related:
+    - meld
+    - cloc
+  disk:
+    - dust duf dua
+  search:
+    - fzf
+    - ripgrep
+    - fd-find
+  sensors:
+    - lm_sensors hddtemp
+  archives:
+    - unrar unzip p7zip p7zip-plugins
+    - file-roller
+  fetch:
+    - fastfetch
+  gaming:
+    - steam
+  finance:
+    - gnucash
+  vpn:
+    - tinc
+    - tailscale # older version in fedora!
+  man:
+    - tealdeer
+  tops:
+    - htop btop iftop nvtop
+  bluetooth:
+    - bluez python3-bluez bluez-libs
+  ls-like:
+    - procs
+    - lshw
+    - lshw-gui # Does not work properly in Fedora 43
+  multimedia:
+    - vlc
+    - clapper
+  torrent:
+    - deluge-common deluge-gtk deluge-gtk
+    - fragments
+  instant-messaging:
+    - dino
+  photo-tools:
+    - exiftool
+    - testdisk
+  image-editors:
+    - gimp
+    - inkscape
+    - krita
+  maps:
+    - gpxsee
+  ebooks:
+    - foliate
+  gnome:
+    - gnome-tweaks
+    - dconf-editor
+  authentication:
+    - keepassxc
+  devices:
+    - solaar
+    - gparted
+    - gnome-firmware
+  fonts:
+    - gucharmap
+    - ibus-typing-booster
+    - dejavu-fonts-all
+    - abattis-cantarell-fonts
+    - google-droid-sans-mono-fonts google-roboto-mono-fonts
+    - fira-code-fonts
+    - levien-inconsolata-fonts
+    - adobe-source-code-pro-fonts
+    - gdouros-symbola-fonts gdouros-musica-fonts
+    - google-noto-emoji-fonts
+    - comic-neue-fonts
+Flatpak:
+  - Menadżer rozszerzeń (Extension Manager) # com.mattjakeman.ExtensionManager
+  - Ustawienia GDM    # io.github.realmazharhussain.GdmSettings
+  - Zasoby      # net.nokyan.Resources
+  - Zasoby komputera  # io.missioncenter.MissionCenter
+  - Authenticator     # com.belmoussaoui.Authenticator
+  - Secrets     # org.gnome.World.Secrets
+  - Apostrof    # org.gnome.gitlab.somas.Apostrophe
+  - Eyedropper  # com.github.finefindus.eyedropper
+  - Cherrypick  # io.github.ellie_commons.cherrypick
+  - Discord     # com.discordapp.Discord
+  - Spotify     # com.spotify.Client
+  - Peek        # com.uploadedlobster.peek
+  - Koleje      # de.schmidhuberj.DieBahn
+  - Turn On     # de.swsnr.turnon
+  - Lorem       # org.gnome.design.Lorem
+  - Upscaler    # io.gitlab.theevilskeleton.Upscaler
+  - Embellish   # io.github.getnf.embellish
+  - Play Timer  # io.github.efogdev.mpris-timer
+  - Smile       # it.mijorus.smile
+  - Bazaar      # io.github.kolunmi.Bazaar
+COPR:
+  - eza         # alternateved/eza
+Downloads:
+  - Google Chrome
+  - Unified Remote
+  - XPPen Deco v01 02
+  - Tailscale
+  - Rustup
 TODO:
-  - tailscale
   - Thunderbird
   - Darktable / RawTherapee
   - Audacity
@@ -73,11 +129,4 @@ TODO:
   - Synology Drive
   - Dropbox
   # - Screenkey # OBSOLETE on Wayland?
-COPR:
-  - eza
-Downloaded:
-  - Google Chrome
-  - Unified Remote
-  - XPPen Deco v01 02
-  - Tailscale
 
