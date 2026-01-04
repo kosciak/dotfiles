@@ -39,7 +39,7 @@
         "tags": ["user"],
         "reference": "https://github.com/sharkdp/bat",
         "symlink": [
-            ".config/tealdeer/config.toml"
+            ".config/tealdeer"
         ]
     },
     "most": {
@@ -53,7 +53,7 @@
         "tags": ["user"],
         "reference": "https://github.com/sharkdp/bat",
         "symlink": [
-            ".config/bat/config"
+            ".config/bat"
         ]
     },
     "screen": {
@@ -97,6 +97,14 @@
         "reference": "https://docs.krita.org/en/KritaFAQ.html#where-are-the-configuration-files-stored",
         "symlink": [
             ".config/kritarc"
+        ]
+    },
+    "xppen": {
+        "tags": ["user"],
+        "reference": "",
+        "note": "Format of .pcfg files with configs might change on XPPen driver version basis!",
+        "symlink": [
+            ".config/xppen"
         ]
     },
 
