@@ -87,7 +87,8 @@
     },
     "alacritty": {
         "tags": ["user"],
-        "reference": "https://github.com/alacritty/alacritty",
+        "reference": "https://alacritty.org/config-alacritty.html",
+        "note": "No default config provided, migration to toml removes all comments",
         "symlink": [
             ".config/alacritty"
         ]
