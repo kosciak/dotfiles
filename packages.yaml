@@ -1,6 +1,7 @@
 Packages:
   - foot
   - vim vimx
+  - vim-default-editor
   - neovim
   - cmake gcc-c++ make python3-devel
   - breezy git
@@ -78,5 +79,5 @@ Downloaded:
   - Google Chrome
   - Unified Remote
   - XPPen Deco v01 02
-
+  - Tailscale
 
