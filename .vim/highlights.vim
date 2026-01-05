@@ -67,9 +67,9 @@ hi mkdRule              term=bold   cterm=bold  ctermfg=2     gui=bold guifg=Gre
 hi mkdListItemCheckbox  term=bold   cterm=bold              ctermbg=254   gui=bold
 hi mkdHeading           term=bold   cterm=bold  ctermfg=4   ctermbg=254   gui=bold
 
-" call matchadd('Conceal', '\[\ \]', 0, 11, {'conceal': ''})
-" call matchadd('Conceal', '\[X\]', 0, 12, {'conceal': ''})
-" call matchadd('Conceal', '\[x\]', 0, 13, {'conceal': ''})
+" call matchadd('Conceal', '\[\ \]', 0, 11, {'conceal': '󰄱'})
+" call matchadd('Conceal', '\[X\]', 0, 12, {'conceal': '󰄲'})
+" call matchadd('Conceal', '\[x\]', 0, 13, {'conceal': '󰄲'})
 " hi Conceal ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
 
 
