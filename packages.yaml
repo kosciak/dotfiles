@@ -9,6 +9,7 @@ DNF:
     - vim vimx
     - vim-default-editor
     - neovim
+    - nfoview
   build-tools:
     - cmake gcc-c++ make python3-devel
   cvs:
@@ -16,8 +17,8 @@ DNF:
   javascript:
     - npm nodejs
   rust:
-    - rustup # installed from repo
-  sqlite:
+    # - rustup # installed from repo
+  databases:
     - sqlitebrowser
   dev-related:
     - meld
@@ -41,7 +42,7 @@ DNF:
     - gnucash
   vpn:
     - tinc
-    - tailscale # older version in fedora!
+    # - tailscale # older version in fedora!
   man:
     - tealdeer
   tops:
@@ -51,7 +52,7 @@ DNF:
   ls-like:
     - procs
     - lshw
-    - lshw-gui # Does not work properly in Fedora 43
+    # - lshw-gui # Does not work properly in Fedora 43
   multimedia:
     - vlc
     - clapper
@@ -67,6 +68,7 @@ DNF:
     - gimp
     - inkscape
     - krita
+    # - pinta # very old version
   maps:
     - gpxsee
   ebooks:
@@ -91,36 +93,74 @@ DNF:
     - adobe-source-code-pro-fonts
     - gdouros-symbola-fonts gdouros-musica-fonts
     - google-noto-emoji-fonts
+    - cascadia-mono-fonts
     - comic-neue-fonts
 Flatpak:
-  - Menadżer rozszerzeń (Extension Manager) # com.mattjakeman.ExtensionManager
-  - Ustawienia GDM    # io.github.realmazharhussain.GdmSettings
-  - Zasoby      # net.nokyan.Resources
-  - Zasoby komputera  # io.missioncenter.MissionCenter
-  - Authenticator     # com.belmoussaoui.Authenticator
-  - Secrets     # org.gnome.World.Secrets
-  - Apostrof    # org.gnome.gitlab.somas.Apostrophe
-  - Eyedropper  # com.github.finefindus.eyedropper
-  - Cherrypick  # io.github.ellie_commons.cherrypick
-  - Discord     # com.discordapp.Discord
-  - Spotify     # com.spotify.Client
-  - Peek        # com.uploadedlobster.peek
-  - Koleje      # de.schmidhuberj.DieBahn
-  - Turn On     # de.swsnr.turnon
-  - Lorem       # org.gnome.design.Lorem
-  - Upscaler    # io.gitlab.theevilskeleton.Upscaler
-  - Embellish   # io.github.getnf.embellish
-  - Play Timer  # io.github.efogdev.mpris-timer
-  - Smile       # it.mijorus.smile
-  - Bazaar      # io.github.kolunmi.Bazaar
+  # Unless specified otherwise:
+  # remote: flathub
+  - name: Menadżer rozszerzeń (Extension Manager)
+    id: com.mattjakeman.ExtensionManager
+  - name: Ustawienia GDM
+    id: io.github.realmazharhussain.GdmSettings
+  - name: Zasoby
+    id: net.nokyan.Resources
+  - name: Zasoby komputera
+    id: io.missioncenter.MissionCenter
+  - name: Authenticator
+    id: com.belmoussaoui.Authenticator
+  - name: Secrets
+    id: org.gnome.World.Secrets
+  - name: Apostrof
+    id: org.gnome.gitlab.somas.Apostrophe
+  - name: Eyedropper
+    id: com.github.finefindus.eyedropper
+  - name: Cherrypick
+    id: io.github.ellie_commons.cherrypick
+  - name: Discord
+    id: com.discordapp.Discord
+  - name: Spotify
+    id: com.spotify.Client
+  - name: Koleje
+    id: de.schmidhuberj.DieBahn
+  - name: Turn On
+    id: de.swsnr.turnon
+    # Alternative: Awake on LAN
+  - name: Lorem
+    id: org.gnome.design.Lorem
+  - name: Upscaler
+    id: io.gitlab.theevilskeleton.Upscaler
+  - name: Embellish
+    id: io.github.getnf.embellish
+  - name: Play Timer
+    id: io.github.efogdev.mpris-timer
+  - name: Smile
+    id: it.mijorus.smile
+  - name: Bazaar
+    id: io.github.kolunmi.Bazaar
+  - name: Warehouse
+    id: io.github.flattool.Warehouse
+  - name: Flatseal
+    id: com.github.tchx84.Flatseal
+  - name: Pinta
+    id: com.github.PintaProject.Pinta
+  - name: Kooha
+    id: io.github.seadve.Kooha
+  - name: Font Downloader
+    id: org.gustavoperedo.FontDownloader
 COPR:
-  - eza         # alternateved/eza
+  - repo: alternateved/eza
+    package: eza
 Downloads:
-  - Google Chrome
-  - Unified Remote
-  - XPPen Deco v01 02
-  - Tailscale
-  - Rustup
+  - name: Google Chrome
+    url: https://www.google.com/intl/pl_pl/chrome/
+  - name: Unified Remote
+    url: https://www.unifiedremote.com/download/other#linux
+  - name: XPPen Deco v01 02
+    url: https://www.xp-pen.com/download-440.html
+  - name: Tailscale # Installable using dnf, but older version
+    url: https://tailscale.com/download/linux/fedora-2
+  - name: Rustup # Installable using dnf
+    url: https://rustup.rs/
 TODO:
   - Thunderbird
   - Darktable / RawTherapee
@@ -129,4 +169,9 @@ TODO:
   - Synology Drive
   - Dropbox
   # - Screenkey # OBSOLETE on Wayland?
+CHECK:
+  - Planify # Todoist integration
+  - Turtle # Nautilus git integration
+OBSOLETE:
+  - Peek # Not working on Wayland
 
