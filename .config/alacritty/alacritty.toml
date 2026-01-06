@@ -7,55 +7,40 @@
 # NOTE: config migrated from previous alacritty.yml
 # TODO: Review, update and comment if needed
 
-[bell]
-animation = "EaseOut"
-color = "#ffffff"
-duration = 0
+[general]
+live_config_reload = true
+import = [
+'themes/tango_light.toml',
+]
 
-[bell.command]
-args = ["/usr/share/sounds/freedesktop/stereo/bell.oga", "vol", "0.75"]
-program = "play"
 
-[colors]
-draw_bold_text_with_bright_colors = false
+[env]
+# key-value pairs to be added as enviromental variables
 
-[colors.bright]
-black = "#555753"
-blue = "#729fcf"
-cyan = "#34e2e2"
-green = "#8ae234"
-magenta = "#ad7fa8"
-red = "#ef2929"
-white = "#eeeeec"
-yellow = "#fce94f"
 
-[colors.normal]
-black = "#2e3436"
-blue = "#3465a4"
-cyan = "#06989a"
-green = "#4e9a06"
-magenta = "#75507b"
-red = "#cc0000"
-white = "#d3d7cf"
-yellow = "#c4a000"
+[window]
+dimensions = { columns=80, lines=24 }
+position = "None"
+padding = { x=4, y=1 }
+dynamic_padding = true
+decorations = "Full"
+decorations_theme_variant = "None"
+opacity = 1.0
+# blur = false
+startup_mode = "Windowed"
+title = "Alacritty"
+dynamic_title = true
+resize_increments = false
 
-[colors.primary]
-background = "#eeeeec"
-foreground = "#2e3436"
 
-[cursor]
-blink_interval = 700
-blink_timeout = 13
-thickness = 0.1
-unfocused_hollow = true
+[scrolling]
+history = 10000
+multiplier = 3
 
-[cursor.style]
-blinking = "Always"
-shape = "Block"
 
 [font]
-builtin_box_drawing = true
 size = 11.0
+builtin_box_drawing = true
 
 [font.normal]
 family = "Adwaita Mono"
@@ -73,29 +58,33 @@ style = "Italic"
 family = "Adwaita Mono"
 style = "Bold Italic"
 
-[font.offset]
-x = 0
-y = 0
+
+[colors]
+draw_bold_text_with_bright_colors = false
+
+
+[bell]
+animation = "EaseOut"
+color = "#c4a000"
+duration = 0
+
+[bell.command]
+args = ["/usr/share/sounds/freedesktop/stereo/bell.oga", "vol", "0.75"]
+program = "play"
+
+
+[cursor]
+blink_interval = 700
+blink_timeout = 13
+thickness = 0.1
+unfocused_hollow = true
+
+[cursor.style]
+# NOTE: blinking = "On" messes up cursor blinking in Vim
+blinking = "Always"
+shape = "Block"
+
 
 [mouse]
 hide_when_typing = true
 
-[window]
-decorations = "full"
-decorations_theme_variant = "None"
-dynamic_padding = true
-dynamic_title = true
-opacity = 1.0
-startup_mode = "Windowed"
-title = "Alacritty"
-
-[window.dimensions]
-columns = 80
-lines = 24
-
-[window.padding]
-x = 1
-y = 1
-
-[general]
-live_config_reload = true
