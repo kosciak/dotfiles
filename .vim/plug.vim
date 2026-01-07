@@ -159,7 +159,7 @@ call plug#begin()
 
   " Version control
     Plug 'tpope/vim-fugitive'         " Git integration
-    Plug 'tpope/vim-rhubarb'          " :GBrowse GitHub support
+    " Plug 'tpope/vim-rhubarb'          " :GBrowse GitHub support
     Plug 'junegunn/gv.vim'            " Git commit browser
     Plug 'mhinz/vim-signify'          " Show changed/added/deleted lines
 
