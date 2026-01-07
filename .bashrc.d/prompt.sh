@@ -85,10 +85,10 @@ prompt_command() {
 	# NOTE: It will replace PS1 with new value!
 	if type __git_ps1 &> /dev/null; then
 		# __git_ps1 "${PS1_PRE}" "${PS1_POST}" " @%s"
-		# __git_ps1 "${PS1_PRE}" "${PS1_POST}" " $(color $FG_GREEN) %s"
+		# __git_ps1 "${PS1_PRE}" "${PS1_POST}" " $(color $FG_GREEN) %s"
 		__git_ps1 \
 			"${PS1_PRE}" "${PS1_POST}" \
-			" $(color $FG_GREEN) %s"
+			" $(color $FG_GREEN) %s"
 	fi;
 
 	# Add Virtual ENV name to prompt

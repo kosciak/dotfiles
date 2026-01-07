@@ -25,21 +25,21 @@ export GIT_PS1_SHOWCOLORHINTS=''
 export GIT_PS1_STATEBEFORENAME=1
 
 # NOTE: Using na-fs-*circle* icons:
-#                 
+#                  
 # Other characters thath might be useful:
-#  - circles: ○ ● ⭘ ⬤j
+#  - circles: ○ ● ⭘ ⬤
 #  - arrows:   🡑 🡓 🡩 🡫 🡱 🡳 🡅 🡇 🠭🠯 
-export GIT_PS1_CONFLICT="$(color $FG_RED)"
+export GIT_PS1_CONFLICT="$(color $FG_RED) "
 export GIT_PS1_NO_DIVERGENCE="" # Don't show anything
-export GIT_PS1_BEHIND="$(color $FG_RED)"
-export GIT_PS1_AHEAD="$(color $FG_LIGHT_BLUE)"
-export GIT_PS1_INIT="$(color $FG_BLUE)" #""
-export GIT_PS1_UNTRACKED="$(color $FG_RED)"
-export GIT_PS1_MODIFIED="$(color $FG_YELLOW)" #"" ""
-export GIT_PS1_STAGED="$(color $FG_GREEN)" #""
-export GIT_PS1_STASHED="$(color $FG_MAGENTA)" #"
+export GIT_PS1_BEHIND="$(color $FG_RED) "
+export GIT_PS1_AHEAD="$(color $FG_LIGHT_BLUE) "
+export GIT_PS1_INIT="$(color $FG_BLUE) " #""
+export GIT_PS1_UNTRACKED="$(color $FG_RED) "
+export GIT_PS1_MODIFIED="$(color $FG_YELLOW) " #"" ""
+export GIT_PS1_STAGED="$(color $FG_GREEN) " #""
+export GIT_PS1_STASHED="$(color $FG_MAGENTA) " #"
 
-export GIT_PS1_STATESEPARATOR=" $(color $FG_GREEN)"
+export GIT_PS1_STATESEPARATOR="$(color $FG_GREEN)"
 
 
 # Source if present
