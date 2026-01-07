@@ -1,0 +1,18 @@
+# DejaVu Sans Mono
+
+[font.normal]
+family = "Adwaita Mono"
+style = "Regular"
+
+[font.bold]
+family = "Adwaita Mono"
+style = "Bold"
+
+[font.italic]
+family = "Adwaita Mono"
+style = "Italic"
+
+[font.bold_italic]
+family = "Adwaita Mono"
+style = "Bold Italic"
+

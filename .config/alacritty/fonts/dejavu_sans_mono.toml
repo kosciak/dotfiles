@@ -1,0 +1,18 @@
+# DejaVu Sans Mono
+
+[font.normal]
+family = "DejaVu Sans Mono"
+style = "Regular"
+
+[font.bold]
+family = "DejaVu Sans Mono"
+style = "Bold"
+
+[font.italic]
+family = "DejaVu Sans Mono"
+style = "Oblique"
+
+[font.bold_italic]
+family = "DejaVu Sans Mono"
+style = "Bold Oblique"
+
