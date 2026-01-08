@@ -13,7 +13,8 @@ DNF:
   build-tools:
     - cmake gcc-c++ make python3-devel
   cvs:
-    - breezy git
+    - breezy
+    - git
   javascript:
     - npm nodejs
   rust:
@@ -29,6 +30,8 @@ DNF:
     - fzf
     - ripgrep
     - fd-find
+  pagers:
+    - bat most
   sensors:
     - lm_sensors hddtemp
   archives:
@@ -150,6 +153,8 @@ Flatpak:
 COPR:
   - repo: alternateved/eza
     package: eza
+  - repo: scottames/ghostty
+    package: ghostty
 Downloads:
   - name: Google Chrome
     url: https://www.google.com/intl/pl_pl/chrome/
