@@ -4,7 +4,8 @@
 # Use: less
 # Show more verbose status line
 # See: https://stackoverflow.com/questions/1049350/how-to-make-less-indicate-location-in-percentage/19871578#19871578
-export MANPAGER='less --mouse -s -M +Gg'
+# export MANPAGER='less --mouse -s -M +Gg'
+export MANPAGER='less --mouse -R -s -M -Dd+b -Du+r +Gg'
 
 # Use: vim
 # NOTE: ftplugin/man.vim must be enabled

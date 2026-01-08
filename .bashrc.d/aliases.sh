@@ -1,5 +1,7 @@
 
 ## Set custom aliases
+#
+#  TODO: Split into separate files?
 
 # ls
 alias la='ls -A'
@@ -40,9 +42,9 @@ if [ -f "/usr/bin/rg" ]; then
 fi
 
 
-# size formatting
+# human readable size formatting
 alias df='df -h'        # human-readable sizes
-alias free='free -m'    # show sizes in MB
+alias free='free -h'    # show sizes in MB
 
 
 # confirm before overwriting something
@@ -52,7 +54,8 @@ alias rm='rm -i'
 
 
 # less - enable mouse scrolling
-alias less="less --mouse"
+# TODO: --use-color and set correct colors!
+alias less="less -R --mouse"
 
 # force man pages in en_US instead of whatever is set as LC_MESSAGES
 alias man="man -Len_US"

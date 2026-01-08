@@ -5,7 +5,7 @@
             "/etc/sensors.d/ASUS_Prime_B550_Plus"
         ]
     },
-    "profile": {
+    "etc_profile": {
         "tags": ["system"],
         "copy": [
             "/etc/profile.d/attrs_colors.sh",
@@ -17,7 +17,9 @@
         "tags": ["user"],
         "reference": "https://wiki.archlinux.org/title/Bash",
         "symlink": [
+            ".profile",
             ".bash_profile",
+            ".bash_logout",
             ".bashrc",
             ".bashrc.d"
         ]

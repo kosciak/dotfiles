@@ -1,4 +1,8 @@
 
+## Define PS* prompts
+#
+# See: https://wiki.archlinux.org/title/Bash/Prompt_customization
+#
 # NOTE: Using colors and attributes defined in /etc/profile.d/attrs_colors.sh
 
 # Mark colors as non printable characters, otherwise wrong length of prompt would be calculated

@@ -13,14 +13,14 @@
 # us      smul      start underline
 # ue      rmul      stop underline
 
-export LESS_TERMCAP_mb=$BOLD$FG_GREEN
-export LESS_TERMCAP_md=$BOLD$FG_BLUE
+export LESS_TERMCAP_mb=$(tput blink)
+export LESS_TERMCAP_md=$BOLD
 #export LESS_TERMCAP_md=$BOLD$DIM$FG_BLUE # bold, blue, dimmed (when bold is displayed as bright)
 export LESS_TERMCAP_me=$RESET
 export LESS_TERMCAP_so=$BOLD$FG_LIGHT_YELLOW$BG_BLUE
 export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
-#export LESS_TERMCAP_us=$UNDERLINE$FG_RED
-export LESS_TERMCAP_us=$BOLD$FG_RED
+export LESS_TERMCAP_us=$UNDERLINE
+export LESS_TERMCAP_us=$BOLD
 export LESS_TERMCAP_ue=$RESET_UNDERLINE$RESET
 export LESS_TERMCAP_mr=$INVERT
 export LESS_TERMCAP_mh=$DIM
