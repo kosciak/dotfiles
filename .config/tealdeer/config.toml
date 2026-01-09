@@ -1,8 +1,34 @@
 [display]
 # use_pager = true
 compact = true
+
+# NOTE: since version 1.8.0
 show_title = true
+
+[search]
+# Show pages in English if available, otherwise show in Polish
+# NOTE: since version 1.8.0
+languages = ["en", "pl"]
+
 
 [updates]
 auto_update = true
 
+
+[style.description]
+foreground = { ansi = 0 }
+
+[style.command_name]
+foreground = { ansi = 4 }
+bold = true
+
+[style.example_text]
+foreground = { ansi = 2 }
+
+[style.example_code]
+foreground = { ansi = 4 }
+bold = true
+
+[style.example_variable]
+foreground = { ansi = 1 }
+underline = true

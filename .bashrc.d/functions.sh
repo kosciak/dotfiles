@@ -1,4 +1,3 @@
-
 ## Functions
 
 # Extract archives

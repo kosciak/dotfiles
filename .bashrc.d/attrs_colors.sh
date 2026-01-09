@@ -1,6 +1,15 @@
-
 ## Define colors and attributes
-#  NOTE: When using in PS1 put inside \[$COLOR\]
+#
+# See: https://wiki.archlinux.org/title/Bash/Prompt_customization
+#
+
+# Mark colors as non printable characters, otherwise wrong length of prompt would be calculated
+color() {
+	echo "\[$1\]";
+}
+
+
+# Define names for all attributes
 if tput setaf 1 &> /dev/null; then
 	tput sgr0; # reset colors
 

@@ -1,10 +1,11 @@
+## PS* prompts
+#
+#  See: https://wiki.archlinux.org/title/Bash/Prompt_customization
+#
+#  NOTE: When using in PS1 put inside \[$COLOR\]
+#
 
-# NOTE: Using colors and attributes defined in /etc/profile.d/attrs_colors.sh
-
-# Mark colors as non printable characters, otherwise wrong length of prompt would be calculated
-color() {
-	echo "\[$1\]";
-}
+# NOTE: Using colors and attributes defined in attrs_colors.sh
 
 
 ## Set PS* prompts
