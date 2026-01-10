@@ -13,6 +13,8 @@ PACKAGES_FN = 'packages.yaml'
 
 DNF_PACKAGES = 'DNF'
 COPR_PACKAGES = 'COPR'
+PIPX_PACKAGES = 'pipx'
+PIP_USER_PACKAGES = 'pip_user'
 DOWNLOADS_PACKAGES = 'Downloads'
 FLATPAK_PACKAGES = 'Flatpak'
 FLATHUB_REMOTE = 'flathub'
@@ -47,6 +49,26 @@ def show_copr(packages_fn=None):
     for package in copr_packages:
         print(f'sudo dnf copr enable {package['repo']}')
         print(f'sudo dnf install {package['package']}')
+
+
+def show_pipx(packages_fn=None):
+    packages_data = get_packages_data(packages_fn)
+    pip_packages = packages_data.get(PIPX_PACKAGES) or []
+    print('##')
+    print('# pipx install packages')
+    print('##')
+    for package in pip_packages:
+        print(f'pipx install {package}')
+
+
+def show_pip_user(packages_fn=None):
+    packages_data = get_packages_data(packages_fn)
+    pip_packages = packages_data.get(PIP_USER_PACKAGES) or []
+    print('##')
+    print('# pip install --user packages')
+    print('##')
+    for package in pip_packages:
+        print(f'pip install --user {package}')
 
 
 def show_flatpak(packages_fn=None):
@@ -94,6 +116,16 @@ if __name__ == "__main__":
         help="packages from COPR repos"
     )
     parser.add_argument(
+        "--pipx",
+        action='store_true', default=False,
+        help="packages from pip repos installed with pipx"
+    )
+    parser.add_argument(
+        "--pip_user",
+        action='store_true', default=False,
+        help="packages from pip repos installed with pip --user"
+    )
+    parser.add_argument(
         "--flatpak",
         action='store_true', default=False,
         help="Flatpak installation"
@@ -115,6 +147,12 @@ if __name__ == "__main__":
 
     if args.copr or args.all:
         show_copr()
+
+    if args.pipx or args.all:
+        show_pipx()
+
+    if args.pip_user or args.all:
+        show_pip_user()
 
     if args.flatpak or args.all:
         show_flatpak()

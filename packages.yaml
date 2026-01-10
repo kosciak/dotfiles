@@ -15,6 +15,8 @@ DNF:
   cvs:
     - breezy
     - git
+  python:
+    - pip pipx
   javascript:
     - npm nodejs
   rust:
@@ -150,11 +152,17 @@ Flatpak:
     id: io.github.seadve.Kooha
   - name: Font Downloader
     id: org.gustavoperedo.FontDownloader
+  - name: SysD Manager
+    id: io.github.plrigaux.sysd-manager
 COPR:
   - repo: alternateved/eza
     package: eza
   - repo: scottames/ghostty
     package: ghostty
+pipx:
+  - internetarchive
+pip_user:
+  - virtualenvwrapper
 Downloads:
   - name: Google Chrome
     url: https://www.google.com/intl/pl_pl/chrome/

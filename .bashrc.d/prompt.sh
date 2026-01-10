@@ -56,7 +56,7 @@ fi;
 
 __venv_ps1() {
 	# printf "$(color $RESET)$(color $BG_WHITE)$(color $FG_MAGENTA) %s $(color $FG_LIGHT_WHITE)◢$(color $RESET)" "${VIRTUAL_ENV##*/}"
-	printf "$(color $RESET)$(color $FG_MAGENTA) %s$(color $RESET)" \
+	printf "$(color $RESET)$(color $FG_MAGENTA) %s $(color $RESET)" \
 		"${VIRTUAL_ENV##*/}"
 }
 
