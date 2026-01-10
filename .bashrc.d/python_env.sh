@@ -1,9 +1,13 @@
+## Python virtual environments
+#
 
-# Virtualenvwrapper settings and startup
-# TODO: Change to WORKON_HOME to ~/.cache/venvs
+## Virtualenvwrapper settings and startup
+#
+# See: https://virtualenvwrapper.readthedocs.io/en/stable/
+#
+
 export WORKON_HOME=$HOME/.cache/venvs
 export PROJECT_HOME=$HOME/projekty
-
 
 # Don't add ENV name to PS1 as it will be overwritten by __git_ps1 anyway
 export VIRTUAL_ENV_DISABLE_PROMPT=1

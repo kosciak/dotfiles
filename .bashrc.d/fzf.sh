@@ -1,5 +1,9 @@
 ## FZF - fuzzy finder
 #
+# See: https://github.com/junegunn/fzf
+# See: https://wiki.archlinux.org/title/Fzf
+#
+
 # Default settings
 export FZF_DEFAULT_OPTS=' --multi --filepath-word --info=inline'
 export FZF_DEFAULT_OPTS+=' --prompt=\>\>\>\  --marker=+'

@@ -34,7 +34,7 @@ export GROFF_NO_SGR=1
 #       This has something to do with properly/faster(?) calculating position % in prompt
 #
 # export MANPAGER='less --mouse -s -M +Gg'
-export MANPAGER='less --mouse -R -i -s -M -Dd+b -Du+r +Gg --use-color -DP+bYsd -DN+y -DE+Wrb -DH+bd -DS-s -DR+g'
+export MANPAGER='less --mouse -R -i -s -M -Dd+b -Du+r +Gg'
 
 
 # Use: vim

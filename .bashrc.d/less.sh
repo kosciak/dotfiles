@@ -8,6 +8,8 @@
 #       support for ANSI escape characters
 # -i
 #       "smart" case
+# --incsearch
+#       incremental search
 # --mouse
 #       enable mouse support
 # --use-color
@@ -24,7 +26,8 @@
 # -DR+gd
 #       rscroll - green; bold
 #
-alias less="less -R -i --mouse --use-color -DP+bYsd -DN+y -DE+Wrb -DH+bd -DS-s -DR+g"
+export LESS="-R -i --incsearch --mouse --use-color -DP+wk -DN+y -DE+Wrb -DH+bd -DS-s -DR+g"
+# alias less="less -R -i --mouse --use-color -DP+bYsd -DN+y -DE+Wrb -DH+bd -DS-s -DR+g"
 
 
 ## NerdFonts support

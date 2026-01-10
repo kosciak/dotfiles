@@ -5,13 +5,6 @@
             "/etc/sensors.d/ASUS_Prime_B550_Plus"
         ]
     },
-    "etc_profile": {
-        "tags": ["system"],
-        "copy": [
-            "/etc/profile.d/attrs_colors.sh",
-            "/etc/profile.d/color_prompt.sh"
-        ]
-    },
 
     "bash": {
         "tags": ["user"],

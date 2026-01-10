@@ -31,8 +31,12 @@ TERM st
 TERM terminator
 TERM tmux*
 TERM vt100
+TERM vt220
 TERM xterm*
 
+# ===================================================================
+# Basic file attributes
+# ===================================================================
 # Below are the color init strings for the basic file types.
 # One can use codes for 256 or more colors supported by modern terminals.
 # The default color codes use the capabilities of an 8 color terminal
@@ -59,19 +63,25 @@ BLK 40;33;01	# block device driver
 CHR 40;33;01	# character device driver
 ORPHAN 00;31;01 # symlink to nonexistent file, or non-stat'able file ...
 MISSING 01;37;41 # ... and the files they point to
-SETUID 37;41	# file that is setuid (u+s)
-SETGID 30;43	# file that is setgid (g+s)
-CAPABILITY 00	# file with capability (very expensive to lookup)
+SETUID 37;41	# regular file that is setuid (u+s)
+SETGID 30;43	# regular file that is setgid (g+s)
+CAPABILITY 00	# regular file with capability (very expensive to lookup)
 STICKY_OTHER_WRITABLE 30;42 # dir that is sticky and other-writable (+t,o+w)
 OTHER_WRITABLE 34;42 # dir that is other-writable (o+w) and not sticky
 STICKY 37;44	# dir with the sticky bit set (+t) and not other-writable
 
-# This is for files with execute permission:
+# This is for regular files with execute permission:
 EXEC 01;32
 
+# ===================================================================
+# File extension attributes
+# ===================================================================
 # List any file extensions like '.gz' or '.tar' that you would like ls
-# to color below. Put the extension, a space, and the color init string.
-# (and any comments you want to add after a '#')
+# to color below. Put the suffix, a space, and the color init string.
+# (and any comments you want to add after a '#').
+# Suffixes are matched case insensitively, but if you define different
+# init strings for separate cases, those will be honored.
+#
 
 # If you use DOS-style suffixes, you may want to uncomment the following:
 #.cmd 01;32 # executables (bright green)
@@ -84,58 +94,66 @@ EXEC 01;32
 #.sh  01;32
 #.csh 01;32
 
- # archives or compressed (bright red)
-.tar 00;31
-.tgz 00;31
+# archives or compressed (bright red)
+.7z  00;31
+.ace 00;31
+.alz 00;31
+.apk 00;31
 .arc 00;31
 .arj 00;31
-.taz 00;31
+.bz  00;31
+.bz2 00;31
+.cab 00;31
+.cpio 00;31
+.crate 00;31
+.deb 00;31
+.drpm 00;31
+.dwm 00;31
+.dz  00;31
+.ear 00;31
+.egg 00;31
+.esd 00;31
+.gz  00;31
+.jar 00;31
 .lha 00;31
+.lrz 00;31
+.lz  00;31
 .lz4 00;31
 .lzh 00;31
 .lzma 00;31
-.tlz 00;31
-.txz 00;31
-.tzo 00;31
-.t7z 00;31
-.zip 00;31
-.z   00;31
-.dz  00;31
-.gz  00;31
-.lrz 00;31
-.lz  00;31
 .lzo 00;31
-.xz  00;31
-.zst 00;31
-.tzst 00;31
-.bz2 00;31
-.bz  00;31
+.pyz 00;31
+.rar 00;31
+.rpm 00;31
+.rz  00;31
+.sar 00;31
+.swm 00;31
+.t7z 00;31
+.tar 00;31
+.taz 00;31
 .tbz 00;31
 .tbz2 00;31
+.tgz 00;31
+.tlz 00;31
+.txz 00;31
 .tz  00;31
-.deb 00;31
-.rpm 00;31
-.jar 00;31
+.tzo 00;31
+.tzst 00;31
+.udeb 00;31
 .war 00;31
-.ear 00;31
-.sar 00;31
-.rar 00;31
-.alz 00;31
-.ace 00;31
-.zoo 00;31
-.cpio 00;31
-.7z  00;31
-.rz  00;31
-.cab 00;31
+.whl 00;31
 .wim 00;31
-.swm 00;31
-.dwm 00;31
-.esd 00;31
+.xz  00;31
+.z   00;31
+.zip 00;31
+.zoo 00;31
+.zst 00;31
 
 # image formats
 .avif 00;35
 .jpg 00;35
 .jpeg 00;35
+.jxl 00;35
 .mjpg 00;35
 .mjpeg 00;35
 .gif 00;35
@@ -207,43 +225,52 @@ EXEC 01;32
 .spx 00;36
 .xspf 00;36
 
-# backup files
 # NOTE: Instead of 00;90 use (slightly lighter) 38;5;24 - this way it can be correctly used by exa
-*~ 38;5;244
-*# 38;5;244
-.bak 38;5;244
-.old 38;5;244
-.orig 38;5;244
-.part 38;5;244
-.rej 38;5;244
-.swp 38;5;244
-.sw0 38;5;244
-.tmp 38;5;244
-.dpkg-dist 38;5;244
-.dpkg-old 38;5;244
-.ucf-dist 38;5;244
-.ucf-new 38;5;244
-.ucf-old 38;5;244
-.rpmnew 38;5;244
-.rpmorig 38;5;244
-.rpmsave 38;5;244
+# backup files
+*~ 38;5;24
+*# 38;5;24
+.bak 38;5;24
+.crdownload 38;5;24
+.dpkg-dist 38;5;24
+.dpkg-new 38;5;24
+.dpkg-old 38;5;24
+.dpkg-tmp 38;5;24
+.old 38;5;24
+.orig 38;5;24
+.part 38;5;24
+.rej 38;5;24
+.rpmnew 38;5;24
+.rpmorig 38;5;24
+.rpmsave 38;5;24
+.swp 38;5;24
+.tmp 38;5;24
+.ucf-dist 38;5;24
+.ucf-new 38;5;24
+.ucf-old 38;5;24
 
 *README               00;33          # Documentation
 *README.rst           00;33          # Documentation
 *README.md            00;33          # Documentation
 *LICENSE              00;33          # Documentation
+*LICENSE.md           00;33          # Documentation
 *COPYING              00;33          # Documentation
 *INSTALL              00;33          # Documentation
 *COPYRIGHT            00;33          # Documentation
 *AUTHORS              00;33          # Documentation
 *HISTORY              00;33          # Documentation
 *CONTRIBUTORS         00;33          # Documentation
+*CONTRIBUTING         00;33          # Documentation
+*CONTRIBUTING.md      00;33          # Documentation
+*CHANGELOG            00;33          # Documentation
+*CHANGELOG.md         00;33          # Documentation
+*CODEOWNERS           00;33          # Documentation
 *PATENTS              00;33          # Documentation
 *VERSION              00;33          # Documentation
 *NOTICE               00;33          # Documentation
 *CHANGES              00;33          # Documentation
 
 .git                  38;5;12        # Version control
+.github               38;5;12        # Version control
 .gitignore            38;5;242       # Version control
 .gitattributes        38;5;242       # Version control
 .gitmodules           38;5;242       # Version control
