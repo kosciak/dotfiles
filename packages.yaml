@@ -43,6 +43,7 @@ DNF:
     - fastfetch
   gaming:
     - steam
+    - gamescope
   finance:
     - gnucash
   vpn:
@@ -57,6 +58,7 @@ DNF:
   ls-like:
     - procs
     - lshw
+    - inxi
     # - lshw-gui # Does not work properly in Fedora 43
   multimedia:
     - vlc
@@ -64,6 +66,8 @@ DNF:
   torrent:
     - deluge-common deluge-gtk deluge-gtk
     - fragments
+  email:
+    - thunderird
   instant-messaging:
     - dino
   photo-tools:
