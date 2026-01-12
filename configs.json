@@ -95,6 +95,14 @@
             ".config/kitty"
         ]
     },
+    "kitty-nautilus": {
+        "tags": ["user"],
+        "reference": "https://sw.kovidgoyal.net/kitty/conf/",
+        "note": "Nautilus extension for Open in kitty",
+        "symlink": [
+            ".local/share/nautilus-python/extensions/kitty.py"
+        ]
+    },
     "krita": {
         "tags": ["user"],
         "reference": "https://docs.krita.org/en/KritaFAQ.html#where-are-the-configuration-files-stored",

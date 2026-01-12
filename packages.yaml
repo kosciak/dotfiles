@@ -1,4 +1,6 @@
 DNF:
+  nautilus:
+    - nautilus-python
   terminals:
     - kitty
     - alacritty
@@ -27,7 +29,7 @@ DNF:
     - meld
     - cloc
   disk:
-    - dust duf dua
+    - dust duf dua gdu
   search:
     - fzf
     - ripgrep
@@ -163,6 +165,9 @@ COPR:
     package: eza
   - repo: scottames/ghostty
     package: ghostty
+  # - repo: monkeygold/nautilus-open-any-terminal
+  #   package: nautilus-open-any-terminal
+  #   NOTE: Does not work in GNOME 49
 pipx:
   - internetarchive
 pip_user:
