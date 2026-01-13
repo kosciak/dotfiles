@@ -14,9 +14,12 @@ DNF:
     - nfoview
   build-tools:
     - cmake gcc-c++ make python3-devel
-  cvs:
+  version-control:
     - breezy
     - git
+  cd-related:
+    - direnv
+    - zoxide
   python:
     - pip pipx
   javascript:

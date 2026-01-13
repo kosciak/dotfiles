@@ -73,6 +73,12 @@
             ".gvimrc"
         ]
     },
+    "direnv": {
+        "tags": ["user"],
+        "symlink": [
+            ".config/direnv"
+        ]
+    },
     "git": {
         "tags": ["user"],
         "symlink": [

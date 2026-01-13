@@ -1,0 +1,23 @@
+# direnv.toml
+#
+# See: https://direnv.net/man/direnv.toml.1.html
+#
+
+disable_stdin = true
+load_dotenv = true
+hide_env_diff = true
+log_format = "-"
+
+[general]
+disable_stdin = true
+load_dotenv = true
+hide_env_diff = true
+log_format = "-"
+
+[whitelist]
+prefix = [
+'~/projekty',
+'~/work',
+'~/src',
+]
+

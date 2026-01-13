@@ -1,0 +1,17 @@
+## Custom layouts for direnv
+
+## Python
+# See: https://github.com/direnv/direnv/wiki/Python
+
+layout_virtualenv() {
+  local venv_path="$1"
+  source ${venv_path}/bin/activate
+  # https://github.com/direnv/direnv/wiki/PS1
+  unset PS1
+}
+
+layout_virtualenvwrapper() {
+  local venv_path="${WORKON_HOME}/$1"
+  layout_virtualenv $venv_path
+}
+

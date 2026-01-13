@@ -5,6 +5,8 @@
 #
 
 # Default settings
+# TODO: Revise with latest versions
+# TODO: Move options to .fzfrc ?
 export FZF_DEFAULT_OPTS=' --multi --filepath-word --info=inline'
 export FZF_DEFAULT_OPTS+=' --prompt=\>\>\>\  --marker=+'
 export FZF_DEFAULT_OPTS+=" --bind='ctrl-w:backward-kill-word'"
