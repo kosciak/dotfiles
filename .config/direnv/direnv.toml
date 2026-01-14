@@ -5,13 +5,13 @@
 
 disable_stdin = true
 load_dotenv = true
-hide_env_diff = true
+hide_env_diff = false
 log_format = "-"
 
 [general]
 disable_stdin = true
 load_dotenv = true
-hide_env_diff = true
+hide_env_diff = false
 log_format = "-"
 
 [whitelist]
