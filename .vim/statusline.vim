@@ -27,7 +27,7 @@ set statusline+=%=                  " left/right alignment separator
 set statusline+=%#StatusLineNormal#   " Start named highlight group
 set statusline+=%y                  " Filetype
 set statusline+=%*                  " Reset highlight group
-set statusline+=%{sline#GitBranch('\ \ \ ')}
+set statusline+=%{sline#GitBranch('\ \ \ \ ')}
 set statusline+=\                   " Space
 set statusline+=%7.(%l:%c%)         " Line number : Column number
 set statusline+=%5p%%               " Percentage through file in lines

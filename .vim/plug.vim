@@ -105,6 +105,9 @@ call plug#begin()
 
     " Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 
+    " TODO: Check zoxiede integration
+    " Plug 'nanotee/zoxide.vim'
+
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'pbogut/fzf-mru.vim'

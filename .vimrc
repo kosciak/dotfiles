@@ -211,6 +211,7 @@ source ~/.vim/plugins.vim
 "  Colorscheme and Highlights
 " ----------------------------------------------------------------------
 
+" set notgc                   " force use of terminal colors
 set t_Co=256                " force 256 colors
 set background=light        " force light background
 

@@ -232,7 +232,8 @@ function! s:WikiBufferInit() abort
   nnoremap <buffer> <leader>wf <Plug>(wiki-link-follow)
   nnoremap <buffer> <leader>wT :GenTocGFM<CR>
   nnoremap <buffer> <leader>wt :UpdateToc<CR>
-  nnoremap <buffer> <leader>fh <plug>(wiki-fzf-toc)
+  " nnoremap <buffer> <leader>fh <plug>(wiki-fzf-toc)
+  nnoremap <buffer> <leader>fh :WikiToc<CR>
 endfunc
 
 augroup wikiLocalMappings
@@ -300,7 +301,8 @@ nnoremap <leader>f: :FzfHistory:<CR>
 
 nnoremap <leader>fH :FzfHelptags<CR>
 
-nnoremap <leader>fw <plug>(wiki-fzf-pages)
+" nnoremap <leader>fw <plug>(wiki-fzf-pages)
+nnoremap <leader>fw :WikiPages<CR>
 
 nnoremap <leader>fS :FzfGFiles?<CR>
 

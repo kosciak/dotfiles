@@ -432,9 +432,10 @@ let g:wiki_link_target_type = 'md'
 " Enable on all wiki_filetypes
 let g:wiki_global_load = 1
 
-" Do NOT toggle link when using follow lik mapping
+" Do NOT toggle/transform link when using follow link mapping
 " OR at least not when using <Enter> to follow
 let g:wiki_link_toggle_on_follow = 0
+let g:wiki_link_transform_on_follow = 0
 
 " Write before navigating from file
 let g:wiki_write_on_nav = 1
